@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>50</y>
+      <w>230</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>DataDescriptor
+--
+ProductCount
+SubProductHist
+IssueHist
+SubIssueHist
+CompanyHist
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>50</y>
+      <w>210</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>DataLoader
+--
+sd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>320</y>
+      <w>230</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,98 @@
+
+{{nodes|json_script:'products'}}
+<div>
+<select name="Products" size="10" id='products_box'>
+	<option id="t">t</option>
+	{% for k, v in nodes.items %}
+	<option onselect="product_click('PRODUCT:{{k}}')" class='products' value='{{k}}'
+			id='PRODUCT:{{k}}'	>{{k}} {{v.count}}</option>
+	{% endfor %}
+</select>
+<select id='subproducts_box' size="10">
+</select>
+</div>
+<div>
+<select id='issue_box' size="10">
+</select>
+<select id='subissue_box' size="10">
+</select>
+</div>
+
+
+<script>
+	var tree = JSON.parse(document.getElementById('products').textContent);
+	var product = "NA";
+	var subproduct = "NA";
+	var issue = "NA";
+	var subissue = "NA";
+	var product_box = document.getElementById('products_box');
+	var subproduct_box = document.getElementById('subproducts_box');
+	var issue_box = document.getElementById('issue_box');
+	var subissue_box = document.getElementById('subissue_box');
+	var boxes = new Array(product_box, subproduct_box, issue_box, subissue_box);
+
+	boxes.forEach(box => box.addEventListener('keypress', (event) => {
+		if (event.key == "Enter") {
+			console.log(box.options[box.selectedIndex].id);
+		}
+		}));
+
+
+	function product_click(id){
+			product = id.slice(8);
+			elem = document.getElementById(id);
+			sp_box = document.getElementById('subproducts_box');
+			i_box = document.getElementById('issue_box');
+			si_box = document.getElementById('subissue_box');
+			sp_box.innerHTML = "";
+			i_box.innerHTML = "";
+			si_box.innerHTML = "";
+			ptree = tree[id.slice(8)]['nodes'];
+			console.log(ptree);
+			for (var key in ptree){
+				option = document.createElement('option');
+				option.innerHTML = key+ " " + ptree[key]['count'];
+				option.setAttribute('id','SubProduct'+key);
+				option.setAttribute('onclick',"subproduct_click('SUBPROD:"+key+"')");
+				sp_box.appendChild(option);
+			}
+	};
+
+	function subproduct_click(id){
+			subproduct = id.slice(8);
+			console.log(id);
+			elem = document.getElementById(id);
+			i_box = document.getElementById('issue_box');
+			si_box = document.getElementById('subissue_box');
+			i_box.innerHTML = "";
+			si_box.innerHTML = "";
+
+			ptree = tree[product]['nodes'][id.slice(8)]['nodes'];
+			console.log(ptree);
+			for (var key in ptree){
+				console.log(key);
+				option = document.createElement('option');
+				option.innerHTML = key + " " + ptree[key]['count'];
+				option.setAttribute('id','ISSUE:'+key);
+				option.setAttribute('onclick',"issue_click('ISSUE:"+key+"')");
+				i_box.appendChild(option);
+			}
+	};
+
+	function issue_click(id){
+			console.log(id);
+			issue = id.slice(6);
+			elem = document.getElementById(id);
+			si_box = document.getElementById('subissue_box');
+			si_box.innerHTML = "";
+			ptree = tree[product]['nodes'][subproduct]['nodes'][id.slice(6)]['nodes'];
+			console.log(ptree);
+			for (var key in ptree){
+				console.log(key);
+				option = document.createElement('option');
+				option.innerHTML = key+ " " + ptree[key]['count'];;
+				option.setAttribute('id','SUBISSUE:'+key);
+				si_box.appendChild(option);
+			}
+	};
+</script>

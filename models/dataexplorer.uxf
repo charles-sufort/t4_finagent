@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>60</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>DataExplorer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>130</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Label Frequencies</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>130</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Label Feature Occurences</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
