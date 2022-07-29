@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>80</y>
+      <w>140</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>TextSection
+--
+text: String
+--
+get_lemmas()
+get_ners()
+get ngrams()
+get_noun_chunks()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>40</x>
       <y>120</y>
       <w>100</w>
       <h>30</h>
@@ -15,7 +15,7 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>160</x>
+      <x>170</x>
       <y>20</y>
       <w>120</w>
       <h>40</h>
@@ -26,7 +26,7 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>20</x>
+      <x>30</x>
       <y>20</y>
       <w>120</w>
       <h>40</h>
@@ -37,7 +37,7 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>160</x>
+      <x>170</x>
       <y>140</y>
       <w>120</w>
       <h>40</h>
@@ -48,7 +48,7 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>160</x>
+      <x>170</x>
       <y>80</y>
       <w>120</w>
       <h>40</h>
@@ -59,7 +59,7 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>160</x>
+      <x>170</x>
       <y>200</y>
       <w>120</w>
       <h>40</h>
@@ -70,12 +70,45 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>20</x>
+      <x>30</x>
       <y>200</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>Credit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>370</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Customer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>220</x>
+      <y>290</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Name</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>210</x>
+      <y>380</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Account</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

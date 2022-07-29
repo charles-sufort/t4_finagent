@@ -22,6 +22,22 @@ class TermList(BaseModel):
 class Name(BaseModel):
     name: str
 
+class AvgQuery(BaseModel):
+    ction: Ction
+    termlist: TermList
+
+class Query(BaseModel):
+    ction: Ction
+    query_type: str 
+    max_n: int
+
+    
+class QueryText(BaseModel):
+    ction: Ction
+    query_type: str
+
+
+
 t41 = T4()
 
 app = FastAPI()
@@ -31,7 +47,8 @@ app.add_middleware(
         allow_origins=['*'],
         allow_headers=['*'],
         allow_methods=['*'],
-)
+ )
+
 
 
 @app.get("/")
@@ -50,24 +67,40 @@ async def get_ction(ction: Name):
 
 @app.get("/ction/get_all/")
 async def get_ction_names():
-    ctions = t41.get_ction_name()
+    ctions = t41.get_ction_names()
     print(ctions)
     return {"message":ctions}
 
 @app.post("/termlist/add/")
 async def add_termlist(tlist: TermList):
-    print("Here")
     t41.save_termlist(tlist.name, tlist.terms)
     return {"message":"saved"}
-
-@app.get("/termlist/get_all/")
-async def get_termlists():
-    termlists = t41.get_termlists()
-    return {"termlists":termlists}
 
 @app.post("/termlist/get/")
 async def get_termlist(termlist: Name):
     termlist = t41.get_termlist(termlist.name)
     return {"termlist":termlist}
+
+@app.get("/termlist/get_all/")
+async def get_termlist_names():
+    termlists = t41.get_termlist_names()
+    return {"termlists":termlists}
+
+@app.get("/data/avg_query/")
+async def avg_query(avg_query: AvgQuery):
+    avg_query = t41.query_avg(avg_query.ction, avg_query.termlist)
+    return {"C_avgs":avg_query}
+
+@app.post("/data/lvec_sample")
+async def get_lvec_sample(vec: Vec):
+    print(vec)
+    sample = t41.get_lvec_sample(vec.fields)
+    print(sample)
+    return {"Sample": sample}
+
+@app.post("/data/query/")
+async def get_query(query: Query):
+    data = t41.query(query.ction.dictionary,query.query_type,query.max_n)
+    return data
 
 

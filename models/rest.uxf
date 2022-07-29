@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>70</y>
+      <x>200</x>
+      <y>90</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -32,6 +32,29 @@
       <h>40</h>
     </coordinates>
     <panel_attributes>Word Sets</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>100</y>
+      <w>220</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Rest:
+--
+t4: T4
+
+--
+save_ction(ction: Ction)
+get_ction(ction: Name)
+get_ction_names()
+add_termlist()
+get_termlists()
+get_termlist()
+
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
