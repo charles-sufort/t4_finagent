@@ -1,4 +1,4 @@
-
+{% load static %}
 {{nodes|json_script:'products'}}
 <div>
 <select name="Products" size="10" id='products_box'>
@@ -20,7 +20,7 @@
 <div style="display: inline:block">
 <div id="c_box">
 	<button type="button" onclick="newC()">New</button>
-	<button type="button" onclick="loadC()">Load</button>
+	<button type="button" onclick="loadC()" >Load</button>
 	<div id="load_div"></div>
 </div>
 <div style="display: inline:box">
@@ -39,7 +39,7 @@
 <div>
 	<label for="c_name">Name:</label>
 	<input type="text" id="c_name" name="label_class">
-	<button type="button" onclick="save_ction()">Save</button>
+	<button type="button" onclick="client.save_ction('c_name',cdict)">Save</button>
 </div>
 </div>
 <div style="display: inline:block">
@@ -49,8 +49,12 @@
 	</div>
 </div>
 </div>
+<script src="{% static 't4_viewer/client.js' %}"></script>
+<script src="{% static 't4_viewer/page.js' %}"></script>
 
 <script>
+	var client = new Client();
+	console.log(client.name);
 	var tree = JSON.parse(document.getElementById('products').textContent);
 	var product = "NA";
 	var subproduct = "NA";
@@ -63,7 +67,6 @@
 	var boxes = new Array(product_box, subproduct_box, issue_box, subissue_box);
 	const l_ind = {'products_box':0,'subproducts_box':1, 'issue_box':2, 'subissue_box':3};
 	const b_array = Object.keys(l_ind);
-
 	var cdict = {};
 	var select_class = "NA";
 
@@ -76,18 +79,10 @@
 	}
 
 	function loadC() {
-		const load_div = document.getElementById('load_div');
-		const c_box = document.getElementById('c_box');
-		const elem = document.createElement('input');
-		const load = document.createElement('button');
-		load_div.innerHTML = "";
-		load.setAttribute('onclick',"load_ction()");
-		elem.setAttribute('id',"class_id");
-		load.innerHTML = "load";
-		load_div.appendChild(elem);
-		load_div.appendChild(load);
+		fun = "client.load_ction('ction_id',addCdict)";
+		input_panel("ction_id",'text',"Ction:",fun,"load_div");
 	}
-
+/*
 	function load_ction() {
 		name = document.getElementById('class_id').value;
 		const oReq = new XMLHttpRequest();
@@ -98,7 +93,7 @@
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}		
-	
+*/	
 	function addLabel() {
 		const input = document.getElementById('label_class');
 		cdict[input.value] = [];
@@ -112,7 +107,7 @@
 			select_class = box.options[box.selectedIndex].value;
 		}
 	}
-
+/*
 	function save_ction() {
 		var input = document.getElementById('c_name');
 		var xhr = new XMLHttpRequest();
@@ -124,15 +119,13 @@
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}
-
-	function reqGet() {
-		console.log("Here");
-		console.log(this.responseText);
+*/
+	function addCdict() {
+		ction = JSON.parse(this.responseText);
+		cdict = ction['ction'];
+		console.log("addCdict");
 		const obj = JSON.parse(this.responseText);
 		elem = document.getElementById('c_select');
-		console.log(obj);
-		cdict = obj['ction'];
-		console.log(cdict);
 		keys = Object.keys(cdict);
 		elem.innerHTML = "";
 		for ( var i = 0; i<keys.length; i++){
@@ -142,12 +135,12 @@
 			elem.appendChild(option);
 		}
 	}
-
+   /*
 	function reqListener () {
 		console.log("Here");
 		console.log(this.responseText);
 	}
-
+*/
 	function change_class(index){
 		const box = document.getElementById('c_select');
 		const c_list = document.getElementById('c_list');

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>40</y>
+      <w>700</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>CtionViewer: LemmaQuery</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>60</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>CtionQuery</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>130</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>LemmaQuery
+--
+CountObj</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>200</y>
+      <w>170</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>TermCounts (sorted)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>120</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Select.Class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>160</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+</diagram>

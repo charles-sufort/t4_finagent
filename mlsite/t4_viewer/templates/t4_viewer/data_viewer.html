@@ -11,7 +11,7 @@
 </select>
 <label for="min_n">Min_n:</label>
 <input type="number" id="min_n">
-<button onclick="dataQuery()">Submit</button>
+<button onclick="dataQuery()">choose</button>
 </div>
 
 <div>
@@ -83,7 +83,7 @@ function getCtion(){
 }
 
 
-function dataQuery(){
+function choose(){
 	elem = document.getElementById("term_options");
 	elem2 = document.getElementById("min_n");
 	oReq = new XMLHttpRequest();

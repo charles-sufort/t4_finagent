@@ -1,5 +1,6 @@
 from dataloader import DataLoader
 
+
 dl = DataLoader("complaints.csv")
 df = dl.df.loc[dl.df['Consumer complaint narrative'].notnull()]
 df_reind = df.set_index(['Product','Sub-product','Issue','Sub-issue'])

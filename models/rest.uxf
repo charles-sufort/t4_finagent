@@ -4,30 +4,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>90</y>
-      <w>100</w>
-      <h>40</h>
+      <x>370</x>
+      <y>280</y>
+      <w>220</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>Rest Objects</panel_attributes>
+    <panel_attributes>Client
+--
+ctions: Save, Load
+termlists: Save, Load
+query</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>140</y>
-      <w>100</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Word Sets</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>220</y>
+      <x>620</x>
+      <y>60</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -37,8 +30,19 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>100</y>
+      <x>810</x>
+      <y>210</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Word Sets</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>30</y>
       <w>220</w>
       <h>190</h>
     </coordinates>
@@ -55,6 +59,21 @@ get_termlists()
 get_termlist()
 
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>300</y>
+      <w>160</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Rest
+--
+ctions
+term_items
+data_stat_items</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
