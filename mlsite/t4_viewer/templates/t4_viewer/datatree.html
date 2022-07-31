@@ -21,6 +21,7 @@
 <div id="c_box">
 	<button type="button" onclick="newC()">New</button>
 	<button type="button" onclick="loadC()">Load</button>
+	<div id="load_div"></div>
 </div>
 <div style="display: inline:box">
 	<label for="label_class">Label Class:</label>
@@ -38,7 +39,7 @@
 <div>
 	<label for="c_name">Name:</label>
 	<input type="text" id="c_name" name="label_class">
-	<button type="button" onclick="save()">Save</button>
+	<button type="button" onclick="save_ction()">Save</button>
 </div>
 </div>
 <div style="display: inline:block">
@@ -68,19 +69,34 @@
 
 	function newC() {
 		cdict = {};
+		elem = document.getElementById("c_select");
+		elem.innerHTML = "";
+		elems = document.getElementById("c_list");
+		elems.innerHTML = "";
 	}
+
 	function loadC() {
+		const load_div = document.getElementById('load_div');
 		const c_box = document.getElementById('c_box');
 		const elem = document.createElement('input');
 		const load = document.createElement('button');
-		name = elem.value;
-		load.setAttribute('onclick',"load_ction('"+name+"')")
-
+		load_div.innerHTML = "";
+		load.setAttribute('onclick',"load_ction()");
+		elem.setAttribute('id',"class_id");
+		load.innerHTML = "load";
+		load_div.appendChild(elem);
+		load_div.appendChild(load);
 	}
 
-	function load_ction(name) {
-		httpRequest.open('GET','http://127.0.0.1:9000',true);
-		httpRequest.send();
+	function load_ction() {
+		name = document.getElementById('class_id').value;
+		const oReq = new XMLHttpRequest();
+		const obj = {'name': name}
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.addEventListener("load", reqGet); 
+		oReq.open("POST","http://127.0.0.1:9000/ction/get/");
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
 	}		
 	
 	function addLabel() {
@@ -91,14 +107,13 @@
 		elem.setAttribute('id',input.value);		
 		elem.innerHTML = input.value;
 		box.appendChild(elem);
-
 		if (Object.keys(cdict).length == 1){
 			const box = document.getElementById('c_select');
 			select_class = box.options[box.selectedIndex].value;
-			}
+		}
 	}
 
-	function save() {
+	function save_ction() {
 		var input = document.getElementById('c_name');
 		var xhr = new XMLHttpRequest();
 		const oReq = new XMLHttpRequest();
@@ -110,11 +125,27 @@
 		oReq.send(blob);
 	}
 
+	function reqGet() {
+		console.log("Here");
+		console.log(this.responseText);
+		const obj = JSON.parse(this.responseText);
+		elem = document.getElementById('c_select');
+		console.log(obj);
+		cdict = obj['ction'];
+		console.log(cdict);
+		keys = Object.keys(cdict);
+		elem.innerHTML = "";
+		for ( var i = 0; i<keys.length; i++){
+			const option = document.createElement("option");
+			option.setAttribute('id',keys[i]);
+			option.innerHTML = keys[i];
+			elem.appendChild(option);
+		}
+	}
+
 	function reqListener () {
 		console.log("Here");
 		console.log(this.responseText);
-		const elem = document.getElementById('example');
-		elem.innerHTML = this.responseText;
 	}
 
 	function change_class(index){
@@ -162,7 +193,7 @@
 			var oReq = new XMLHttpRequest();
 			const obj = {'fields':l_array};
 			const blob = new Blob([JSON.stringify(obj,null,2)],{'type':'application/json'});
-			oReq.addEventListener("load",reqListener2);
+			oReq.addEventListener("load",handleSample);
 			oReq.open("POST","http://127.0.0.1:9000/data/lvec_sample")
 			oReq.setRequestHeader("Content-type","application/json");
 			oReq.send(blob);
@@ -170,7 +201,7 @@
 		
 		}));
 
-	function reqListener2 () {
+	function handleSample () {
 		console.log("Here");
 		console.log(this.responseText);
 		const elem = document.getElementById('example');

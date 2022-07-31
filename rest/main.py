@@ -1,8 +1,8 @@
 from fastapi import FastAPI
+
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, List
-
 from t4 import T4
 
 class Vec(BaseModel):
@@ -29,13 +29,11 @@ class AvgQuery(BaseModel):
 class Query(BaseModel):
     ction: Ction
     query_type: str 
-    max_n: int
-
+    min_n: int
     
 class QueryText(BaseModel):
     ction: Ction
     query_type: str
-
 
 
 t41 = T4()
@@ -48,8 +46,6 @@ app.add_middleware(
         allow_headers=['*'],
         allow_methods=['*'],
  )
-
-
 
 @app.get("/")
 async def root():
@@ -68,7 +64,6 @@ async def get_ction(ction: Name):
 @app.get("/ction/get_all/")
 async def get_ction_names():
     ctions = t41.get_ction_names()
-    print(ctions)
     return {"message":ctions}
 
 @app.post("/termlist/add/")
@@ -93,14 +88,15 @@ async def avg_query(avg_query: AvgQuery):
 
 @app.post("/data/lvec_sample")
 async def get_lvec_sample(vec: Vec):
-    print(vec)
     sample = t41.get_lvec_sample(vec.fields)
-    print(sample)
     return {"Sample": sample}
 
 @app.post("/data/query/")
 async def get_query(query: Query):
-    data = t41.query(query.ction.dictionary,query.query_type,query.max_n)
+    print("here")
+    data = t41.query(query.ction.dictionary,query.query_type,query.min_n)
+    print(data)
+    print("here2")
     return data
 
 

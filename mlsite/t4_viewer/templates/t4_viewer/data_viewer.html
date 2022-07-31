@@ -1,0 +1,132 @@
+<div>
+    <label for="ction">Ction:</label>
+    <input type="text" id="ction">
+	<button onclick="loadCtion()" id="ction_load">load</button>
+</div>
+
+<div>
+<select id="term_options">
+	<option id="lemmas">lemmas</option>
+	<option id="ners">ners</option>
+</select>
+<label for="min_n">Min_n:</label>
+<input type="number" id="min_n">
+<button onclick="dataQuery()">Submit</button>
+</div>
+
+<div>
+	<select id="class_select" onchange="change_class()">
+	</select>
+</div>
+<div>
+<div>
+	<div>
+		<select id="vecs" size=5>
+		</select>
+	</div>
+</div>
+<div>
+	<select id="data" size=20>
+	</select>
+<script>
+var name = "NA";
+var cdict = {};
+var data = {};
+var cdict_s = {};
+
+function change_class(){
+		console.log("here");
+		const box = document.getElementById('class_select');
+		const data_box = document.getElementById('data');
+		const vecs_box = document.getElementById('vecs');
+		data_box.innerHTML = "";
+		select_class = box.options[box.selectedIndex].value;
+		console.log(select_class);
+		const elems = [];
+		for( var i = 0; i<data[select_class].length; i++){
+			elems[i] = document.createElement('option');
+			elems[i].setAttribute('id',data[select_class][i]);
+			elems[i].innerHTML = data[select_class][i];
+			data_box.appendChild(elems[i]);
+			console.log("here");
+			console.log(elems[i].parentElement);
+			console.log(elems[i]);
+		}
+}
+
+function loadCtion(){
+	name = document.getElementById("ction").value;
+	oReq = new XMLHttpRequest();
+	oReq.addEventListener("load",getCtion);
+	oReq.open("POST","http://127.0.0.1:9000/ction/get/")
+	obj  = {"name":name}
+	blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+	oReq.setRequestHeader("Content-Type","application/json");
+	oReq.send(blob);
+}
+
+function getCtion(){
+	ction  = JSON.parse(this.responseText);
+	console.log(ction);
+	cdict = ction['ction'];
+	console.log(cdict);
+	keys = Object.keys(cdict);
+	const select = document.getElementById("class_select");
+	for (var i = 0; i<keys.length; i++){
+		console.log(keys[i]);
+		const option = document.createElement("option");
+		option.setAttribute("id",keys[i]);
+		option.setAttribute("option",keys[i]);
+		option.innerHTML = keys[i];
+		select.appendChild(option);
+	}
+}
+
+
+function dataQuery(){
+	elem = document.getElementById("term_options");
+	elem2 = document.getElementById("min_n");
+	oReq = new XMLHttpRequest();
+	oReq.addEventListener("load",getQuery);
+	oReq.open("POST","http://127.0.0.1:9000/data/query");
+	obj = {"ction":{"name":name,"dictionary":cdict},"query_type":elem.value,"min_n":elem2.value}
+	blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
+	oReq.send(blob);
+}
+
+function getQuery(){
+	console.log("query");
+	data = JSON.parse(this.responseText)["query"];
+	console.log(this.responseText);
+	const elem = document.getElementById("data");
+	classes = Object.keys(data);	
+	select = document.getElementById('class_select');
+	const vecs_box = document.getElementById('vecs');
+	cl = select.options[select.selectedIndex].value;
+	terms = data[cl];
+	for (var j = 0; j< terms.length; j++){
+		const option = document.createElement('option');
+		console.log(terms[j]);
+		option.innerHTML = terms[j];
+		elem.appendChild(option);
+	}
+	vecs = cdict[cl];
+	for (var j = 0; j< vecs.length; j++){
+		const option = document.createElement('option');
+		console.log(vecs[j]);
+		option.innerHTML = vecs[j];
+		vecs_box.appendChild(option);
+	}
+	console.log("done");
+	console.log(cdict_s);
+}
+
+function col2sort(a,b){
+	if (a[1] === b[1]){
+		return 0;
+	}
+	else {
+		return (a[1] < b[1]) ? -1 : 1;
+	}
+}
+</script>

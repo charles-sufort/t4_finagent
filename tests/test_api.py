@@ -70,6 +70,16 @@ class TestAPI(unittest.TestCase):
         r1 = json.loads(conn.getresponse().read().decode('utf-8'))
         print(r1)
 
+    def test_query(self):
+        conn = http.client.HTTPConnection("127.0.0.1:9000")
+        ction = {"dictionary":{"C1":[["Prepaid card","NA","NA","NA"]]},"name":"T"}
+        data = {"ction":ction,"query_type":"lemmas", "max_n":8}
+        headers = {"Content-type":"application/json"}
+        data = json.dumps(data)
+        conn.request("POST","/data/query/",data,headers)
+        r1 = json.loads(conn.getresponse().read().decode('utf-8'))
+        print(r1)
+
 
         
 

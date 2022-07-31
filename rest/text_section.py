@@ -1,4 +1,5 @@
 import spacy
+import re
 
 class TextSection:
     def __init__(self, text):
@@ -8,8 +9,11 @@ class TextSection:
 
     def get_lemmas(self):
         lemmas = []
+        p = "[a-zA-Z\'\"]+"
         for token in self.doc:
-            lemmas.append(token.lemma_)
+            if token.lemma_ not in self.nlp.Defaults.stop_words:
+                if bool(re.search(p,token.lemma_)):
+                    lemmas.append(token.lemma_)
         return lemmas
     
     def get_ners(self):
@@ -26,7 +30,6 @@ class TextSection:
             chunk_obj["root"] = chunk.root.text
             chunk_obj["text"] = chunk.root.dep_
             chunk_obj["text"] = chunk.root.head.text
-            
             chunks.append(chunk_obj)
         return chunks
 

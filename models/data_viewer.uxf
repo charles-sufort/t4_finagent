@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>50</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Ction:
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>50</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Load
+--
+Button
+onclick=loadCtion()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>200</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Select.class
+--
+id="class_select"
+onchange="change_class()"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>300</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Vecs
+--
+ListBox</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>10</y>
+      <w>790</w>
+      <h>620</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>50</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>
+--
+Input
+id="ction"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>130</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Select. text_data
+--
+id="term_options"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>130</y>
+      <w>60</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>Max_n</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>130</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>
+--
+input
+id="min_n"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>130</y>
+      <w>120</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Submit
+--
+Button
+onclick=choose()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>390</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DataDisplay
+--
+Tab</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

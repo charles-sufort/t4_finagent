@@ -42,6 +42,7 @@ class T4:
         p = "[a-zA-Z\']+"
         CT_df = {}
         for cl in CL: 
+            print("1: cl {}".format(cl))
             cl_df = CL[cl]
             df_ccn = cl_df['Consumer complaint narrative'].str.lower()
             re_df = cl_ccn.applymap(lambda x: re.findall(p,x))
@@ -52,24 +53,29 @@ class T4:
             T[cl] = terms_df
         dict_avgs = {}
         for cl in  CL:
+            print("2: cl {}".fomat(cl))
             dict_avgs[cl] = {}
             for term in termlist:
                 dict_avgs[cl][term] = np.average(CT_df[cl].to_numpy())
         return dict_avgs
 
     def get_lvec_sample(self,vec):
-        return self.dl.get_lvec_sample(vec)
+            return self.dl.get_lvec_sample(vec)
 
     def avg_query(self,ction,termlist):
         return self.dl.dfC_term_avgs(ction,termlist)
 
-    def query(self,ction,query_type,max_n):
-        print(ction)
+    def query(self,ction,query_type,min_n):
         L = self.dl.filter_vecs(ction)
-        print(L)
         query = {}
         for c in L:
-            query[c] = self.dl.query_text(L[c],query_type)
+            print("query: {}".format(c))
+            Lc_dict = self.dl.query_text(L[c],query_type,min_n)
+            Lc = [] 
+            for term in Lc_dict:
+                Lc.append([term,Lc_dict[term]])
+            Lc = sorted(Lc,reverse=True,key=lambda tup:tup[1])
+            query[c] = Lc
         return {"query":query}
         
     

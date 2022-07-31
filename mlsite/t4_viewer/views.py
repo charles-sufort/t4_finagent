@@ -11,6 +11,11 @@ def datatree(request):
         context = json.load(fo)
     return render(request,'t4_viewer/datatree.html',context)
 
+def data_viewer(request):
+    context = {}
+    return render(request, 't4_viewer/data_viewer.html', context)
+
+
 def terms(request):
     context = {}
     return render(request,'t4_viewer/terms.html', context)

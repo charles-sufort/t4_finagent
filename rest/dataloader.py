@@ -19,7 +19,7 @@ class DataLoader:
     def get_ction(self,ction):
         cdict = ction['dictionary']
 
-    def query_text(self,df,query_type):
+    def query_text(self,df,query_type,min_n):
         data = {}
         for i in range(df.shape[0]):
             txt = TextSection(df['Consumer complaint narrative'].iloc[i])
@@ -32,7 +32,6 @@ class DataLoader:
                         data[ner] = 1
             elif query_type == "lemmas":
                 lems = txt.get_lemmas()
-                print(lems)
                 for lem in lems:
                     if lem in data:
                         data[lem] = data[lem] + 1
@@ -40,10 +39,14 @@ class DataLoader:
                         data[lem] = 1
             elif query_type == "noun_chunk":
                 data = txt.get_noun_chunks()
-        return data        
+        data2 = {}
+        for key in data:
+            if data[key] > min_n:
+                data2[key] = data[key]
+        return data2        
+
 
     def filter_vecs(self,c_dict):
-        print("here")
         L = {}
         for C in c_dict:
             L[C] = []
@@ -52,17 +55,17 @@ class DataLoader:
             vecs = c_dict[cl]
             I_cl = pd.Index([])
             for vec in vecs:
+                print(vec)
                 n = 4
                 for i in range(4):
                     if vec[i] == "NA":
-                        n = i-1
+                        n = i
+                        break
+                print(i)
                 i_vec = self.df.loc[self.df[fields[:n]].isin(vec[:n]).all(1)].index
+                print(i_vec)
                 I_cl = I_cl.union(i_vec)
             L[cl] = I_cl
-            cl = self.match_to_clabel(c_dict,self.df.iloc[i]) 
-            if cl != "NA":
-                print("here")
-                L[cl].append(i)
         for c in c_dict:
             L[c] = self.df.iloc[L[c]]
         return L
@@ -101,7 +104,7 @@ class DataLoader:
         n = 4
         for i in range(4):
             if lvec[i] == "NA":
-                n = i-1
+                n = i
         print("fields: {}".format(fields[:n]))
         print("lvec: {}".format(lvec[:n]))
         lvec = self.df.loc[self.df[fields[:n]].isin(lvec[:n]).all(1)] 
@@ -111,11 +114,8 @@ class DataLoader:
         elem  = lvec.iloc[i]
         print(elem)
         return elem['Consumer complaint narrative']
-
-
     
     def save_df(self,df,name):
         file = self.proj_root + "/data/" + name
         df.to_csv(file)
-
 
