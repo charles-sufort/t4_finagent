@@ -15,7 +15,7 @@ class DataLoader:
             file = self.proj_root + "/data/" + file
             self.df = pd.read_csv(file)
         self.df = self.df.loc[self.df['Consumer complaint narrative'].notnull()]
-
+ 
     def get_ction(self,ction):
         cdict = ction['dictionary']
 
@@ -44,7 +44,6 @@ class DataLoader:
             if data[key] > min_n:
                 data2[key] = data[key]
         return data2        
-
 
     def filter_vecs(self,c_dict):
         L = {}
@@ -119,3 +118,6 @@ class DataLoader:
         file = self.proj_root + "/data/" + name
         df.to_csv(file)
 
+#dl = DataLoader()
+#
+#print(list(dl.df["Company"].unique()))

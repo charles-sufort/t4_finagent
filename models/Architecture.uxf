@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
+      <x>150</x>
       <y>70</y>
       <w>100</w>
       <h>30</h>
@@ -15,7 +15,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
+      <x>120</x>
       <y>140</y>
       <w>100</w>
       <h>30</h>
@@ -26,7 +26,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
+      <x>340</x>
       <y>70</y>
       <w>100</w>
       <h>30</h>
@@ -37,23 +37,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
+      <x>280</x>
       <y>150</y>
-      <w>100</w>
+      <w>120</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>T4
 -
-Data/Learning
-Interface
-
+QuerySupport
+DataProcessor
+LearningMachine
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
+      <x>160</x>
       <y>90</y>
       <w>60</w>
       <h>70</h>
@@ -64,7 +64,7 @@ Interface
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
+      <x>240</x>
       <y>60</y>
       <w>120</w>
       <h>40</h>
@@ -75,7 +75,7 @@ Interface
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>40</x>
       <y>200</y>
       <w>100</w>
       <h>30</h>
@@ -86,7 +86,7 @@ Interface
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>40</x>
       <y>250</y>
       <w>100</w>
       <h>30</h>
@@ -97,7 +97,7 @@ Interface
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>40</x>
       <y>300</y>
       <w>100</w>
       <h>30</h>
@@ -108,7 +108,7 @@ Interface
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>100</x>
+      <x>110</x>
       <y>160</y>
       <w>80</w>
       <h>60</h>
@@ -119,7 +119,7 @@ Interface
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
+      <x>80</x>
       <y>220</y>
       <w>30</w>
       <h>50</h>
@@ -130,7 +130,7 @@ Interface
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
+      <x>80</x>
       <y>270</y>
       <w>30</w>
       <h>50</h>
@@ -141,12 +141,138 @@ Interface
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
+      <x>320</x>
       <y>90</y>
-      <w>30</w>
+      <w>90</w>
       <h>80</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>570</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>QuerySupport</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>120</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>T4Processor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>450</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TextData</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>510</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>510</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>490</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TextForms</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>140</x>
+      <y>540</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue
+run DataProcessor on whole dataset
+or per classification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>420</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>DataBase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>140</y>
+      <w>80</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;50.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>320</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DataInterface
+--
+process_ction()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>440</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>OTHER</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

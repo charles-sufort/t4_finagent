@@ -1,0 +1,67 @@
+<div>
+
+	<button  id="new_radio" name="new" value="new" onclick="list_new()">New</button>
+	<button  id="load_radio" name="load" value="load" onclick="list_load()">Load</button>
+		<div id="load_div"></div>
+</div>
+<div>
+	<select name="terms" id="terms" size=20>
+	</select>
+	<div>
+		<input type="text" id="word_input" value="">
+		<button id="term_add" onclick="addterm()">Add</button>
+	</div>
+</div>
+<div>
+	<label id="list_label" for="list_name">Name</label><input id="list_name" type="text">
+	<button id="submit" onclick="save_list()">Submit</button>
+</div>
+
+<script>
+	termlist = [];
+	const names = "NA";
+	var radio = "new_radio";
+	var terms = [];
+	function radio_select(id) {
+		radio = id;
+	}
+	function addterm(){
+		const elem = document.createElement('option');
+		term = document.getElementById('word_input').value;
+		elem.setAttribute('value',term);
+		elem.innerHTML = term;
+		select = document.getElementById('terms');
+		select.appendChild(elem);
+		terms[terms.length] = term;
+	}
+	function save_list(){
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		name = document.getElementById("list_name").value;
+		const obj = {'name': name, 'terms': terms};
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}) 
+		oReq.open("POST","http://127.0.0.1:9000/termlist/add/");
+		oReq.setRequestHeader("Content-Type","application/json")
+		oReq.send(blob);
+	}
+	function new_list(){
+		terms = []			
+		elem = document.getElementById('terms');
+		elem.innerHTML = "";
+	}
+	function load_list(){
+		elem = document.getElementById('load_div');							
+		const input = document.createElement('input');
+		input.setAttribute('id',"load_name");
+		input.setAttribute('type',"text");
+		const add = document.createElement('button');
+		add.setAttribute('onclick','load_name()');
+		add.setAttribute('id','submit_load');
+		}
+	function load_name(){
+		name = document.getElementById('load_name').value;
+	}
+
+
+</script>
+

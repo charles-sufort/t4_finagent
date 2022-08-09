@@ -1,0 +1,269 @@
+{% load static %}
+{{nodes|json_script:'products'}}
+<div>
+<select name="Products" size="10" id='products_box'>
+	<option id="t">t</option>
+	{% for k, v in nodes.items %}
+	<option onclick="product_click('PRODUCT:{{k}}')" class='products' value='{{k}}' id='PRODUCT:{{k}}'	>{{k}} {{v.count}}</option>
+	{% endfor %}
+</select>
+<select id='subproducts_box' size="10">
+</select>
+</div>
+<div>
+<select id='issue_box' size="10">
+</select>
+<select id='subissue_box' size="10">
+</select>
+</div>
+<div style="display: flex">
+<div style="display: inline:block">
+<div id="c_box">
+	<button type="button" onclick="newC()">New</button>
+	<button type="button" onclick="loadC()" >Load</button>
+	<div id="load_div"></div>
+</div>
+<div style="display: inline:box">
+	<label for="label_class">Label Class:</label>
+	<input type="text" id="label_class" name="label_class">
+	<button type="button" onclick="addLabel()">Add</button>
+</div>
+<div>
+	<select id="c_select" onchange="change_class(this.selectedIndex)">
+	</select>
+</div>
+<div>
+	<select id="c_list" size=10>
+	</select>
+</div>
+<div>
+	<label for="c_name">Name:</label>
+	<input type="text" id="c_name" name="label_class">
+	<button type="button" onclick="client.save_ction('c_name',cdict)">Save</button>
+</div>
+</div>
+<div style="display: inline:block">
+	<div>
+		<textarea id="example">		
+		</textarea>
+	</div>
+</div>
+</div>
+<script src="{% static 't4_viewer/client.js' %}"></script>
+<script src="{% static 't4_viewer/page.js' %}"></script>
+
+<script>
+	var client = new Client();
+	console.log(client.name);
+	var tree = JSON.parse(document.getElementById('products').textContent);
+	var product = "NA";
+	var subproduct = "NA";
+	var issue = "NA";
+	var subissue = "NA";
+	var product_box = document.getElementById('products_box');
+	var subproduct_box = document.getElementById('subproducts_box');
+	var issue_box = document.getElementById('issue_box');
+	var subissue_box = document.getElementById('subissue_box');
+	var boxes = new Array(product_box, subproduct_box, issue_box, subissue_box);
+	const l_ind = {'products_box':0,'subproducts_box':1, 'issue_box':2, 'subissue_box':3};
+	const b_array = Object.keys(l_ind);
+	var cdict = {};
+	var select_class = "NA";
+
+	function newC() {
+		cdict = {};
+		elem = document.getElementById("c_select");
+		elem.innerHTML = "";
+		elems = document.getElementById("c_list");
+		elems.innerHTML = "";
+	}
+
+	function loadC() {
+		fun = "client.load_ction('ction_id',addCdict)";
+		input_panel("ction_id",'text',"Ction:",fun,"load_div");
+	}
+/*
+	function load_ction() {
+		name = document.getElementById('class_id').value;
+		const oReq = new XMLHttpRequest();
+		const obj = {'name': name}
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.addEventListener("load", reqGet); 
+		oReq.open("POST","http://127.0.0.1:9000/ction/get/");
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}		
+*/	
+	function addLabel() {
+		const input = document.getElementById('label_class');
+		cdict[input.value] = [];
+		const box = document.getElementById('c_select');
+		const elem = document.createElement('option');
+		elem.setAttribute('id',input.value);		
+		elem.innerHTML = input.value;
+		box.appendChild(elem);
+		if (Object.keys(cdict).length == 1){
+			const box = document.getElementById('c_select');
+			select_class = box.options[box.selectedIndex].value;
+		}
+	}
+/*
+	function save_ction() {
+		var input = document.getElementById('c_name');
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		const obj = {'name': input.value, 'dictionary':cdict}
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.addEventListener("load", reqListener); 
+		oReq.open("POST","http://127.0.0.1:9000/ction/add/");
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}
+*/
+	function addCdict() {
+		ction = JSON.parse(this.responseText);
+		cdict = ction['ction'];
+		console.log("addCdict");
+		const obj = JSON.parse(this.responseText);
+		elem = document.getElementById('c_select');
+		keys = Object.keys(cdict);
+		elem.innerHTML = "";
+		for ( var i = 0; i<keys.length; i++){
+			const option = document.createElement("option");
+			option.setAttribute('id',keys[i]);
+			option.innerHTML = keys[i];
+			elem.appendChild(option);
+		}
+	}
+   /*
+	function reqListener () {
+		console.log("Here");
+		console.log(this.responseText);
+	}
+*/
+	function change_class(index){
+		const box = document.getElementById('c_select');
+		const c_list = document.getElementById('c_list');
+		c_list.innerHTML = "";
+		select_class = box.options[box.selectedIndex].value;
+		console.log(select_class);
+		console.log(cdict[select_class]);
+		const elems = [];
+		for( var i = 0; i<cdict[select_class].length; i++){
+			elems[i] = document.createElement('option');
+			elems[i].setAttribute('id',cdict[select_class][i]);
+			elems[i].innerHTML = cdict[select_class][i];
+			c_list.appendChild(elems[i]);
+			console.log("here");
+			console.log(elems[i].parentElement);
+			console.log(elems[i]);
+		}
+		}
+
+	boxes.forEach(box => box.addEventListener('keypress', (event) => {
+		var l_array = ["NA","NA","NA","NA"]; 
+		for (var i = 0; i < l_ind[box.id]+1; i++){
+			box_i = document.getElementById(b_array[i]);
+			console.log('keypress index');
+			console.log(box_i.selectedIndex);
+			l_array[i] = box_i.options[box_i.selectedIndex].value;
+		}
+		console.log("event");
+		console.log(event.key);
+		if (event.key == "Enter") {
+			console.log(box.options[box.selectedIndex].id);
+			c_list = document.getElementById('c_list');
+			console.log(select_class);
+			if (select_class in cdict){
+				cdict[select_class][cdict[select_class].length] = l_array;
+				const element = document.createElement('option');
+				element.innerHTML = l_array.toString();
+				c_list.appendChild(element);
+			}
+		}
+		if (event.key == 'e') {
+			console.log("here a");
+			var oReq = new XMLHttpRequest();
+			const obj = {'fields':l_array};
+			const blob = new Blob([JSON.stringify(obj,null,2)],{'type':'application/json'});
+			oReq.addEventListener("load",handleSample);
+			oReq.open("POST","http://127.0.0.1:9000/data/lvec_sample")
+			oReq.setRequestHeader("Content-type","application/json");
+			oReq.send(blob);
+			}
+		
+		}));
+
+	function handleSample () {
+		console.log("Here");
+		console.log(this.responseText);
+		const elem = document.getElementById('example');
+		elem.innerHTML = this.responseText;
+
+	}
+
+
+	function product_click(id){
+			console.log("here");
+			product = id.slice(8);
+			elem = document.getElementById(id);
+			sp_box = document.getElementById('subproducts_box');
+			i_box = document.getElementById('issue_box');
+			si_box = document.getElementById('subissue_box');
+			sp_box.innerHTML = "";
+			i_box.innerHTML = "";
+			si_box.innerHTML = "";
+			ptree = tree[id.slice(8)]['nodes'];
+			console.log(ptree);
+			for (var key in ptree){
+				option = document.createElement('option');
+				option.innerHTML = key+ " " + ptree[key]['count'];
+				option.setAttribute('id','SubProduct'+key);
+				option.setAttribute('value',key)
+				option.setAttribute('onclick',"subproduct_click('SUBPROD:"+key+"')");
+				sp_box.appendChild(option);
+			}
+	};
+
+	function subproduct_click(id){
+			subproduct = id.slice(8);
+			console.log(id);
+			elem = document.getElementById(id);
+			i_box = document.getElementById('issue_box');
+			si_box = document.getElementById('subissue_box');
+			issue = "NA";
+			subissue = "NA";
+			i_box.innerHTML = "";
+			si_box.innerHTML = "";
+			ptree = tree[product]['nodes'][id.slice(8)]['nodes'];
+			console.log(ptree);
+			for (var key in ptree){
+				console.log(key);
+				option = document.createElement('option');
+				option.innerHTML = key + " " + ptree[key]['count'];
+				option.setAttribute('id','ISSUE:'+key);
+				option.setAttribute('value',key)
+				option.setAttribute('onclick',"issue_click('ISSUE:"+key+"')");
+				i_box.appendChild(option);
+			}
+	};
+
+	function issue_click(id){
+			console.log(id);
+			issue = id.slice(6);
+			elem = document.getElementById(id);
+			si_box = document.getElementById('subissue_box');
+			si_box.innerHTML = "";
+			ptree = tree[product]['nodes'][subproduct]['nodes'][id.slice(6)]['nodes'];
+			console.log(ptree);
+			issue = id;
+			for (var key in ptree){
+				console.log(key);
+				option = document.createElement('option');
+				option.setAttribute('value',key)
+				option.innerHTML = key+ " " + ptree[key]['count'];;
+				option.setAttribute('id','SUBISSUE:'+key);
+				si_box.appendChild(option);
+			}
+	};
+</script>

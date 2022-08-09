@@ -1,4 +1,5 @@
 from dataloader import DataLoader
+import pandas as pd
 import json
 import os
 
@@ -16,6 +17,8 @@ class DataTree:
             tree['nodes'][p] = {}
             tree['nodes'][p]['nodes'] = {}
             tree['nodes'][p]['count'] = df_p.shape[0]
+            df_null = df_p.loc[pd.isnull(df['Sub-product'])]
+            issues = df_null['Issue'].unique()
             for sp in subproducts:
                 df_sp = df_p.loc[df_p['Sub-product'] == sp]
                 issues = list(df_sp['Issue'].unique())
@@ -28,10 +31,15 @@ class DataTree:
                     tree['nodes'][p]['nodes'][sp]['nodes'][i] = {} 
                     tree['nodes'][p]['nodes'][sp]['nodes'][i]['count'] = df_i.shape[0] 
                     tree['nodes'][p]['nodes'][sp]['nodes'][i]['nodes'] = {} 
+                    df_null = df_i.loc[pd.isnull(df['Sub-issue'])]
                     for si in subissues:
                         df_si = df_i.loc[df_i['Sub-issue'] == si]
                         tree['nodes'][p]['nodes'][sp]['nodes'][i]['nodes'][si] = {}
                         tree['nodes'][p]['nodes'][sp]['nodes'][i]['nodes'][si]['count'] = df_si.shape[0]
+            for i in issues:
+                
+
+
         self.tree = tree
 
     def save_tree(self,name):
@@ -43,5 +51,6 @@ class DataTree:
 dl = DataLoader('complaints_boa.csv')
 dt = DataTree(dl.df)
 dt.save_tree('boa_tree.json')
+
 
 

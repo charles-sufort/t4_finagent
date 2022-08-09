@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>176</y>
+      <w>200</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>QueryBoard
+--
+query_class: Select.QueryClass
+panel: QueryParameters
+
+--
+constructor()
+query_select()
+submit()
+ction_viewer()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>320</y>
+      <w>200</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>CtionViewer
+--
+query_class: QueryClass
+query_data: QueryData
+query_viewer: QueryViewer
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>120</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>QueryParameters
+--
+query_class: QueryClass
+range: Range
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>504</x>
+      <y>160</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue
+add depth
+add stoplist</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>144</y>
+      <w>88</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>320</y>
+      <w>168</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>QueryViewer
+--
+query_class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>320</y>
+      <w>168</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>FreqViewer
+--
+panels</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>440</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>ListViewer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>440</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>GraphViewer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

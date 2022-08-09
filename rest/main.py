@@ -35,6 +35,10 @@ class QueryText(BaseModel):
     ction: Ction
     query_type: str
 
+class ProcessCtion(BaseModel):
+    ction: Ction
+    name: str
+
 
 t41 = T4()
 
@@ -98,5 +102,19 @@ async def get_query(query: Query):
     print(data)
     print("here2")
     return data
+
+@app.post("/data/dataform/process")
+async def process_dataform(proc: ProcessCtion):
+    t41.process_dataform(proc.ction,proc.name)
+    return "added"
+   
+@app.post("/data/dataform/get")
+async def get_dataform(proc: ProcessCtion):
+    return t41.get_dataform(proc.ction,proc.name)
+
+
+
+
+
 
 

@@ -4,21 +4,6 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>280</y>
-      <w>220</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>Client
---
-ctions: Save, Load
-termlists: Save, Load
-query</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>620</x>
       <y>60</y>
       <w>100</w>
@@ -44,7 +29,7 @@ query</panel_attributes>
       <x>50</x>
       <y>30</y>
       <w>220</w>
-      <h>190</h>
+      <h>360</h>
     </coordinates>
     <panel_attributes>Rest:
 --
@@ -57,23 +42,9 @@ get_ction_names()
 add_termlist()
 get_termlists()
 get_termlist()
+get_lvec_sample()
 
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>50</x>
-      <y>300</y>
-      <w>160</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>Rest
---
-ctions
-term_items
-data_stat_items</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

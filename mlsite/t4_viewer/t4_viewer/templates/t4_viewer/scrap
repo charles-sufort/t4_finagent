@@ -1,0 +1,27 @@
+<select id="term_options">
+	<option id="lemmas">lemmas</option>
+	<option id="ners">ners</option>
+</select>
+<label for="min_n">Min_n:</label>
+<input type="number" id="min_n">
+<button onclick="dataQuery()">choose</button>
+
+
+<div>
+	<select id="class_select" onchange="change_class()">
+	</select>
+</div>
+<div>
+<div>
+	<div>
+		<select id="vecs" size=5>
+		</select>
+	</div>
+</div>
+<div>
+	<select id="data" size=20>
+	</select>
+</div>
+</div>
+
+

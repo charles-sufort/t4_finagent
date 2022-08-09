@@ -1,6 +1,4 @@
-
 class Client {
-
 	constructor() {
 		this.name = "client1";
 	}

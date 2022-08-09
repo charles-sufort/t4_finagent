@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>168</y>
+      <w>232</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>QueryBoard
+--
+query_class: Select.QueryClass
+panel: QueryParameters
+
+--
+constructor()
+query_select()
+submit()
+ction_viewer()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>8</x>
+      <y>312</y>
+      <w>240</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>CtionViewer
+--
+query_class: QueryClass
+query_data: QueryData
+query_viewer: QueryViewer
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

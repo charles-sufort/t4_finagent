@@ -1,8 +1,11 @@
 import sys, os
+import threading
 from dataloader import DataLoader
 import json
 import re
 from text_section import TextSection
+from dataclient import DataClient
+from t4processor import T4Processor
 
 
 class T4:
@@ -10,6 +13,7 @@ class T4:
         self.dl = DataLoader('complaints_boa.csv')
         src_dir = os.path.dirname(os.path.abspath(__file__))
         self.proj_root = os.path.dirname(src_dir)
+        self.ction_process = {}
 
     def save_ction(self,name,ction):
         file = self.proj_root + "/data/ctions/" + name + ".json"
@@ -60,7 +64,7 @@ class T4:
         return dict_avgs
 
     def get_lvec_sample(self,vec):
-            return self.dl.get_lvec_sample(vec)
+        return self.dl.get_lvec_sample(vec)
 
     def avg_query(self,ction,termlist):
         return self.dl.dfC_term_avgs(ction,termlist)
@@ -78,6 +82,37 @@ class T4:
             query[c] = Lc
         return {"query":query}
         
+    def process_dataform(self,ction,dataform):
+        if ction.name not in self.ction_process:
+            self.ction_process[ction.name] = {}
+            self.ction_process[ction.name][dataform] = "started"
+            t = threading.Thread(target=self.process_dataform_thread,args=(ction,dataform))
+            t.start()
+        else:
+            self.ction_process[ction.name][dataform] = "started"
+            t = threading.Thread(target=self.process_dataform_thread,args=(ction,dataform))
+            t.start()
+
+    def process_dataform_thread(self,ction,dataform):
+        t4proc = T4Processor()
+        t4proc.process_dataform(ction.dictionary,dataform)
+        self.ction_process[ction.name][dataform] = "finished"
+
+    def get_dataform(self,ction,dataform):
+        print("here")
+        print(list(self.ction_process.keys()))
+        if ction.name in self.ction_process:
+            if dataform in self.ction_process[ction.name]:
+                if self.ction_process[ction.name][dataform] == "finished": 
+                    t4proc = T4Processor()
+                    return t4proc.get_data(ction.dictionary,dataform)
+                else:
+                    return "Not Finished"
+            else:
+                return "Not Found"
+        else:
+            return "Not Found"
+
     
     def __save_file(self,file,data):
         with open(file,'w') as fo:
