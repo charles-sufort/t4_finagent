@@ -4,6 +4,7 @@ from sqlalchemy.sql import select
 from sqlalchemy.orm import Session
 import pymysql.cursors
 import json
+import time
 
 class DataClient:
     def __init__(self,):
@@ -73,6 +74,8 @@ class DataClient:
         database=self.database,
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor)
+        vec = [vec[i] for i in range(len(vec)) if vec[i] != "NA" ]
+
         with connection:
             with connection.cursor() as cursor:
                 sql = "SELECT `{}`".format(keys[0])
@@ -183,10 +186,13 @@ class DataClient:
         tbl_dict = self.get_cols_json(file)
         cols_dict = tbl_dict["col_names"]
         name = tbl_dict["name"]
-        vec_dict = {}
+        vec_dict = []
         for vec in vecs:
             inds = self.get_vec(vec,['index'])
-            print(self.get_dataform_inds(inds,file))
+            vec_dict = {}
+            vec_dict["vec"] = vec
+            vec_dict["data"] = self.get_dataform_inds(inds,file)
+        return vec_dict
 
     def get_dataform_inds(self,inds,file):
         connection = pymysql.connect(\
@@ -226,19 +232,21 @@ if __name__ == "__main__":
     #
     #
     client = DataClient()
-    vecs = [["BANK OF AMERICA, NATIONAL ASSOCIATION","Mortgage","Reverse mortgage"]]
-
-    print(client.get_dataform_vecs(vecs,"LemmaFormTable.json"))
-
+    #vecs = [["BANK OF AMERICA, NATIONAL ASSOCIATION","Mortgage","Reverse mortgage"]]
+#
+#    print(client.get_dataform_vecs(vecs,"LemmaFormTable.json"))
+#
 #   print(client.get_dataforms_vec("LemmaFormDirectory"))
     #client.create_dataform("NounChunkTable.json")
     #client.directoryTable("NamedEntityFormDirectory")
 #    client = DataClient()
 #    client.create_dataform("LemmaFormTable.json")
 
-    #vec = ["BANK OF AMERICA, NATIONAL ASSOCIATION","Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]
-
-    #data = client.get_vec(vec,["Consumer complaint narrative","index"])
+    vec = ["BANK OF AMERICA, NATIONAL ASSOCIATION","Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]
+    start = time.perf_counter()
+    data = client.get_vec(vec,["Consumer complaint narrative","index"])
+    stop = time.perf_counter()
+    print(stop-start)
     #print(data[:10])
 
 

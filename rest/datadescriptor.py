@@ -28,25 +28,27 @@ class DataDescriptor:
     def summary(self):
         fields = ['Product','Sub-product','Issue','Sub-issue']
         df_dd = self.df.drop_duplicates(subset=fields)
+        print(df_dd.shape[0])
+        print(df_dd[fields].values.tolist())
 #        print(df_dd.shape)
 #        print(self.df['ZIP code'])
 #        print(self.df.dtypes)
 #
 #        print(self.df.dtypes[1]=="object")
 #        print(self.df.dtypes[3])
-        types = self.df.dtypes
-        columns = self.df.columns
-
-        col_dict = {}
-        for i in range(len(types)):
-            if types[i] == "object":
-                col = columns[i]
-                lengths = self.df[col].str.len()
-                col_dict[col] = lengths.max()
-            
-        col_dict['Complaint ID'] = "int"
-        print(col_dict)        
-        return col_dict
+#        types = self.df.dtypes
+#        columns = self.df.columns
+#
+#        col_dict = {}
+#        for i in range(len(types)):
+#            if types[i] == "object":
+#                col = columns[i]
+#                lengths = self.df[col].str.len()
+#                col_dict[col] = lengths.max()
+#            
+#        col_dict['Complaint ID'] = "int"
+#        print(col_dict)        
+#        return col_dict
 
 
 dd = DataDescriptor("complaints.csv")

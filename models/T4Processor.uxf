@@ -4,16 +4,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>90</y>
+      <x>10</x>
+      <y>10</y>
       <w>210</w>
       <h>200</h>
     </coordinates>
     <panel_attributes>T4Processor
 --
-get_ction_form()
-check_vecs_form()
-process_vec_form()
+get_data()
+process_dataform_ction()
+process_dataform()n
 
 
 --

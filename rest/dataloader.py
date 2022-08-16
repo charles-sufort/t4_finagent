@@ -1,6 +1,5 @@
 import pandas as pd
-import os
-import re
+import os, re, time, json
 import numpy as np
 from text_section import TextSection
 
@@ -15,9 +14,21 @@ class DataLoader:
             file = self.proj_root + "/data/" + file
             self.df = pd.read_csv(file)
         self.df = self.df.loc[self.df['Consumer complaint narrative'].notnull()]
+        self.df['Product'].fillna("nan",inplace=True)
+        self.df['Sub-product'].fillna("nan",inplace=True)
+        self.df['Issue'].fillna("nan",inplace=True)
+        self.df['Sub-issue'].fillna("nan",inplace=True)
  
     def get_ction(self,ction):
         cdict = ction['dictionary']
+
+
+    def get_vecs(self,company):
+        df_c = self.df.loc[self.df["Company"] == company]
+        fields = ['Product','Sub-product','Issue','Sub-issue']
+        df_dd = df_c.drop_duplicates(subset=fields)
+        vecs = df_dd[fields].values.tolist()
+        return vecs
 
     def query_text(self,df,query_type,min_n):
         data = {}
@@ -45,7 +56,20 @@ class DataLoader:
                 data2[key] = data[key]
         return data2        
 
-    def filter_vecs(self,c_dict):
+    def filter_vec(self,vec):
+        fields = ['Product','Sub-product','Issue','Sub-issue']
+        key = "__".join(vec)
+        return self.df.loc[self.df[fields].isin(vec).all(1)]
+
+    def filter_vecs(self,vecs):
+        vec_keys =  ["__".join(vec) for vec in vecs]
+        vec_dict = {}
+        for i in range(len(vecs)):
+            vec = vecs[i]
+            vec_dict[vec_keys[i]] = self.filter_vec(vec)
+        return vec_dict
+
+    def filter_ction(self,c_dict):
         L = {}
         for C in c_dict:
             L[C] = []
@@ -98,6 +122,18 @@ class DataLoader:
                 dict_avgs[cl][term] = np.average(CT_df[cl][[term]].to_numpy())
         return dict_avgs
 
+    def get_vecs_directory(self,company):
+        dir_path = self.proj_root + "/data/vecs"
+        file = dir_path + "/directory.json"
+        js_dict = {}
+        with open(file,'r') as fo:
+            js_dict = json.load(fo)
+        dir_path = dir_path + "/" + js_dict[company]
+        file = dir_path + "/directory.json"
+        with open(file,'r') as fo:
+            js_dict = json.load(fo)
+        return js_dict
+
     def get_lvec_sample(self,lvec):
         fields = ['Product','Sub-product','Issue','Sub-issue']
         n = 4
@@ -117,6 +153,26 @@ class DataLoader:
     def save_df(self,df,name):
         file = self.proj_root + "/data/" + name
         df.to_csv(file)
+
+if __name__ == "__main__":
+#    ction = {"C1":[["BANK OF AMERICA, NATIONAL ASSOCIATION","Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]]}
+#
+#    dl = DataLoader()
+#    start = time.perf_counter()
+#
+#    data = dl.filter_vecs(ction)
+#    stop = time.perf_counter()
+#    print(stop-start)
+    dl = DataLoader()
+    vec = ["Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]
+    df_vec = dl.filter_vec(vec)
+    print(list(df_vec.index.values.tolist()))
+
+
+#    vecs = [["Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"],['Credit reporting, credit repair services, or other personal consumer reports', 'Credit reporting', 'Problem with a credit reporting companys investigation into an existing problem', 'Difficulty submitting a dispute or getting information about a dispute over the phone']]
+#    vecs = dl.filter_vecs(vecs)
+#    print(vecs)
+
 
 #dl = DataLoader()
 #

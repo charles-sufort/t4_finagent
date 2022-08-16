@@ -95,7 +95,7 @@ class T4:
 
     def process_dataform_thread(self,ction,dataform):
         t4proc = T4Processor()
-        t4proc.process_dataform(ction.dictionary,dataform)
+        t4proc.process_dataform_ction(ction.dictionary,dataform)
         self.ction_process[ction.name][dataform] = "finished"
 
     def get_dataform(self,ction,dataform):

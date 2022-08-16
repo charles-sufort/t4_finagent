@@ -2,12 +2,12 @@ import spacy
 import re
 
 class TextSection:
-    def __init__(self, text):
-        self.text = text
+    def __init__(self):
         self.nlp = spacy.load("en_core_web_sm")
-        self.doc = self.nlp(text)
 
-    def get_lemmas(self):
+    def get_lemmas(self,text):
+
+        self.doc = self.nlp(text)
         lemmas = []
         p = "[a-zA-Z\'\"]+"
         for token in self.doc:
@@ -16,13 +16,17 @@ class TextSection:
                     lemmas.append({"lemma":token.lemma_,"token":token.text})
         return lemmas
     
-    def get_ners(self):
+    def get_ners(self,text):
+
+        self.doc = self.nlp(text)
         ners = []
         for ent in self.doc.ents:
             ners.append({"text": ent.text,"label":  ent.label_})
         return ners
 
-    def get_noun_chunks(self):
+    def get_noun_chunks(self,text):
+
+        self.doc = self.nlp(text)
         chunks = []
         for chunk in self.doc.noun_chunks:
             chunk_obj = {}

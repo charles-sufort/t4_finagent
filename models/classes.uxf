@@ -29,7 +29,15 @@ CompanyHist
     </coordinates>
     <panel_attributes>DataLoader
 --
-sd</panel_attributes>
+get_ction()
+query_text()
+filter_vecs()
+filter_ction()
+match_to_clabel()
+dfC_term_avgs()
+get_vecs_directory()
+get_lvec_sample()
+save_df()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
