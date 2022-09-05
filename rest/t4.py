@@ -14,6 +14,7 @@ class T4:
         src_dir = os.path.dirname(os.path.abspath(__file__))
         self.proj_root = os.path.dirname(src_dir)
         self.ction_process = {}
+        self.t4proc = T4Processor()
 
     def save_ction(self,name,ction):
         file = self.proj_root + "/data/ctions/" + name + ".json"
@@ -113,6 +114,8 @@ class T4:
         else:
             return "Not Found"
 
+    def company_metadata_summary(self,company):
+        return self.t4proc.company_metadata_summary(company)
     
     def __save_file(self,file,data):
         with open(file,'w') as fo:

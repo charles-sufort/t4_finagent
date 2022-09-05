@@ -14,6 +14,7 @@ class DataLoader:
             file = self.proj_root + "/data/" + file
             self.df = pd.read_csv(file)
         self.df = self.df.loc[self.df['Consumer complaint narrative'].notnull()]
+        self.df.reset_index(drop=True,inplace=True)
         self.df['Product'].fillna("nan",inplace=True)
         self.df['Sub-product'].fillna("nan",inplace=True)
         self.df['Issue'].fillna("nan",inplace=True)
@@ -21,7 +22,6 @@ class DataLoader:
  
     def get_ction(self,ction):
         cdict = ction['dictionary']
-
 
     def get_vecs(self,company):
         df_c = self.df.loc[self.df["Company"] == company]
@@ -56,17 +56,21 @@ class DataLoader:
                 data2[key] = data[key]
         return data2        
 
-    def filter_vec(self,vec):
+    def filter_vec(self,vec,company=None):
         fields = ['Product','Sub-product','Issue','Sub-issue']
         key = "__".join(vec)
-        return self.df.loc[self.df[fields].isin(vec).all(1)]
+        if company is not None:
+            df = self.df.loc[self.df['Company'] == company]
+            return df.loc[df[fields].isin(vec).all(1)]
+        else: 
+            return self.df.loc[self.df[fields].isin(vec).all(1)]
 
-    def filter_vecs(self,vecs):
+    def filter_vecs(self,vecs,company=None):
         vec_keys =  ["__".join(vec) for vec in vecs]
         vec_dict = {}
         for i in range(len(vecs)):
             vec = vecs[i]
-            vec_dict[vec_keys[i]] = self.filter_vec(vec)
+            vec_dict[vec_keys[i]] = self.filter_vec(vec,company)
         return vec_dict
 
     def filter_ction(self,c_dict):
@@ -164,9 +168,11 @@ if __name__ == "__main__":
 #    stop = time.perf_counter()
 #    print(stop-start)
     dl = DataLoader()
-    vec = ["Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]
-    df_vec = dl.filter_vec(vec)
-    print(list(df_vec.index.values.tolist()))
+    print(dl.df.columns)
+    print(dl.df["Complaint ID"])
+#    vec = ["Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"]
+#    df_vec = dl.filter_vec(vec)
+#    print(list(df_vec.index.values.tolist()))
 
 
 #    vecs = [["Vehicle loan or lease","Loan","Managing the loan or lease","Billing problem"],['Credit reporting, credit repair services, or other personal consumer reports', 'Credit reporting', 'Problem with a credit reporting companys investigation into an existing problem', 'Difficulty submitting a dispute or getting information about a dispute over the phone']]

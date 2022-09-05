@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, List
@@ -39,9 +38,11 @@ class ProcessCtion(BaseModel):
     ction: Ction
     name: str
 
+class QueryMetaData(BaseModel):
+    company: str
+
 
 t41 = T4()
-
 app = FastAPI()
 app.add_middleware(
         CORSMiddleware,
@@ -50,6 +51,7 @@ app.add_middleware(
         allow_headers=['*'],
         allow_methods=['*'],
  )
+
 
 @app.get("/")
 async def root():
@@ -112,9 +114,10 @@ async def process_dataform(proc: ProcessCtion):
 async def get_dataform(proc: ProcessCtion):
     return t41.get_dataform(proc.ction,proc.name)
 
-
-
-
+@app.post("/data/company_md")
+async def get_company_md(md: QueryMetaData):
+    metadata = t41.company_metadata_summary(md.company)
+    return metadata
 
 
 

@@ -3,7 +3,6 @@ from dataloader import DataLoader
 from fdf_script import reinit_fdf
 
 class FDF_MGR:
-    
     def __init__(self):
         self.dl = DataLoader()
         self.df = self.dl.df
@@ -28,35 +27,49 @@ class FDF_MGR:
     def add_company(self,company):
         vecs = self.dl.get_vecs(company)
         js_cpy = {}
+
+        companies = list(self.js_md["companies"].keys())
+        dir_cmp = "dir" + str(len(companies)+1) 
+        dir_cmp_path = self.fdf_root + "/" + dir_cmp
+        os.mkdir(dir_cmp_path)
         for i in range(len(vecs)):
             vec = vecs[i]
             vec_str = "__".join(vec)
             indices = self.dl.filter_vec(vec).index.values.tolist()
             dir_path = "vec" + str(i+1)
-            vec_dict = {"dir":dir_path,"dataforms":{},"indices":indices}
+            vec_dict = {"dir":dir_path,"dataforms":{},"count":len(indices)}
             js_cpy[vec_str] = vec_dict
-        companies = list(self.js_md["companies"].keys())
-        dir_cmp = "dir" + str(len(companies)+1) 
+            dir_path = dir_cmp_path + "/" + dir_path
+            os.mkdir(dir_path)
+            vec_dir = {"indices":indices}
+            with open(dir_path+"/directory.json",'w') as fo:
+                json.dump(vec_dir,fo)
         self.js_md["companies"][company] = {}
         self.js_md["companies"][company]["file"] = dir_cmp
         self.js_md["companies"][company]["dataforms"] = []
-        dir_cmp_path = self.fdf_root + "/" + dir_cmp
         cmp_dir_path = dir_cmp_path + "/directory.json" 
-        os.mkdir(dir_cmp_path)
         self.save_metadata(self.js_md)
         with open(cmp_dir_path,'w') as fo:
             json.dump(js_cpy,fo)
-        for vec in js_cpy:
-            dir_path = dir_cmp_path + "/" + js_cpy[vec]["dir"]
-            os.mkdir(dir_path)
+
+    def retrieve_vec_data(self,company,vec):
+        """
+        params
+        company (str) -- company of vec
+        vec (str) -- vec_str of vec
+
+        returns
+        vec_md -- combined vec metadata
+        """
+        dir_cmp = self.fdf_root + "/" + self.js_md[company][file]
+
+    def save_vec_data(self,company,vec,data):        
 
 
-    def retrieve_vec_data(self):
-        pass
 
 if __name__ == "__main__":
-    reinit_fdf()
+    #reinit_fdf()
     dbmgr = FDF_MGR()
-    dbmgr.add_company("CAPITAL ONE FINANCIAL CORPORATION")
+    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
 
 
