@@ -43,6 +43,7 @@ class T4Processor:
             for vec in company_md:
                 vec_md = company_md[vec]
                 if dataform in vec_md:
+                    pass
 
 
 

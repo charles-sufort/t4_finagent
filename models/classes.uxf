@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>50</y>
+      <x>10</x>
+      <y>60</y>
       <w>230</w>
       <h>240</h>
     </coordinates>
@@ -22,8 +22,8 @@ CompanyHist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>50</y>
+      <x>290</x>
+      <y>60</y>
       <w>210</w>
       <h>240</h>
     </coordinates>
@@ -43,13 +43,23 @@ save_df()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>320</y>
+      <x>10</x>
+      <y>330</y>
       <w>230</w>
       <h>240</h>
     </coordinates>
-    <panel_attributes>
+    <panel_attributes>FDF_MGR
 --
+init()
+get_metadata()
+save_metadata()
+add_dataform()
+add_company()
+get_company_metadata()
+retrieve_vec_metadata()
+save_vec_data()
+retrieve_vec_data()
+save_vec_data(company,vec,data,dataform)
 </panel_attributes>
     <additional_attributes/>
   </element>

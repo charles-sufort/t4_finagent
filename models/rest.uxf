@@ -43,6 +43,11 @@ add_termlist()
 get_termlists()
 get_termlist()
 get_lvec_sample()
+get_query()
+process_dataform(proc: ProcessCtion)
+get_dataform(proc: ProcessCtion)
+get_company_md(md: QueryMetaData)
+
 
 </panel_attributes>
     <additional_attributes/>

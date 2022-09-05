@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>50</y>
+      <y>40</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
@@ -18,7 +18,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>490</x>
-      <y>50</y>
+      <y>40</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -34,7 +34,7 @@ onclick=loadCtion()
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>200</y>
+      <y>190</y>
       <w>180</w>
       <h>70</h>
     </coordinates>
@@ -49,7 +49,7 @@ onchange="change_class()"
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>300</y>
+      <y>290</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -62,7 +62,7 @@ ListBox</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>100</x>
-      <y>10</y>
+      <y>0</y>
       <w>790</w>
       <h>620</h>
     </coordinates>
@@ -73,7 +73,7 @@ ListBox</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>320</x>
-      <y>50</y>
+      <y>40</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -87,7 +87,7 @@ id="ction"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>130</y>
+      <y>120</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
@@ -100,7 +100,7 @@ id="term_options"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>320</x>
-      <y>130</y>
+      <y>120</y>
       <w>60</w>
       <h>20</h>
     </coordinates>
@@ -111,7 +111,7 @@ id="term_options"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>390</x>
-      <y>130</y>
+      <y>120</y>
       <w>90</w>
       <h>70</h>
     </coordinates>
@@ -126,7 +126,7 @@ id="min_n"
     <id>UMLClass</id>
     <coordinates>
       <x>490</x>
-      <y>130</y>
+      <y>120</y>
       <w>120</w>
       <h>70</h>
     </coordinates>
@@ -140,7 +140,7 @@ onclick=choose()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>390</y>
+      <y>380</y>
       <w>140</w>
       <h>70</h>
     </coordinates>

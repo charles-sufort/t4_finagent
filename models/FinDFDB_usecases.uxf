@@ -100,4 +100,26 @@
     <panel_attributes>Modify DataForm Data</panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>490</x>
+      <y>280</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Get Company Metadata</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>280</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;30.0;330.0;20.0</additional_attributes>
+  </element>
 </diagram>
