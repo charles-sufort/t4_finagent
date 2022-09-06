@@ -60,11 +60,6 @@ class FDF_MGR:
             json.dump(js_cpy,fo)
 
 
-
-
-
-
-
     def retrieve_vec_metadata(self,company,vec):
         """
         params
@@ -126,16 +121,16 @@ class FDF_MGR:
 
 
 if __name__ == "__main__":
-    reinit_fdf()
+#   reinit_fdf()
     dbmgr = FDF_MGR()
-    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
+#    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
 #    dbmgr = FDF_MGR()
-#    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
 #    print(dbmgr.get_company_metadata(company))
-#    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
-#    vec_str = "__".join(vec)
-#    data = dbmgr.retrieve_vec_data(company,vec_str,"lemma")
-#    print(data)
+    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
+    vec_str = "__".join(vec)
+    data = dbmgr.retrieve_vec_data(company,vec_str,"lemma")
+    print(data)
     #company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
     #vec = "Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"
     #vec_str = "__".join(vec)

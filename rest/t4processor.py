@@ -123,9 +123,9 @@ if __name__ == "__main__":
     t4proc = T4Processor()
     ction = {"C1":[["BANK OF AMERICA, NATIONAL ASSOCIATION","Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]],"C2":[["BANK OF AMERICA, NATIONAL ASSOCIATION","Debt collection","Auto debt","Attempts to collect debt not owed","Debt is not yours"],["BANK OF AMERICA, NATIONAL ASSOCIATION","Checking or savings account","Savings account","Problem caused by your funds being low","Late or other fees"]]}
 
-    dataform = "lemma"
-    key = "lemma"
-    t4proc.process_dataform_ction(ction,dataform)
+#    dataform = "lemma"
+#    key = "lemma"
+#    t4proc.process_dataform_ction(ction,dataform)
 
 #    print(t4proc.check_ction_dataform(ction,dataform))
 #    lem_count = t4proc.count_dataform_freq(ction,dataform,key)
