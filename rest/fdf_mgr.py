@@ -52,13 +52,12 @@ class FDF_MGR:
                 json.dump(vec_dir,fo)
         self.js_md["companies"][company] = {}
         self.js_md["companies"][company]["dir"] = dir_cmp
-        self.js_md["companies"][company]["dataforms"] = []
+        self.js_md["companies"][company]["dataforms"] = {}
         self.js_md["companies"][company]["count"] = self.dl.df.loc[self.dl.df["Company"] == company].shape[0]
         cmp_dir_path = dir_cmp_path + "/directory.json" 
         self.save_metadata(self.js_md)
         with open(cmp_dir_path,'w') as fo:
             json.dump(js_cpy,fo)
-
 
     def retrieve_vec_metadata(self,company,vec):
         """
@@ -87,18 +86,23 @@ class FDF_MGR:
 
     def save_vec_data(self,company,vec,data,dataform):
         print("save_vec_data {}".format(vec))
-        dir_cmp = self.fdf_root + "/" + self.js_md["companies"][company]["dir"]
-        cmp_md_path = dir_cmp + "/directory.json"
-        cmp_md = {}
-        with open(cmp_md_path,'r') as fo:
-            cmp_md = json.load(fo)
+        cmp_md = self.get_company_metadata(company)
         vec_md1 = cmp_md[vec]
+        vec_count = cmp_md[vec]["count"]
+        if dataform not in self.js_md["companies"][company]['dataforms']:
+            self.js_md["companies"][company]['dataforms'][dataform] = vec_count
+        else:
+            self.js_md["companies"][company]['dataforms'][dataform] = self.js_md["companies"][company]['dataforms'][dataform] + vec_count
+        dir_cmp = self.fdf_root + "/" + self.js_md["companies"][company]["dir"]
+        cmp_md_path = dir_cmp + "/" + "directory.json"
         vec_path = dir_cmp + "/" + vec_md1["dir"] + "/" +dataform + ".json"
+        self.save_metadata(self.js_md) 
         with open(vec_path,'w') as fo:
             json.dump(data,fo)
         cmp_md[vec]["dataforms"][dataform] = "Yes"
         with open(cmp_md_path,'w') as fo:
             json.dump(cmp_md,fo)
+
 
     def retrieve_vec_data(self,company,vec,dataform):
         dir_cmp = self.fdf_root + "/" + self.js_md["companies"][company]["dir"]
@@ -121,19 +125,19 @@ class FDF_MGR:
 
 
 if __name__ == "__main__":
-#   reinit_fdf()
+    reinit_fdf()
     dbmgr = FDF_MGR()
-#    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
+    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
 #    dbmgr = FDF_MGR()
-    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+#    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
 #    print(dbmgr.get_company_metadata(company))
-    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
-    vec_str = "__".join(vec)
-    data = dbmgr.retrieve_vec_data(company,vec_str,"lemma")
-    print(data)
+#    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
+#    vec_str = "__".join(vec)
+    #data = dbmgr.retrieve_vec_data(company,vec_str,"lemma")
+    #print(data)
     #company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
     #vec = "Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"
     #vec_str = "__".join(vec)
-    #print(dbmgr.retrieve_vec_metadata(company,vec_str))
+#    print(dbmgr.retrieve_vec_metadata(company,vec_str))
 
 

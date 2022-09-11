@@ -26,7 +26,7 @@ class T4Processor:
                 data = self.process_dataform(vec_df,dataform)
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
 
-    def process_dataform_vec(self, vecs, dataform):
+    def process_dataform_vecs(self, vecs, dataform):
         vec_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs]
         for company,vec_str in vec_strs:
             vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec_str)
@@ -35,20 +35,49 @@ class T4Processor:
                 data = self.process_dataform(vec_df,dataform)
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
 
+    def process_dataform_company(self,company,dataform):
+        company_md = self.fdf_mgr.get_company_metadata(company)
+        vec_strs = [(company,vec) for vec in company_md]
+        for company,vec_str in vec_strs:
+            vec_md  = self.fdf_mgr.retrieve_vec_metadata(company,vec_str)
+            if dataform not in company_md[vec_str]["dataforms"]:
+                vec_df = self.dl.df.iloc[vec_md["indices"]]
+                data = self.process_dataform(vec_df,dataform)
+                self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
+                print("saved: {}".format(vec_str))
+
+
+        
+    def get_company_vecs_dataform(self,dataform,company):
+        fdf_jd = self.fdf_mgr.js_md
+        vecs = []
+        company_md = self.fdf_mgr.get_company_metadata(company)
+        for vec in company_md:
+            vec_md = company_md[vec]
+            if dataform in vec_md["dataforms"]:
+                print(vec)
+                if vec_md["dataforms"][dataform] == "Yes":
+                    vecs.append(vec)
+        return vecs
+
+
     def get_vecs_dataform(self,dataform):
         fdf_jd = self.fdf_mgr.js_md
         companies = list(fdf_jd["companies"].keys())
+        vecs = []
         for company in companies:
             company_md = self.fdf_mgr.get_company_metadata(company)
+
             for vec in company_md:
                 vec_md = company_md[vec]
-                if dataform in vec_md:
-                    pass
+                if dataform in vec_md["dataforms"]:
+
+                    print(vec)
+                    if vec_md["dataforms"][dataform] == "Yes":
+                        vecs.append(vec)
+        return vecs
 
 
-
-
-              
     def process_dataform(self,vec_df,dataform):
         lemmas = []
         inds = vec_df.index.values.tolist()
@@ -81,7 +110,6 @@ class T4Processor:
 
     def get_dataform_inventory(dataform):
         pass
-
 
     def check_ction_dataform(self,ction,dataform):
         vec_strs = []
@@ -118,12 +146,19 @@ class T4Processor:
         return ction_dict
 
 
-
 if __name__ == "__main__":
     t4proc = T4Processor()
     ction = {"C1":[["BANK OF AMERICA, NATIONAL ASSOCIATION","Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]],"C2":[["BANK OF AMERICA, NATIONAL ASSOCIATION","Debt collection","Auto debt","Attempts to collect debt not owed","Debt is not yours"],["BANK OF AMERICA, NATIONAL ASSOCIATION","Checking or savings account","Savings account","Problem caused by your funds being low","Late or other fees"]]}
 
-#    dataform = "lemma"
+    dataform = "lemma"
+#    print(t4proc.get_vecs_dataform(dataform))
+
+    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+#    print(t4proc.get_company_metadata(company))
+#    print(t4proc.get_company_vecs_dataform(dataform,company))
+
+
+    
 #    key = "lemma"
 #    t4proc.process_dataform_ction(ction,dataform)
 

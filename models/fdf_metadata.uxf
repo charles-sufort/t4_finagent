@@ -28,7 +28,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
+      <x>170</x>
       <y>60</y>
       <w>100</w>
       <h>30</h>
@@ -39,7 +39,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>0</x>
       <y>150</y>
       <w>190</w>
       <h>80</h>
@@ -52,15 +52,15 @@ companies: {name: CmpDict}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>270</x>
       <y>140</y>
-      <w>100</w>
+      <w>170</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>CMPDict
 --
 dir: str
-dataforms: [str]
+dataforms: {str: count}
 count: int
 </panel_attributes>
     <additional_attributes/>
@@ -68,7 +68,7 @@ count: int
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>0</x>
       <y>260</y>
       <w>190</w>
       <h>80</h>
@@ -81,7 +81,7 @@ vecs: {name: VecDict}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
+      <x>280</x>
       <y>260</y>
       <w>170</w>
       <h>80</h>
@@ -97,7 +97,7 @@ count: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>100</x>
       <y>80</y>
       <w>130</w>
       <h>90</h>
@@ -108,7 +108,7 @@ count: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
+      <x>80</x>
       <y>220</y>
       <w>30</w>
       <h>60</h>
@@ -119,7 +119,7 @@ count: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
+      <x>180</x>
       <y>160</y>
       <w>110</w>
       <h>40</h>
@@ -130,7 +130,7 @@ count: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
+      <x>180</x>
       <y>270</y>
       <w>120</w>
       <h>40</h>
@@ -141,7 +141,7 @@ count: int
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>0</x>
       <y>370</y>
       <w>190</w>
       <h>80</h>
@@ -155,7 +155,7 @@ ids: [int]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
+      <x>80</x>
       <y>330</y>
       <w>30</w>
       <h>60</h>

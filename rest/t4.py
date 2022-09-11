@@ -15,13 +15,14 @@ class T4:
         self.proj_root = os.path.dirname(src_dir)
         self.ction_process = {}
         self.t4proc = T4Processor()
+        self.company_process = {}
 
     def save_ction(self,name,ction):
         file = self.proj_root + "/data/ctions/" + name + ".json"
         ction = {"ction": ction}
         with open(file,'w') as fo:
             json.dump(ction,fo)
-            
+
     def get_ction(self,name):
         file = self.proj_root + "/data/ctions/" + name + ".json"
         ction = self.__load_file(file)
@@ -94,9 +95,39 @@ class T4:
             t = threading.Thread(target=self.process_dataform_thread,args=(ction,dataform))
             t.start()
 
+    def process_dataform_company(self,company,dataform):
+        if company not in self.company_process:
+            self.company_process[company] = {}
+            self.company_process[company][dataform] = "started"
+            t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataform))
+            t.start()
+        else:
+            self.ction_process[company][dataform] = "started"
+            t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataform))
+            t.start()
+        
+    
+    def process_dataform_company_thread(self,company,dataform):
+        self.t4proc.process_dataform_company(company,dataform)
+        self.company_process[company][dataform] = "finished"
+
+
+    def get_dataform_company_status(self,company,dataform):
+        print("in function")
+        if company not in self.company_process:
+            return "no such company process"
+        elif dataform not in self.company_process[company]:
+            return "no such dataform process"
+        vec_count = 0
+
+        if dataform in self.t4proc.fdf_mgr.js_md["companies"][company]["dataforms"]:
+            vec_count = self.t4proc.fdf_mgr.js_md["companies"][company]["dataforms"][dataform]
+        status = self.company_process[company][dataform]
+        print("here2")
+        return {"vec_count": vec_count,"status":status}
+    
     def process_dataform_thread(self,ction,dataform):
-        t4proc = T4Processor()
-        t4proc.process_dataform_ction(ction.dictionary,dataform)
+        self.t4proc.process_dataform_ction(ction.dictionary,dataform)
         self.ction_process[ction.name][dataform] = "finished"
 
     def get_dataform(self,ction,dataform):
@@ -105,8 +136,7 @@ class T4:
         if ction.name in self.ction_process:
             if dataform in self.ction_process[ction.name]:
                 if self.ction_process[ction.name][dataform] == "finished": 
-                    t4proc = T4Processor()
-                    return t4proc.get_data(ction.dictionary,dataform)
+                    return self.t4proc.get_data(ction.dictionary,dataform)
                 else:
                     return "Not Finished"
             else:

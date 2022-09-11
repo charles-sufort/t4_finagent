@@ -7,6 +7,9 @@
 	<option onclick="product_click('PRODUCT:{{k}}')" class='products' value='{{k}}' id='PRODUCT:{{k}}'	>{{k}} {{v.count}}</option>
 	{% endfor %}
 </select>
+<div id="summary_panel">
+	<button type="button" onclick="client.get_company_metadata('summary_panel',display_summary)">load</button>
+</div>
 <select id='subproducts_box' size="10">
 </select>
 </div>
@@ -70,6 +73,11 @@
 	var cdict = {};
 	var select_class = "NA";
 
+	function display_summary(){
+		ction = JSON.parse(this.responseText);
+		console.log(ction);
+	}
+
 	function newC() {
 		cdict = {};
 		elem = document.getElementById("c_select");
@@ -82,6 +90,7 @@
 		fun = "client.load_ction('ction_id',addCdict)";
 		input_panel("ction_id",'text',"Ction:",fun,"load_div");
 	}
+
 /*
 	function load_ction() {
 		name = document.getElementById('class_id').value;
@@ -161,7 +170,7 @@
 		}
 
 	boxes.forEach(box => box.addEventListener('keypress', (event) => {
-		var l_array = ["NA","NA","NA","NA"]; 
+		var l_array = ["*","*","*","*"]; 
 		for (var i = 0; i < l_ind[box.id]+1; i++){
 			box_i = document.getElementById(b_array[i]);
 			console.log('keypress index');

@@ -5,8 +5,8 @@
     <id>UMLClass</id>
     <coordinates>
       <x>150</x>
-      <y>140</y>
-      <w>490</w>
+      <y>130</y>
+      <w>810</w>
       <h>490</h>
     </coordinates>
     <panel_attributes>DataViewer</panel_attributes>
@@ -16,18 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>180</x>
-      <y>200</y>
-      <w>440</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>Processing Information</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>410</y>
+      <y>400</y>
       <w>440</w>
       <h>150</h>
     </coordinates>
@@ -37,23 +26,46 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>220</y>
-      <w>100</w>
-      <h>30</h>
+      <x>180</x>
+      <y>160</y>
+      <w>670</w>
+      <h>210</h>
     </coordinates>
-    <panel_attributes>dataform</panel_attributes>
+    <panel_attributes>ProcessingBoard
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>260</y>
-      <w>150</w>
+      <x>640</x>
+      <y>210</y>
+      <w>90</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>dataform summary</panel_attributes>
+    <panel_attributes>Submit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>210</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>dataform:select</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>210</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>by:select</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

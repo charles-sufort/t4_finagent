@@ -16,7 +16,6 @@ class Client {
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}
-	
 	ction_listener(){
 		console.log("ction listener");
 		this.ction = JSON.parse(this.responseText);
@@ -38,6 +37,30 @@ class Client {
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}
+
+	get_company_metadata(elem_id,elem_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {'company': "BANK OF AMERICA, NATIONAL ASSOCIATION"}
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.addEventListener("load", elem_fun); 
+		oReq.open("POST","http://127.0.0.1:9000/data/company_md");
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}
+	
+	process_company_dataform(company,dataform,task_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {'company':company,'dataform':dataform};
+
+		oReq.addEventListener("load",task_fun);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
+		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/process")
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+
+	}
+	
+
 /*
 	load_list(div_id){
 		name = document.getElementById("elem_id").value;
@@ -52,6 +75,7 @@ class Client {
 
 	list_listener(){
 		console.log(this.responseText);
+
 		const obj = JSON.parse(this.responseText);
 		elem = document.getElementById('c_select');
 		console.log(obj);
@@ -65,7 +89,6 @@ class Client {
 			option.innerHTML = keys[i];
 			elem.appendChild(option);
 		}
-
 	}
 
 	save_list(){

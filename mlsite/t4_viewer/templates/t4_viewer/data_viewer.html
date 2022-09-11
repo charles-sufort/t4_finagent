@@ -1,5 +1,8 @@
 {% load static %}
 
+<div id="processing_board">
+</div>
+
 <div>
     <label for="ction">Ction:</label>
     <input type="text" id="ction">
@@ -34,7 +37,7 @@
 
 <script src="{% static 't4_viewer/client.js' %}"></script>
 <script src="{% static 't4_viewer/page.js' %}"></script>
-
+<script src="{% static 't4_viewer/taskboard.js' %}"></script>
 
 <script>
 var client = new Client();
@@ -42,6 +45,15 @@ var name = "NA";
 var cdict = {};
 var data = {};
 var cdict_s = {};
+var taskboard = new TaskBoard("processing_board","taskboard",task_status);
+function task_status(){
+	console.log(this.responseText);
+}
+
+function get_dataform_summary(){
+	
+}
+
 
 function change_class(){
 		console.log("here");

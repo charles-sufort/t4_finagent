@@ -38,6 +38,11 @@ class ProcessCtion(BaseModel):
     ction: Ction
     name: str
 
+class ProcessCompany(BaseModel):
+    company: str
+    dataform: str
+
+
 class QueryMetaData(BaseModel):
     company: str
 
@@ -51,7 +56,6 @@ app.add_middleware(
         allow_headers=['*'],
         allow_methods=['*'],
  )
-
 
 @app.get("/")
 async def root():
@@ -77,7 +81,7 @@ async def add_termlist(tlist: TermList):
     t41.save_termlist(tlist.name, tlist.terms)
     return {"message":"saved"}
 
-@app.post("/termlist/get/")
+@app.post("/termlist/get/") 
 async def get_termlist(termlist: Name):
     termlist = t41.get_termlist(termlist.name)
     return {"termlist":termlist}
@@ -105,12 +109,21 @@ async def get_query(query: Query):
     print("here2")
     return data
 
-@app.post("/data/dataform/process")
+@app.post("/data/ction/dataform/process")
 async def process_dataform(proc: ProcessCtion):
     t41.process_dataform(proc.ction,proc.name)
     return "added"
+
+@app.post("/data/company/dataform/process")
+async def process_dataform_company(proc: ProcessCompany):
+    t41.process_dataform_company(proc.company,proc.dataform)
+    return "started"
+
+@app.post("/data/company/dataform/process/get")
+async def get_company_process(proc: ProcessCompany):
+    return t41.get_dataform_company_status(proc.company,proc.dataform)
    
-@app.post("/data/dataform/get")
+@app.post("/data/ction/dataform/get")
 async def get_dataform(proc: ProcessCtion):
     return t41.get_dataform(proc.ction,proc.name)
 

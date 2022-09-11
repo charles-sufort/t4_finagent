@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>20</y>
+      <x>70</x>
+      <y>430</y>
       <w>240</w>
       <h>340</h>
     </coordinates>
@@ -15,6 +15,7 @@ get_data()
 process_dataform_ction(ction,dataform)
 process_dataform(vec_df,dataform)
 company_metadata_summary(company_metadata_summary)
+process_datafform_company(company,dataform)
 check_ction_dataform(ction,dataform)
 
 
@@ -37,8 +38,8 @@ check_ction_dataform(ction,dataform)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>40</y>
+      <x>70</x>
+      <y>30</y>
       <w>210</w>
       <h>340</h>
     </coordinates>
@@ -55,11 +56,15 @@ avg_query(ction,termlist)
 query(ction,query_type,min_n)
 process_dataform(ction,dataform)
 process_dataform_thread(ction,dataform)
+process_dataform_company(compamy,dataform)
+process_dataform_company_thread(company,dataform)
+get_dataform_company_status(company,dataform)
 get_dataform(ction,dataform)
+company_metadata_summary()
 __save_file(file,data_
 __load_file(file)
 __get_name(data_dir)
-company_metadata_summary()</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
