@@ -71,8 +71,8 @@ async def get_ction(ction: Name):
     ction = t41.get_ction(ction.name)
     return {"ction":ction}
 
-@app.get("/ction/get_all/")
-async def get_ction_names():
+@app.get("/ction/get_all/") 
+async def get_ction_names(): 
     ctions = t41.get_ction_names()
     return {"message":ctions}
 

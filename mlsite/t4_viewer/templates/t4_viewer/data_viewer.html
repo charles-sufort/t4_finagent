@@ -45,13 +45,17 @@ var name = "NA";
 var cdict = {};
 var data = {};
 var cdict_s = {};
-var taskboard = new TaskBoard("processing_board","taskboard",task_status);
-function task_status(){
-	console.log(this.responseText);
+var taskboard = new TaskBoard("processing_board","taskboard",client,task_status,task_status);
+
+function task_status(response,task_id){
+	console.log("fun task_status");
+	console.log(response);
+	console.log(task_id);
+	taskboard.set_status(task_id,response);
 }
 
 function get_dataform_summary(){
-	
+	console.log(this.responseText);	
 }
 
 

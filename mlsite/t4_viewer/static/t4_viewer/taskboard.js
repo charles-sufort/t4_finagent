@@ -1,9 +1,11 @@
 class TaskBoard {
-	constructor (div_id,name,client,task_fun) {
+	constructor (div_id,name,client,task_fun,status_fun) {
 		this.div_id = div_id;
 		this.client = client;
 		this.name = name;
 		this.task_count = 0;
+		this.task_fun = task_fun;
+		this.status_fun = status_fun;
 		this.task_ids = []
 		this.new_task_id = div_id + "new_task";
 		this.new_task = document.createElement('button');
@@ -12,6 +14,7 @@ class TaskBoard {
 		
 		const div = document.getElementById(div_id);
 		div.appendChild(this.new_task);
+		console.log("constructed");
 	}
 	
 	add_task(){
@@ -50,22 +53,22 @@ class TaskBoard {
 		}
 		sel_submit.innerHTML = "submit";
 		const submit_fun = this.name + ".submit_task('"+task_id +"')";
-		sel_submit.setAttribute("onclick",this.submit_task);
+		sel_submit.setAttribute("onclick",submit_fun);
 		task.appendChild(sel_dataform);
 		task.appendChild(sel_unit);
 		task.appendChild(sel_input);
 		task.appendChild(sel_submit);
 		const div = document.getElementById(this.div_id);
 		div.appendChild(task)
+		console.log("add task");
 	}
 
 
 	submit_task(task_id){
 		console.log(task_id);
-		dataform_id = task_id + "dataform";
-		unit_id = task_id + "unit";
-		input_id = task_id + "input";
-
+		const dataform_id = task_id + "dataform";
+		const unit_id = task_id + "unit";
+		const input_id = task_id + "input";
 		const sel_df = document.getElementById(dataform_id);
 		const sel_unit = document.getElementById(unit_id);
 		const sel_input = document.getElementById(input_id);
@@ -75,9 +78,48 @@ class TaskBoard {
 		const dataform = sel_df.options[sel_df.selectedIndex].value;
 		if (unit == "company"){
 			const company = sel_input.value;
-			client.process_company_dataform(company,dataform,this.task_fun);
-		}
+			client.process_company_dataform(company,dataform,this.task_fun,task_id);
 
+			this.task_bar(task_id,company,dataform);
+		}
+	}
+
+	task_bar(task_id,company,dataform){
+		const task_div = document.getElementById(task_id);
+		task_div.innerHTML = "";
+		const company_btn = document.createElement("button");
+		company_btn.innerHTML = company;
+		const dataform_btn = document.createElement("button");
+		dataform_btn.innerHTML = dataform;
+		const status_btn = document.createElement("button");
+		const status_id = task_id + "status";
+		const check_btn = document.createElement("button");
+		const btn_fun = this.name + ".get_task_status('"+task_id+"','"+dataform+"','"+company+"')";
+		check_btn.setAttribute('onclick',btn_fun);
+		status_btn.setAttribute('id',status_id) ;
+		status_btn.innerHTML = "NA";
+		check_btn.innerHTML = "check";
+		task_div.appendChild(company_btn);
+		task_div.appendChild(dataform_btn);
+		task_div.appendChild(status_btn);
+		task_div.appendChild(check_btn);
+	}	
+
+
+
+	set_status(task_id,response){
+		const status_id = task_id + "status";
+		const status_btn = document.getElementById(status_id);
+		console.log(task_id);
+		console.log("response");
+
+		console.log(response);
+		status_btn.innerHTML = response;
+	}
+
+
+	get_task_status(task_id,dataform,company){
+		this.client.company_process_status(company,dataform,  this.status_fun,task_id);
 	}
 
 	task_fun(){
@@ -85,6 +127,7 @@ class TaskBoard {
 
 	}
 
+		
 
 
 }

@@ -102,7 +102,7 @@ class T4:
             t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataform))
             t.start()
         else:
-            self.ction_process[company][dataform] = "started"
+            self.company_process[company][dataform] = "started"
             t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataform))
             t.start()
         
