@@ -146,6 +146,9 @@ class T4:
 
     def company_metadata_summary(self,company):
         return self.t4proc.company_metadata_summary(company)
+
+    def count_dataform_freq(self,ction,dataform,key):
+        return self.t4proc.count_dataform_freq(ction,dataform,key)
     
     def __save_file(self,file,data):
         with open(file,'w') as fo:

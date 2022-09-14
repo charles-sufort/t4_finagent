@@ -42,6 +42,11 @@ class ProcessCompany(BaseModel):
     company: str
     dataform: str
 
+class QueryCtionDFFreq(BaseModel):
+    ction: Ction
+    dataform: str
+    key: str
+
 
 class QueryMetaData(BaseModel):
     company: str
@@ -126,6 +131,11 @@ async def get_company_process(proc: ProcessCompany):
 @app.post("/data/ction/dataform/get")
 async def get_dataform(proc: ProcessCtion):
     return t41.get_dataform(proc.ction,proc.name)
+
+@app.post("/data/ction/dataform/freq/query")
+async def get_ction_dataform_freq(query: QueryCtionDFFreq):
+    return t41.count_dataform_freq(query.ction.dictionary,query.dataform,query.key)
+
 
 @app.post("/data/company_md")
 async def get_company_md(md: QueryMetaData):

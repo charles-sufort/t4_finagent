@@ -67,7 +67,6 @@ class T4Processor:
         vecs = []
         for company in companies:
             company_md = self.fdf_mgr.get_company_metadata(company)
-
             for vec in company_md:
                 vec_md = company_md[vec]
                 if dataform in vec_md["dataforms"]:
@@ -113,20 +112,27 @@ class T4Processor:
 
     def check_ction_dataform(self,ction,dataform):
         vec_strs = []
+        print(ction)
         for cl in ction:
             vecs = ction[cl]
-            cl_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs]
+            vecs2 = []
+            for vec in vecs:
+                vec = [vec[i] for i in range(4) if vec[i] != "NA" ]
+                vecs2.append(vec)
+            cl_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs ]
             vec_strs += cl_strs
         for company, vec_str in vec_strs:
             cmp_md = self.company_metadata_summary(company)
-            vec_strs = [tup[0] for tup in cmp_md["dataframe"][dataform]]
-            if vec_str not in vec_strs:
-                print(cmp_md)
-                return False
+            cmp_vec_strs = [tup[0] for tup in cmp_md["dataframe"][dataform]]
+            vec_in = False
+            for cmp_vec_str in cmp_vec_strs:
+                if vec_str in cmp_vec_str:
+                    vec_in = True
+                    break
         return True
 
     def count_dataform_freq(self,ction,dataform,key):
-        if not t4proc.check_ction_dataform(ction,dataform):
+        if not self.check_ction_dataform(ction,dataform):
             return "Data Not Processed"
         ction_dict = {}
         for cl in ction:
@@ -155,6 +161,7 @@ if __name__ == "__main__":
 
     company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
 #    print(t4proc.get_company_metadata(company))
+
 #    print(t4proc.get_company_vecs_dataform(dataform,company))
 
 
