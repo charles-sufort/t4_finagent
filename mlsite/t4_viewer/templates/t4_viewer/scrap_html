@@ -1,0 +1,41 @@
+<div id="t4_viewer>
+	<select id="viewer_panel">
+		<option id=""></option>
+	</select>
+</div>
+
+<div id="processing_board">
+</div>
+
+<div>
+    <label for="ction">Ction:</label>
+    <input type="text" id="ction">
+	<button onclick="client.load_ction('ction_id',addCdict)" id="ction_load">load</button>
+</div>
+
+<div>
+<select id="term_options">
+	<option id="lemmas" value="lemmas">lemmas</option>
+	<option id="noun_chunks" value="noun_chunks">noun chunks</option>
+</select>
+<label for="min_n">Min_n:</label>
+<input type="number" id="min_n">
+<button onclick="dataQuery()">choose</button>
+</div>
+
+<div>
+	<select id="class_select" onchange="change_class()">
+	</select>
+</div>
+<div>
+	<div>
+		<select id="vecs" size=5>
+		</select>
+	</div>
+</div>
+<div>
+	<select id="data" size=20>
+	</select>
+</div>
+
+

@@ -79,8 +79,6 @@ class Client {
 		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/process/get")
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
-
-
 	}
 
 /*

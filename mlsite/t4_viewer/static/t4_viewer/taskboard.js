@@ -106,7 +106,6 @@ class TaskBoard {
 	}	
 
 
-
 	set_status(task_id,response){
 		const status_id = task_id + "status";
 		const status_btn = document.getElementById(status_id);

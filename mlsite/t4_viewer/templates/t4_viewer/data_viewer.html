@@ -1,43 +1,24 @@
 {% load static %}
 
-<div id="processing_board">
-</div>
-
-<div>
-    <label for="ction">Ction:</label>
-    <input type="text" id="ction">
-	<button onclick="client.load_ction('ction_id',addCdict)" id="ction_load">load</button>
-</div>
-
-<div>
-<select id="term_options">
-	<option id="lemmas" value="lemmas">lemmas</option>
-	<option id="noun_chunks" value="noun_chunks">noun chunks</option>
+<select name="select_panel" id="select_panel" onchange="set_panel">
+	<option value="taskboard">taskboard</option>
+	<option value="ction">ctionviewer</option>
+	<option value="queryboard">queryboard</option>
 </select>
-<label for="min_n">Min_n:</label>
-<input type="number" id="min_n">
-<button onclick="dataQuery()">choose</button>
+
+<div id="panel_board">
+
 </div>
 
-<div>
-	<select id="class_select" onchange="change_class()">
-	</select>
-</div>
-<div>
-<div>
-	<div>
-		<select id="vecs" size=5>
-		</select>
-	</div>
-</div>
-<div>
-	<select id="data" size=20>
-	</select>
-</div>
+
+
+
+
 
 <script src="{% static 't4_viewer/client.js' %}"></script>
 <script src="{% static 't4_viewer/page.js' %}"></script>
 <script src="{% static 't4_viewer/taskboard.js' %}"></script>
+<script src="{% static 't4_viewer/ctionviewer.js' %}"></script>
 
 <script>
 var client = new Client();
@@ -45,7 +26,28 @@ var name = "NA";
 var cdict = {};
 var data = {};
 var cdict_s = {};
-var taskboard = new TaskBoard("processing_board","taskboard",client,task_status,task_status);
+var taskboard = null;
+var ctionviewer = null;
+
+function set_panel(){
+	const select_panel = document.getElementById("select_panel");
+	const panel = select_panel.options[select_panel.selectedIndex]
+	const panel_board = document.getElementById("panel_board");
+	console.log(panel);
+	if (panel == "taskboard"){
+		panel_board.innerHTML = "";
+		taskboard = new TaskBoard("panel_board","panel_board",client,task_status,task_status);
+	}
+	else if (panel == "ctionviewer"){
+		panel_board.innerHTML = "";
+
+		ctionviewer = new CtionViewer("ction_viewer","panel_board",client);
+	}
+	else if (panel == "queryboard"){
+	}
+
+}
+
 
 function task_status(response,task_id){
 	console.log("fun task_status");
