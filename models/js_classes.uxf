@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>27</x>
+      <y>54</y>
+      <w>252</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Client
+--
+constructor()
+load_ction(elem_id,load_action)
+ction_listener()
+save_ction(elem_id,cdict)
+get_company_metadata(elem_id,
+elem_fun)
+process_company_dataform(
+company,dataform,
+task_fun,task_id)
+company_process_status(company,
+dataform,status_fun,
+task_id)
+freq_query(ction,dataform,key,query_fun)
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>27</x>
+      <y>288</y>
+      <w>252</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>QueryBoard
+--
+constructor(div_id,name)
+submit_query()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>54</y>
+      <w>189</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>CtionViewer
+--
+constructor(div_id,name,client)
+load_ction(load_fun)
+load_display(response,display_fun)
+change_class(index)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>288</y>
+      <w>189</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>TaskBoard
+--
+constructor(div_id,name,
+client,task_fun,status_fun)
+add_task()
+submit_task(task_id)
+task_bar(task_id,company,dataform)
+set_status(task_id,response)
+get_task_status(task_id,
+dataform,company)
+task_fun()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -15,7 +15,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>10</x>
       <y>60</y>
       <w>100</w>
       <h>40</h>
@@ -27,7 +27,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>20</x>
       <y>130</y>
       <w>100</w>
       <h>70</h>
@@ -39,7 +39,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
+      <x>120</x>
       <y>60</y>
       <w>110</w>
       <h>40</h>
@@ -50,7 +50,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
+      <x>240</x>
       <y>60</y>
       <w>110</w>
       <h>40</h>
@@ -61,12 +61,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
+      <x>360</x>
       <y>60</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
     <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>60</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Submit</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

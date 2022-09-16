@@ -78,7 +78,7 @@ class TaskBoard {
 		const dataform = sel_df.options[sel_df.selectedIndex].value;
 		if (unit == "company"){
 			const company = sel_input.value;
-			client.process_company_dataform(company,dataform,this.task_fun,task_id);
+			this.client.process_company_dataform(company,dataform,this.task_fun,task_id);
 
 			this.task_bar(task_id,company,dataform);
 		}
@@ -121,10 +121,6 @@ class TaskBoard {
 		this.client.company_process_status(company,dataform,  this.status_fun,task_id);
 	}
 
-	task_fun(){
-		console.log("task_fun");
-
-	}
 
 		
 

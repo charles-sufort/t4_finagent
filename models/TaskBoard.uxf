@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>150</y>
+      <x>80</x>
+      <y>130</y>
       <w>470</w>
       <h>60</h>
     </coordinates>
@@ -37,8 +37,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>220</y>
+      <x>80</x>
+      <y>200</y>
       <w>470</w>
       <h>50</h>
     </coordinates>
@@ -48,8 +48,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>160</y>
+      <x>90</x>
+      <y>140</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -59,8 +59,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>160</y>
+      <x>230</x>
+      <y>140</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -70,8 +70,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>160</y>
+      <x>400</x>
+      <y>140</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -81,8 +81,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>230</y>
+      <x>90</x>
+      <y>210</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -92,8 +92,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>230</y>
+      <x>230</x>
+      <y>210</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -103,8 +103,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>230</y>
+      <x>400</x>
+      <y>210</y>
       <w>140</w>
       <h>30</h>
     </coordinates>

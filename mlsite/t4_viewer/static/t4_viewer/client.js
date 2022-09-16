@@ -81,6 +81,19 @@ class Client {
 		oReq.send(blob);
 	}
 
+	freq_query(ction,dataform,key,query_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {"ction":ction,"dataform":dataform,"key":key}
+		oReq.addEentListener("load",function () { 
+			query_fun(this.responseText);
+		},false);
+		const blob = new Blob([JSON.strinify(obj,null,2)],{type:'application/json'})
+		oReq.open("POST","http://127.0.0.1:9000/data/ction/dataform/freq/query2")
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}
+
+
 /*
 	load_list(div_id){
 		name = document.getElementById("elem_id").value;

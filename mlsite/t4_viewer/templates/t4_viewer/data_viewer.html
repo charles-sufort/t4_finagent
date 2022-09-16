@@ -1,8 +1,9 @@
 {% load static %}
 
-<select name="select_panel" id="select_panel" onchange="set_panel">
+<select name="select_panel" id="select_panel" onchange="set_panel()">
+	<option value="">choose</option>
 	<option value="taskboard">taskboard</option>
-	<option value="ction">ctionviewer</option>
+	<option value="ctionviewer">ctionviewer</option>
 	<option value="queryboard">queryboard</option>
 </select>
 
@@ -12,13 +13,11 @@
 
 
 
-
-
-
 <script src="{% static 't4_viewer/client.js' %}"></script>
 <script src="{% static 't4_viewer/page.js' %}"></script>
 <script src="{% static 't4_viewer/taskboard.js' %}"></script>
 <script src="{% static 't4_viewer/ctionviewer.js' %}"></script>
+<script src="{% static 't4_viewer/queryboard.js' %}"></script>
 
 <script>
 var client = new Client();
@@ -28,24 +27,26 @@ var data = {};
 var cdict_s = {};
 var taskboard = null;
 var ctionviewer = null;
+var queryboard = null;
 
 function set_panel(){
 	const select_panel = document.getElementById("select_panel");
-	const panel = select_panel.options[select_panel.selectedIndex]
+	const panel = select_panel.options[select_panel.selectedIndex].value;
 	const panel_board = document.getElementById("panel_board");
 	console.log(panel);
 	if (panel == "taskboard"){
 		panel_board.innerHTML = "";
-		taskboard = new TaskBoard("panel_board","panel_board",client,task_status,task_status);
+		taskboard = new TaskBoard("panel_board","taskboard",client,task_status,task_status);
 	}
 	else if (panel == "ctionviewer"){
 		panel_board.innerHTML = "";
 
-		ctionviewer = new CtionViewer("ction_viewer","panel_board",client);
+		ctionviewer = new CtionViewer("panel_board","ctionviewer",client);
 	}
 	else if (panel == "queryboard"){
+		panel_board.innerHTML = "";
+		queryboard = new QueryBoard("panel_board","queryboard")
 	}
-
 }
 
 
