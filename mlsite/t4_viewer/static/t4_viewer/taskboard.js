@@ -11,7 +11,6 @@ class TaskBoard {
 		this.new_task = document.createElement('button');
 		this.new_task.setAttribute("onclick",name+".add_task()");
 		this.new_task.innerHTML = "add Task";
-		
 		const div = document.getElementById(div_id);
 		div.appendChild(this.new_task);
 		console.log("constructed");
@@ -63,7 +62,6 @@ class TaskBoard {
 		console.log("add task");
 	}
 
-
 	submit_task(task_id){
 		console.log(task_id);
 		const dataform_id = task_id + "dataform";
@@ -105,24 +103,17 @@ class TaskBoard {
 		task_div.appendChild(check_btn);
 	}	
 
-
 	set_status(task_id,response){
 		const status_id = task_id + "status";
 		const status_btn = document.getElementById(status_id);
 		console.log(task_id);
 		console.log("response");
-
 		console.log(response);
 		status_btn.innerHTML = response;
 	}
 
-
 	get_task_status(task_id,dataform,company){
 		this.client.company_process_status(company,dataform,  this.status_fun,task_id);
 	}
-
-
-		
-
 
 }

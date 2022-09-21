@@ -45,7 +45,7 @@ save_df()</panel_attributes>
     <coordinates>
       <x>10</x>
       <y>330</y>
-      <w>230</w>
+      <w>300</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>FDF_MGR
@@ -58,7 +58,7 @@ add_company(company)
 get_company_metadata(company)
 retrieve_vec_metadata(company,vec)
 save_vec_data(company,vec,data,dataform)
-retrieve_vec_data(company,vec)
+retrieve_vec_data(company,vec,dataform)
 save_vec_data(company,vec,data,dataform)
 </panel_attributes>
     <additional_attributes/>

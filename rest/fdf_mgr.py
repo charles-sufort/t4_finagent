@@ -9,6 +9,7 @@ class FDF_MGR:
         self.fdf_root = self.dl.proj_root + "/data/fdf"
         self.js_md  = self.get_metadata()
 
+
     def get_metadata(self):
         file = self.fdf_root + "/directory.json"
         js_md = {}
@@ -85,7 +86,6 @@ class FDF_MGR:
         return vec_md
 
     def save_vec_data(self,company,vec,data,dataform):
-        print("save_vec_data {}".format(vec))
         cmp_md = self.get_company_metadata(company)
         vec_md1 = cmp_md[vec]
         vec_count = cmp_md[vec]["count"]

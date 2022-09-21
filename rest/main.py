@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, List
+from typing import Dict, List, Literal
 from t4 import T4
 
 class Vec(BaseModel):
@@ -15,10 +15,15 @@ class Ction(BaseModel):
     name: str
 
 class TermList(BaseModel):
+    dataform: Literal["ners","noun_chunks","lemma"]
     name: str
     terms: List[str]
 
 class Name(BaseModel):
+    name: str
+
+class TermList2(BaseModel):
+    dataform: str
     name: str
 
 class AvgQuery(BaseModel):
@@ -52,10 +57,8 @@ class QueryCtionDFFreq2(BaseModel):
     dataform: str
     key: str
 
-
 class QueryMetaData(BaseModel):
     company: str
-
 
 t41 = T4()
 app = FastAPI()
@@ -88,12 +91,12 @@ async def get_ction_names():
 
 @app.post("/termlist/add/")
 async def add_termlist(tlist: TermList):
-    t41.save_termlist(tlist.name, tlist.terms)
+    t41.save_termlist(tlist.dataform, tlist.name, tlist.terms)
     return {"message":"saved"}
 
 @app.post("/termlist/get/") 
-async def get_termlist(termlist: Name):
-    termlist = t41.get_termlist(termlist.name)
+async def get_termlist(termlist: TermList2):
+    termlist = t41.get_termlist(termlist.dataform,termlist.name)
     return {"termlist":termlist}
 
 @app.get("/termlist/get_all/")
@@ -146,12 +149,18 @@ async def get_ction_dataform_freq(query: QueryCtionDFFreq2):
     ction = t41.get_ction(query.ction)
     return t41.count_dataform_freq(ction,query.dataform,query.key)
 
+@app.post("/data/company/dataform/check")
+async def check_company_dataform(proc: ProcessCompany):
+    return t41.check_dataform_company(proc.company,proc.dataform)
+
+@app.post("data/company/dataform/check/status")
+async def status_check_company_dataform(proc: ProcessCompany):
+    return t41.get_status_check_dataform_company(proc.company,proc.dataform)
 
 
 @app.post("/data/company_md")
 async def get_company_md(md: QueryMetaData):
     metadata = t41.company_metadata_summary(md.company)
     return metadata
-
 
 

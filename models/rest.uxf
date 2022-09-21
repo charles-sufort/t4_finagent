@@ -47,7 +47,7 @@ get_query()
 process_dataform(proc: ProcessCtion)
 get_dataform(proc: ProcessCtion)
 get_company_md(md: QueryMetaData)
-process_company_dataform
+recheck_company_data
 
 
 </panel_attributes>

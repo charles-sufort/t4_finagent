@@ -83,15 +83,45 @@ class Client {
 
 	freq_query(ction,dataform,key,query_fun){
 		const oReq = new XMLHttpRequest();
-		const obj = {"ction":ction,"dataform":dataform,"key":key}
-		oReq.addEentListener("load",function () { 
-			query_fun(this.responseText);
+		const obj = {"ction":ction,"dataform":dataform,"key":key};
+		oReq.addEventListener("load",function () { 
+			const response = this.responseText;
+			query_fun(response);
 		},false);
-		const blob = new Blob([JSON.strinify(obj,null,2)],{type:'application/json'})
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
 		oReq.open("POST","http://127.0.0.1:9000/data/ction/dataform/freq/query2")
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}
+
+	save_list(dataform,name,terms,load_func){
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		const obj = {'dataform': dataform,'name': name, 'terms': terms};
+		oReq.addEventListener("load",function () {
+			const response = this.responseText;
+			load_func(response);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}) ;
+		oReq.open("POST","http://127.0.0.1:9000/termlist/add/");
+		oReq.setRequestHeader("Content-Type","application/json")
+		oReq.send(blob);
+	}
+
+	get_list(dataform,name,load_func){
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		const obj = {'dataform': dataform, "name": name};
+		oReq.addEventListener("load",function () {
+			const response = this.responseText;
+			load_func(response);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.open("POST","http://127.0.0.1:9000/termlist/get/");
+		oReq.setRequestHeader("Content-Type","application/json")
+		oReq.send(blob);
+	}
+
 
 
 /*
@@ -124,15 +154,5 @@ class Client {
 		}
 	}
 
-	save_list(){
-		var xhr = new XMLHttpRequest();
-		const oReq = new XMLHttpRequest();
-		name = document.getElementById("list_name").value;
-		const obj = {'name': name, 'terms': terms};
-		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}) 
-		oReq.open("POST","http://127.0.0.1:9000/termlist/add/");
-		oReq.setRequestHeader("Content-Type","application/json")
-		oReq.send(blob);
-	}
 */
 }

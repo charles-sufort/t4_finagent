@@ -7,7 +7,7 @@
       <x>27</x>
       <y>54</y>
       <w>252</w>
-      <h>216</h>
+      <h>252</h>
     </coordinates>
     <panel_attributes>Client
 --
@@ -24,6 +24,8 @@ company_process_status(company,
 dataform,status_fun,
 task_id)
 freq_query(ction,dataform,key,query_fun)
+save_list(dataform,name,terms,load_func)
+get_list(dataform,name,load_func)
 
 
 
@@ -36,7 +38,7 @@ freq_query(ction,dataform,key,query_fun)
     <id>UMLClass</id>
     <coordinates>
       <x>27</x>
-      <y>288</y>
+      <y>315</y>
       <w>252</w>
       <h>225</h>
     </coordinates>
@@ -82,6 +84,19 @@ set_status(task_id,response)
 get_task_status(task_id,
 dataform,company)
 task_fun()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>495</x>
+      <y>54</y>
+      <w>189</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>ListBoxL
+--
+add_key_func</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

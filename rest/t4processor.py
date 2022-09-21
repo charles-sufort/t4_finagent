@@ -151,6 +151,40 @@ class T4Processor:
             ction_dict[cl] = val_count
         return ction_dict
 
+    def check_dataform_company(self,company,dataform):
+        company_md = self.fdf_mgr.get_company_metadata(company)
+        for vec in company_md:
+            vec_dict = company_md[vec]
+            if vec_dict["dataforms"][dataform] == "Yes":
+                df_dict = self.fdf_mgr.retrieve_vec_data(company,vec,dataform)
+                processed = True
+                for ind in df_dict:
+                    if df_dict[ind] == []:
+                        print("here {}".format(vec))
+                        print(list(df_dict.keys()))
+                        processed = False
+                        break
+                if not processed:
+                    vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec)
+                    vec_df = self.dl.df.iloc[vec_md["indices"]]
+                    data = self.process_dataform(vec_df,dataform)
+                    self.fdf_mgr.save_vec_data(company,vec,data,dataform)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     t4proc = T4Processor()

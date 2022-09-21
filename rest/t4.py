@@ -16,6 +16,7 @@ class T4:
         self.ction_process = {}
         self.t4proc = T4Processor()
         self.company_process = {}
+        self.check_process = {}
 
     def save_ction(self,name,ction):
         file = self.proj_root + "/data/ctions/" + name + ".json"
@@ -31,13 +32,13 @@ class T4:
     def get_ction_names(self):
         return self.__get_names("ctions/")
 
-    def save_termlist(self,name, termlist):
-        file = self.proj_root + "/data/termlists/" + name + ".json"
+    def save_termlist(self,dataform,name, termlist):
+        file = self.proj_root + "/data/termlists/" + dataform + "/" + name + ".json"
         termlist = {"terms": termlist}
         self.__save_file(file,termlist)
 
-    def get_termlist(self,name):
-        file = self.proj_root + "/data/termlists/" + name + ".json"
+    def get_termlist(self,dataform,name):
+        file = self.proj_root + "/data/termlists/" + dataform + "/" + name + ".json"
         return self.__load_file(file)["terms"]
 
     def get_termlist_names(self):
@@ -149,6 +150,39 @@ class T4:
 
     def count_dataform_freq(self,ction,dataform,key):
         return self.t4proc.count_dataform_freq(ction,dataform,key)
+
+    def check_dataform_company(self,company,dataform):    
+        print("here1")
+        if company not in self.check_process:
+            self.check_process[company] = {}
+            self.check_process[company][dataform] = "started"
+            t = threading.Thread(target=self.check_dataform_company_thread,args=(company,dataform))
+            t.start()
+            print("here2")
+        else:
+            self.check_process[company][dataform] = "started"
+            t = threading.Thread(target=self.check_dataform_company_thread,args=(company,dataform))
+            t.start()
+            print("here2")
+        return self.t4proc.check_dataform_company(company,dataform)
+
+    def check_dataform_company_thread(self,company,dataform):
+        self.t4proc.check_dataform_company(company,dataform)
+        self.check_process[company][dataform] = "finished"
+
+    def get_status_check_dataform_company(self,company,dataform): 
+        if company in self.check_process:
+            if dataform in self.check_process[company]:
+                if self.check_process[company][dataform] == "finished": 
+                    return "Finished"
+                else:
+                    return "Not Finished"
+            else:
+                return "Not Found"
+        else:
+            return "Not Found"
+
+
     
     def __save_file(self,file,data):
         with open(file,'w') as fo:

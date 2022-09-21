@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>30</y>
+      <x>360</x>
+      <y>20</y>
       <w>150</w>
       <h>60</h>
     </coordinates>
@@ -44,7 +44,7 @@ dir_names_map: JSON</panel_attributes>
       <w>140</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Directory</panel_attributes>
+    <panel_attributes>DataForm Directory </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -100,12 +100,12 @@ vec_processing_status: JSON
     <id>Relation</id>
     <coordinates>
       <x>230</x>
-      <y>80</y>
-      <w>100</w>
-      <h>70</h>
+      <y>70</y>
+      <w>180</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>80.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>160.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -198,8 +198,8 @@ vec_processing_status: JSON
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>280</y>
+      <x>290</x>
+      <y>440</y>
       <w>170</w>
       <h>100</h>
     </coordinates>
