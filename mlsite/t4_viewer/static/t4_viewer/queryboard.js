@@ -180,9 +180,37 @@ class QueryBoard {
 	add_clist_bar(){
 		const div_clist = document.getElementById(this.div_id+"dispclist");
 		div_clist.innerHTML = "";
-
-
+		const sel_df = document.createElement("select");
+		const dataforms = ["ners","lemma","noun_chunks"];
+		for (var i = 0; i<dataforms.length; i++){
+			const opt = document.createElement("option");
+			opt.setAttribute(dataforms[i]);
+			opt.innerHTML = dataforms[i];
+		}
+		const label = document.createElement("label");
+		const input = document.createElement("input");
+		const submit = document.createElement("button");
+		const input_id = this.div_id + "divclist" + "input";
+		const sel_df_id = this.div_id + "divclist" + "select_df";
+		input.setAttribute("id",input_id);
+		select_df.setAttribute("id",sel_df_id);
+		const load_clist = this.name + ".load_clist()";
 	}
+
+	load_clist(){
+		const dataform = document.getElementById(this.div_id+"dispclist"+"select_df").value;
+		const name = document.getElementById(this.div_id+"dispclist"+"input").value;
+		const obj = this;
+		const load_func = function (resp){
+			const response = JSON.parse(resp);
+			obj.save_clist();
+		}
+		this.client(dataform,name,load_func);
+	}
+
+	save_clist(){
+	}
+
 
 }
 

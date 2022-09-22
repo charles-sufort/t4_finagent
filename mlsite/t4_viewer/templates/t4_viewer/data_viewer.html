@@ -20,6 +20,7 @@
 <script src="{% static 't4_viewer/queryboard.js' %}"></script>
 <script src="{% static 't4_viewer/termboard.js' %}"></script>
 <script src="{% static 't4_viewer/listbox.js' %}"></script>
+<script src="{% static 't4_viewer/inputpanel.js' %}"></script>
 
 <script>
 var client = new Client();
@@ -53,7 +54,6 @@ function set_panel(){
 	else if (panel == "termboard"){
 		panel_board.innerHTML = "";
 		termboard = new TermBoard("panel_board","termboard",client);
-
 	}
 }
 
