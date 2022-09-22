@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>27</x>
+      <x>0</x>
       <y>54</y>
       <w>252</w>
       <h>252</h>
@@ -37,22 +37,25 @@ get_list(dataform,name,load_func)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>27</x>
-      <y>315</y>
+      <x>234</x>
+      <y>324</y>
       <w>252</w>
       <h>225</h>
     </coordinates>
     <panel_attributes>QueryBoard
 --
 constructor(div_id,name)
+get_select_variable(handle)
+get_input_variable(handle)
 submit_query()
+query_display(response)osprey animal documentary
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>288</x>
+      <x>261</x>
       <y>54</y>
       <w>189</w>
       <h>216</h>
@@ -68,8 +71,8 @@ change_class(index)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>513</x>
+      <y>324</y>
       <w>189</w>
       <h>216</h>
     </coordinates>
@@ -89,14 +92,39 @@ task_fun()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>495</x>
+      <x>513</x>
       <y>54</y>
       <w>189</w>
-      <h>225</h>
+      <h>207</h>
     </coordinates>
-    <panel_attributes>ListBoxL
+    <panel_attributes>ListBox
 --
-add_key_func</panel_attributes>
+constructor(div_id)
+addKeyBindings()
+addItem(item)
+getItems()
+removeItems()
+addEventFunc(key,func)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>333</y>
+      <w>189</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>TermBoard
+--
+constructor(div_id,name,client)
+load_list()
+add_term1()
+add_term2()
+save_termlist()
+display_status(response)
+display_list(response)
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

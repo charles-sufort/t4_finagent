@@ -3,6 +3,7 @@ class QueryBoard {
 		this.div_id = div_id;
 		this.response = null;
 		this.name = name;
+		this.cls_list = null;
 		const div = document.getElementById(div_id);
 		
 		const select_query = document.createElement("select");
@@ -14,14 +15,17 @@ class QueryBoard {
 		const key_label = document.createElement("label");
 		const key_input = document.createElement("input");
 		const div_disp = document.createElement("div");
+		const div_clist = document.createElement("div");
 		const query_id = div_id + "query";
 		const dataform_id = div_id + "dataform";
 		const ction_id = div_id + "ction";
 		const disp_id = div_id + "disp";
 		const div_df_id = div_id + "div_df";
 		const key_id = div_id + "key";
+		const div_term_id = div_id + "termboard";
 		this.client = client;
 		div_dataform.setAttribute("id",div_df_id);
+		div_term.setAttribute("id",div_term_id);
 		select_query.setAttribute("id",query_id);
 		select_dataform.setAttribute("id",dataform_id);
 		ction_input.setAttribute("id",ction_id);
@@ -62,6 +66,7 @@ class QueryBoard {
 		div.appendChild(key_input);
 		div.appendChild(ction_submit);
 		div.appendChild(div_disp);
+		div.appendChild(div_term);
 	}
 
 	get_select_variable(handle){
@@ -72,6 +77,7 @@ class QueryBoard {
 
 	get_input_variable(handle){
 		const input_id = this.div_id + handle;
+
 		const input = document.getElementById(input_id);
 		return input.value;
 	}
@@ -81,7 +87,7 @@ class QueryBoard {
 		const disp_id = this.div_id + "disp";
 		const div_disp = document.getElementById(disp_id);
 		div_disp.innerHTML = "";
-		var obj = this;
+		const obj = this;
 		const load_func = function (response) {
 			console.log(response);
 			const resp_obj = JSON.parse(response);
@@ -94,7 +100,6 @@ class QueryBoard {
 		const dataform = this.get_select_variable("dataform");
 		console.log(dataform);
 		this.client.freq_query(ction,dataform,key,load_func);
-
 	}
 
 	query_display(response){
@@ -104,17 +109,24 @@ class QueryBoard {
 		const div_disp = document.getElementById(disp_id);
 		const div_results_id = disp_id + "results";
 		const div_glossary_id = disp_id + "glossary";
+		const div_clist_id = disp_id + "clist";
 		const div_results = document.createElement("div");
-
 		const div_glossary = document.createElement("div");
 		const list_dfs = document.createElement("select");
+		const div_term = document.createElement("div");
+		const div_clist = document.createElement("div");
+		const clist_add = document.createElement("button");
 		const classes = Object.keys(response);
 		const resp_cls_select = document.createElement("select");
 		const default_opt = document.createElement("option");
+		const div_term_id  = disp_id + "clist";
 		div_results.setAttribute("id",div_results_id);
 		div_glossary.setAttribute("id",div_glossary_id);
+		div_clist.setAttribute("id",div_clist_id);
 		default_opt.setAttribute("value","");
 		default_opt.innerHTML = "select class";
+		clist_add.innerHTML = "add ControlList"
+		const addClistfun = this.name + ".add_clist_bar()";
 		const cls_fun = this.name + ".cls_select()";
 		resp_cls_select.setAttribute("onchange",cls_fun);
 		resp_cls_select.setAttribute("id",sel_cls_id);
@@ -126,34 +138,50 @@ class QueryBoard {
 			cl_opt.innerHTML = classes[i];
 			resp_cls_select.appendChild(cl_opt);
 		}
+		div_clist.appendChild(clist_add);
 		div_disp.appendChild(div_results);
+		div_disp.appendChild(div_clist);
 		div_disp.appendChild(div_glossary);
 		div_results.appendChild(resp_cls_select);
-		const cls_list = document.createElement("select");
-		const cls_list_id = this.div_id + "cl_list";
-		cls_list.setAttribute('size',20);
-		cls_list.setAttribute('id',cls_list_id);
-		div_results.appendChild(cls_list);
+		this.cls_list = new ListBox(disp_id + "results",20,this.client);
+		this.termboard = new TermBoard(this.div_id+"termboard",this.name+".termboard", this.client);
+		const obj = this.termboard;
+		const add_func = function (lbox){
+			console.log(lbox);
+			console.log(lbox.box);
+			const term = lbox.box.options[lbox.box.selectedIndex].value;
+			obj.add_term2(term);
+		}
+		this.cls_list.addEventFunc("a",add_func);
 	}
+
 
 	cls_select(){
 		console.log("cls_select");
-		const cls_list_sel_id = this.div_id + "cl_list";
-		const cls_list_sel = document.getElementById(cls_list_sel_id);
+		const dataform = document.getElementById(this.div_id+"dataform").value;
 		const cls_sel_id = this.div_id + "sel_cls";
 		const cls_sel = document.getElementById(cls_sel_id);
 		const cls = cls_sel.options[cls_sel.selectedIndex].value;
 		console.log(this.response);
 		const cls_list = this.response[cls];
-		cls_list.sort(col2sort)
+		cls_list.sort(col2sort);
 		console.log(cls_list);
-		cls_list_sel.innerHTML = "";
-		for (var i = 0; i < cls_list.length; i++){
-			const list_opt = document.createElement("option");
-			list_opt.setAttribute("value",cls_list[i]);
-			list_opt.innerHTML = cls_list[i];
-			cls_list_sel.appendChild(list_opt);
+		this.cls_list.removeItems();
+		var value_func = item => item[0];
+		if (dataform == "lemma"){
+			value_func = item => item[0];
 		}
+
+		for (var i = 0; i < cls_list.length; i++){
+			this.cls_list.addItem(cls_list[i],0);
+		}
+	}
+
+	add_clist_bar(){
+		const div_clist = document.getElementById(this.div_id+"dispclist");
+		div_clist.innerHTML = "";
+
+
 	}
 
 }
