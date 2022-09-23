@@ -44,7 +44,6 @@ function set_panel(){
 	}
 	else if (panel == "ctionviewer"){
 		panel_board.innerHTML = "";
-
 		ctionviewer = new CtionViewer("panel_board","ctionviewer",client);
 	}
 	else if (panel == "queryboard"){
@@ -128,6 +127,7 @@ function choose(){
 	obj = {"ction":{"name":name,"dictionary":cdict},"query_type":elem.value,"min_n":elem2.value}
 	blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
 	oReq.send(blob);
+
 }
 
 function getQuery(){

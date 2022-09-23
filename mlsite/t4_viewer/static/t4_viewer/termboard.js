@@ -68,7 +68,6 @@ class TermBoard {
 		this.term_list = new ListBox(div_list_id,10);
 	}
 
-
 	load_list(){
 		const obj = this;
 		const sel_df = document.getElementById(this.div_id+"select_df");
@@ -84,15 +83,15 @@ class TermBoard {
 
 	add_term1(){
 		const term = document.getElementById(this.div_id+"add_input").value;
-		const term_opt = document.createElement("option");
-		term_opt.setAttribute("value",term);
-		term_opt.innerHTML = term;
-		this.term_list.appendChild(term_opt);
+		this.term_list.addItem(term);
 	}
 
 	add_term2(term){
-		const term_opt = document.createElement("option");
 		this.term_list.addItem(term);
+	}
+
+	remove_terms(){
+		this.term_list.removeItems();
 	}
 
 	save_termlist(){
@@ -120,9 +119,10 @@ class TermBoard {
 		const div_list = document.getElementById(this.div_id+"list_div");
 		this.term_list.innerHTML = "";
 		const list = response["termlist"];
-		console.log(list)
+		console.log(list);
 		for (var i = 0; i< list.length; i++){
 			this.term_list.addItem(list[i]);
 		}
 	}
+
 }
