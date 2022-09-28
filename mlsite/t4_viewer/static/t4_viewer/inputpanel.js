@@ -4,17 +4,20 @@ class InputPanel{
 		const label = document.createElement("label");
 		const input = document.createElement("input");
 		const submit = document.createElement("button");
-		const input_id = div_id + "input";
-		input.setAttribute("id",input_id);
+		this.id_dict = {}
+		this.div_id = div_id;
+		this.id_dict["input"] = this.div_id + ".1";
+		input.setAttribute("id",this.id_dict["input"]);
 		submit.setAttribute("onclick",func);
 		label.innerHTML = lbl;
+		submit.innerHTML = "submit";
 		div.appendChild(label);
 		div.appendChild(input);
 		div.appendChild(submit);
 	}
 
 	get_input(){
-		return document.getElementById(div_id+"input").value;
+		return document.getElementById(this.id_dict["input"]).value;
 	}
 
 

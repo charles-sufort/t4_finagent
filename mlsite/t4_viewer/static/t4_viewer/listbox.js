@@ -47,7 +47,7 @@ class ListBox {
 	}
 
 	getItems(){
-		return this.items;
+		return Array.from(this.items);
 	}
 	
 	removeItems(){
@@ -85,11 +85,12 @@ class ListBox {
 			}
 		}
 		if (type == "whitelist"){
-			const items = this.getItems();
+			const items = this.items;
+			const items_dict = this.items_dict;
 			this.removeItems();
-			for (const item of items){
-				if (termset.has(item)){
-					this.addItem(item);
+			for (const key of items){
+				if (termset.has(key)){
+					this.addItem(items_dict[key]);
 				}
 			}
 		}

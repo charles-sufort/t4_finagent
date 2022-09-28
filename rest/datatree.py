@@ -4,9 +4,10 @@ import json
 import os
 
 class DataTree:
-    def __init__(self, df):
+    def __init__(self, dl,company):
         src_dir = os.path.dirname(os.path.abspath(__file__))
         self.proj_root = os.path.dirname(src_dir)
+        df = dl.get_company_df(company)
         products = list(df['Product'].unique())
         tree = {}
         tree['nodes'] = {}
@@ -36,10 +37,6 @@ class DataTree:
                         df_si = df_i.loc[df_i['Sub-issue'] == si]
                         tree['nodes'][p]['nodes'][sp]['nodes'][i]['nodes'][si] = {}
                         tree['nodes'][p]['nodes'][sp]['nodes'][i]['nodes'][si]['count'] = df_si.shape[0]
-            for i in issues:
-                
-
-
         self.tree = tree
 
     def save_tree(self,name):
@@ -47,10 +44,10 @@ class DataTree:
         with open(file,'w') as fo:
             json.dump(self.tree, fo)
 
-
-dl = DataLoader('complaints_boa.csv')
-dt = DataTree(dl.df)
-dt.save_tree('boa_tree.json')
+if __name__=="__main__":
+    dl = DataLoader()
+    dt = DataTree(dl,"BANK OF AMERICA, NATIONAL ASSOCIATION")
+    print(dt.tree)
 
 
 

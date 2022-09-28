@@ -6,12 +6,15 @@ class TaskBoard {
 		this.task_count = 0;
 		this.task_fun = task_fun;
 		this.status_fun = status_fun;
+	}
+
+	build(){
 		this.task_ids = []
-		this.new_task_id = div_id + "new_task";
+		this.new_task_id = this.div_id + "new_task";
 		this.new_task = document.createElement('button');
-		this.new_task.setAttribute("onclick",name+".add_task()");
+		this.new_task.setAttribute("onclick",this.name+".add_task()");
 		this.new_task.innerHTML = "add Task";
-		const div = document.getElementById(div_id);
+		const div = document.getElementById(this.div_id);
 		div.appendChild(this.new_task);
 		console.log("constructed");
 	}

@@ -1,0 +1,8 @@
+{
+	"name": "NounChunkForm",
+	"col_names":
+		{
+			"index": "int",
+            "data" : "json"
+		}
+}

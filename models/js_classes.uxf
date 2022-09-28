@@ -48,7 +48,14 @@ constructor(div_id,name)
 get_select_variable(handle)
 get_input_variable(handle)
 submit_query()
-query_display(response)osprey animal documentary
+query_display(response)osprey animaldocumentary
+cls_select()
+add_clist_bar()
+load_clist()
+save_clist(response)
+clear_clist()
+disp_mode()
+graph_data()
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -84,7 +91,7 @@ add_task()
 submit_task(task_id)
 task_bar(task_id,company,dataform)
 set_status(task_id,response)
-get_task_status(task_id,
+get_task_status(task_id)
 dataform,company)
 task_fun()</panel_attributes>
     <additional_attributes/>
@@ -101,7 +108,7 @@ task_fun()</panel_attributes>
 --
 constructor(div_id)
 addKeyBindings()
-addItem(item)
+addItem(item,value_func)
 getItems()
 removeItems()
 addEventFunc(key,func)</panel_attributes>

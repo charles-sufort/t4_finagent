@@ -3,14 +3,10 @@ class Client {
 		this.name = "client1";
 	}
 
-	load_ction(elem_id,load_action) {
-		console.log("load_ction");
-		console.log(this.name);
-		console.log(this.ction);
-		name = document.getElementById(elem_id).value;
+	load_ction(name,load_action) {
 		const oReq = new XMLHttpRequest();
 		oReq.addEventListener("load",load_action);
-		oReq.open("POST","http://127.0.0.1:9000/ction/get/")
+		oReq.open("POST","http://127.0.0.1:9000/ction/get/");
 		const obj  = {"name":name};
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
 		oReq.setRequestHeader("Content-Type","application/json");
@@ -103,6 +99,7 @@ class Client {
 			load_func(response);
 		},false);
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}) ;
+		console.log(obj);
 		oReq.open("POST","http://127.0.0.1:9000/termlist/add/");
 		oReq.setRequestHeader("Content-Type","application/json")
 		oReq.send(blob);
@@ -112,6 +109,7 @@ class Client {
 		var xhr = new XMLHttpRequest();
 		const oReq = new XMLHttpRequest();
 		const obj = {'dataform': dataform, "name": name};
+		console.log(obj);
 		oReq.addEventListener("load",function () {
 			const response = this.responseText;
 			load_func(response);
@@ -122,7 +120,32 @@ class Client {
 		oReq.send(blob);
 	}
 
+	get_datatree(company,load_func){
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		const obj = {'name': company};
+		oReq.addEventListener("load",function () {
+			const response = this.responseText;
+			load_func(response);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+		oReq.open("POST","http://127.0.0.1:9000/data/company/tree");
+		oReq.setRequestHeader("Content-Type","application/json")
+		oReq.send(blob);
+	}
 
+	get_companies(load_func){
+		var xhr = new XMLHttpRequest();
+		const oReq = new XMLHttpRequest();
+		oReq.addEventListener("load",function () {
+			const response = this.responseText;
+			load_func(response);
+		},false);
+		oReq.open("GET","http://127.0.0.1:9000/data/company/get_all");
+		oReq.setRequestHeader("Content-Type","application/json")
+		oReq.send();
+
+	}
 
 /*
 	load_list(div_id){

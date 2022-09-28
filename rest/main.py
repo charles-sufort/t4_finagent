@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, List, Literal
@@ -59,6 +60,7 @@ class QueryCtionDFFreq2(BaseModel):
 
 class QueryMetaData(BaseModel):
     company: str
+
 
 t41 = T4()
 app = FastAPI()
@@ -162,5 +164,22 @@ async def status_check_company_dataform(proc: ProcessCompany):
 async def get_company_md(md: QueryMetaData):
     metadata = t41.company_metadata_summary(md.company)
     return metadata
+
+@app.post("/data/company/tree")
+async def get_company_tree(name: Name):
+    datatree = t41.get_company_tree(name.name)
+    return {"datatree":datatree}
+
+@app.get("/data/company/get_all")
+async def get_company_tree():
+    companies = t41.get_companies()
+    return {"companies":companies}
+
+
+
+
+    
+
+
 
 

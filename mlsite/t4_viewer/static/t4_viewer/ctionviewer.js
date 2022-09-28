@@ -1,24 +1,26 @@
 class CtionViewer {
 	constructor(div_id,name,client){
 		this.client = client;
-		this.input_id = div_id + "ction";
 		this.div_id = div_id;
 		this.name = name;
 		console.log("here");
 		console.log(this.div_id);
-		const div = document.getElementById(div_id);
+	}
+
+	build(){
+		this.input_id = this.div_id + "ction";
+		const div = document.getElementById(this.div_id);
 		const ction_label = document.createElement("label");
 		const ction_input = document.createElement("input");
 		const submit = document.createElement("button");
 		this.cdict = {}
-
 		ction_label.innerHTML = "Ction:";
 				this.load_fun = function () {
 			const response = this.response;
 			console.log("inner fun");
 			display_fun(response,display_fun);
 		}
-		const submit_func = name + ".load_ction()";
+		const submit_func = this.name + ".load_ction()";
 		submit.setAttribute("onclick",submit_func);
 		ction_input.setAttribute("id",this.input_id);
 		submit.innerHTML = "load";
@@ -26,6 +28,7 @@ class CtionViewer {
 		div.appendChild(ction_input);
 		div.appendChild(submit);
 	}
+
 	
 	load_ction(load_fun){
 		var obj = this;

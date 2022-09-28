@@ -30,6 +30,12 @@ class DataLoader:
         vecs = df_dd[fields].values.tolist()
         return vecs
 
+    def get_companies(self):
+        return self.df["Company"].drop_duplicates().values.tolist()
+
+    def get_company_df(self,company):
+        return self.df.loc[self.df["Company"] == company]
+
     def query_text(self,df,query_type,min_n):
         data = {}
         for i in range(df.shape[0]):

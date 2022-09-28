@@ -1,11 +1,14 @@
 class TermBoard {
 	constructor (div_id,name,client) {
-		const div = document.getElementById(div_id);
 		this.name = name;
 		this.div_id = div_id;
 		this.client = client;
+	}
+
+	build(){
+		const div = document.getElementById(this.div_id);
 		const term_list_id = this.div_id + "term_list";
-		const select_df_id = div_id + "select_df";
+		const select_df_id = this.div_id + "select_df";
 		const select_df = document.createElement("select");
 		const dataforms = ["ners","lemma","noun_chunks"];
 		const div_add = document.createElement("div");
@@ -22,18 +25,18 @@ class TermBoard {
 		const dflist_label = document.createElement("label");
 		const dflist_input = document.createElement("input");
 		const dflist_load = document.createElement("button");
-		const dflist_input_id = div_id + "input_list";
+		const dflist_input_id = this.div_id + "input_list";
 		const add_input = document.createElement("input");
 		const add_button = document.createElement("button");
-		const add_input_id = div_id + "add_input";
+		const add_input_id = this.div_id + "add_input";
 		const add_func = this.name + ".add_term1()";
 		const save_label = document.createElement("label");
 		const save_input = document.createElement("input");
 		const save_button = document.createElement("button");
 		const save_status = document.createElement("button");
-		const save_input_id = div_id + "save_input";
+		const save_input_id = this.div_id + "save_input";
 		const save_func = this.name + ".save_termlist()";
-		const save_status_id = div_id + "save_status";
+		const save_status_id = this.div_id + "save_status";
 		save_label.innerHTML = "Name:";
 		save_button.innerHTML = "Save";
 		add_button.innerHTML = "Add";
@@ -65,7 +68,9 @@ class TermBoard {
 		div.appendChild(div_add);
 		div.appendChild(div_save);
 		const obj = this;
-		this.term_list = new ListBox(div_list_id,10);
+		const item_func = x => x;
+		this.term_list = new ListBox(div_list_id,10,this.client,item_func);
+
 	}
 
 	load_list(){
@@ -104,6 +109,10 @@ class TermBoard {
 			const resp_obj = JSON.parse(response);
 			obj.display_status(resp_obj);
 		}
+		console.log("save termlist");
+		console.log(dataform);
+		console.log(name);
+		console.log(terms);
 		this.client.save_list(dataform,name,terms,save_func);
 	}
 	

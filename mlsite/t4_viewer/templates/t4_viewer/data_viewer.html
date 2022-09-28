@@ -1,18 +1,6 @@
 {% load static %}
-
-<select name="select_panel" id="select_panel" onchange="set_panel()">
-	<option value="">choose</option>
-	<option value="taskboard">taskboard</option>
-	<option value="ctionviewer">ctionviewer</option>
-	<option value="queryboard">queryboard</option>
-	<option value="termboard">termboard</option>
-</select>
-
-<div id="panel_board">
+<div id="tab_panel">
 </div>
-
-
-
 <script src="{% static 't4_viewer/client.js' %}"></script>
 <script src="{% static 't4_viewer/page.js' %}"></script>
 <script src="{% static 't4_viewer/taskboard.js' %}"></script>
@@ -21,6 +9,11 @@
 <script src="{% static 't4_viewer/termboard.js' %}"></script>
 <script src="{% static 't4_viewer/listbox.js' %}"></script>
 <script src="{% static 't4_viewer/inputpanel.js' %}"></script>
+<script src="{% static 't4_viewer/tabpanel.js' %}"></script>
+<script src="{% static 't4_viewer/datatree.js' %}"></script>
+
+
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
 
 <script>
 var client = new Client();
@@ -28,10 +21,19 @@ var name = "NA";
 var cdict = {};
 var data = {};
 var cdict_s = {};
-var taskboard = null;
-var ctionviewer = null;
-var queryboard = null;
-var termboard = null;
+var tabpanel = new TabPanel("tab_panel","tabpanel");
+const div_panel = tabpanel.id_dict["panel"];
+var taskboard = new TaskBoard(div_panel+".1","taskboard",client,task_status,task_status);
+var ctionviewer = new CtionViewer(div_panel+".2","ctionviewer",client);
+var queryboard = new QueryBoard(div_panel+".3","queryboard",client);                     
+var termboard = new TermBoard(div_panel+".4","termboard",client);                        
+var datatree = new DataTree(div_panel+".5","datatree",client);
+tabpanel.add_tab(div_panel+".1","TaskBoard",taskboard);
+tabpanel.add_tab(div_panel+".2","CtionViewer",ctionviewer);
+tabpanel.add_tab(div_panel+".3","QueryBoard",queryboard);
+tabpanel.add_tab(div_panel+".4","TermBoard",termboard);
+tabpanel.add_tab(div_panel+".5","DataTree",datatree);
+
 
 function set_panel(){
 	const select_panel = document.getElementById("select_panel");
@@ -56,7 +58,6 @@ function set_panel(){
 	}
 }
 
-
 function task_status(response,task_id){
 	console.log("fun task_status");
 	console.log(response);
@@ -67,7 +68,6 @@ function task_status(response,task_id){
 function get_dataform_summary(){
 	console.log(this.responseText);	
 }
-
 
 function change_class(){
 		console.log("here");
@@ -116,7 +116,6 @@ function getCtion(){
 		select.appendChild(option);
 	}
 }
-
 
 function choose(){
 	elem = document.getElementById("term_options");

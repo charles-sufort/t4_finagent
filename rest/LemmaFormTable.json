@@ -1,0 +1,9 @@
+{
+	"name": "LemmaForm",
+	"col_names":
+		{ 
+			"index":"int",
+			"data":"json",
+			"text": "text"
+		}		
+}

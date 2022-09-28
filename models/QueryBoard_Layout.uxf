@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>0</y>
+      <w>190</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>QueryBoard
+--
+div_id: String
+response : Object
+name: String
+cls_list: [String]
+clist: Object
+mode: String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>190</y>
+      <w>110</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Query: Select
+--
+query_id = 
+div_id + "query"
+options = 
+["FreqQueries"]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>200</y>
+      <w>120</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Dataform: Select
+--
+dataform_id=
+div_id+"dataform"
+options=
+[ "ners",
+"lemma"
+"noun_chunks"]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>380</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Ction: Label
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>380</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Ction: Input
+--
+ction_id=
+div_id+"ction"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>350</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Ction: Submit
+--
+onclick=
+name+".submit_query()"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>320</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Key: Label
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>320</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Key: Input
+--
+key_id=
+div_id+"key"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>160</y>
+      <w>480</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>Query: Div</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>470</y>
+      <w>480</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>div_clist: Div
+--
+id = div_id + "divclist"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>530</y>
+      <w>110</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Clist: Select
+--
+sel_clist_id = 
+div_id+"divclist"
+options = [
+"whitelist",
+"blacklist"]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>530</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Submit: Button
+--
+onclick=
+name+".load_clist()"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>530</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>TermList: Input
+--
+input_id=
+div_id+"divclist"
++"select_clist"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>530</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TermList: Label
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>680</y>
+      <w>480</w>
+      <h>550</h>
+    </coordinates>
+    <panel_attributes>div_disp: Div
+--
+id=div_id+"disp"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>1090</y>
+      <w>480</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>div_glossary:Div
+--
+id=div_id+"termboard"
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>730</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>sel_display: Select
+--
+id=div_id+"dispsel_display"
+options= ["list","graph"]
+onclick=
+name+".disp_mode()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>820</y>
+      <w>480</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>div_results:Div
+--
+id=div_id+"dispresults"
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>970</y>
+      <w>480</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>div_graph: Div
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>860</y>
+      <w>480</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>div_list: Div
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>890</y>
+      <w>330</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>resp_cls_select: Select
+--
+onchange=this.name+".cls_select()"
+id=div_id+"sel_cls"
+options=[&lt;RESPONSE_CLASSES&gt;]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>900</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>cls_list: ListBox
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>1020</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>graph: Plotly</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>1150</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>termboard: TermBoard</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>620</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>RemoveClist: Button
+--
+onclick=name+".clear_clist()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

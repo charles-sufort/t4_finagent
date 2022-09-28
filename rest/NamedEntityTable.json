@@ -1,0 +1,8 @@
+{
+	"name": "NamedEntityForm",
+	"col_names":
+	{ 
+			"index":"int",
+			"data":"json"
+	}
+}

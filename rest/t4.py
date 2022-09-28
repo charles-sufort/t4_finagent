@@ -6,11 +6,12 @@ import re
 from text_section import TextSection
 from dataclient import DataClient
 from t4processor import T4Processor
+from datatree import DataTree
 
 
 class T4:
     def __init__(self):
-        self.dl = DataLoader('complaints_boa.csv')
+        self.dl = DataLoader()
         src_dir = os.path.dirname(os.path.abspath(__file__))
         self.proj_root = os.path.dirname(src_dir)
         self.ction_process = {}
@@ -182,7 +183,12 @@ class T4:
         else:
             return "Not Found"
 
+    def get_company_tree(self,company):
+        datatree = DataTree(self.dl,company)
+        return datatree.tree
 
+    def get_companies(self):
+        return self.dl.get_companies()
     
     def __save_file(self,file,data):
         with open(file,'w') as fo:
@@ -198,6 +204,7 @@ class T4:
         dirname = self.proj_root + "/data/" + data_dir
         files = os.listdir(dirname)
         return [ file.split('.')[0] for file in files] 
+
 
 
 
