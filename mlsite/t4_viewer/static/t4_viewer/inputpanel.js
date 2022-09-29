@@ -1,12 +1,11 @@
-class InputPanel{
+class InputPanel extends Panel{
 	constructor(div_id,lbl,func) {
+		super();
 		const div  = document.getElementById(div_id);
 		const label = document.createElement("label");
 		const input = document.createElement("input");
 		const submit = document.createElement("button");
-		this.id_dict = {}
-		this.div_id = div_id;
-		this.id_dict["input"] = this.div_id + ".1";
+		this.add_id("input");
 		input.setAttribute("id",this.id_dict["input"]);
 		submit.setAttribute("onclick",func);
 		label.innerHTML = lbl;

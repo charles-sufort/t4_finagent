@@ -1,11 +1,9 @@
-class DataTree {
+class DataTree extend Panel{
 	constructor (div_id,name,client){
+		super();
 		this.div_id = div_id;
 		this.name = name;
 		this.client = client;
-		this.id_dict = {};
-		this.cls_dict = {};
-		this.elem_count = 0;
 		this.tree = null;
 	}
 
@@ -18,6 +16,12 @@ class DataTree {
 		div_load_cmp.setAttribute("id",this.id_dict["load_panel"]);
 		div.appendChild(div_load_cmp);
 		this.get_companies();
+		const div_ction = document.createElement("div");
+
+		div_ction.setAttribute("id"
+
+		this.cls_dict["ctionpanel"] = CtionPanel(,
+		
 	}
 
 
@@ -108,7 +112,6 @@ class DataTree {
 		this.cls_dict["subproduct_box"].addEventFunc("Enter",subprod_func);
 		this.cls_dict["issue_box"].addEventFunc("Enter",issue_func);
 		this.product_list();
-
 	}
 
 	product_list(){

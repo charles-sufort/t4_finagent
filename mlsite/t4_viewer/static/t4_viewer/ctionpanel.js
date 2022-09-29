@@ -1,11 +1,9 @@
-class CtionPanel {
+class CtionPanel extends Panel{
 	constructor(div_id,name,client) {
+		super();
 		this.div_id = div_id;
 		this.name = name;
 		this.client = client;
-		this.id_dict = {};
-		this.cls_dict = {};
-		this.elem_count = 0;
 		this.ction = null;
 }
 
@@ -45,11 +43,6 @@ class CtionPanel {
 		div_save.setAttribute("id",this.id_dict["save_panel"]);
 		div.appendChild(div_save);
 		this.cls_dict["save_panel"] = new InputPanel(this.id_dict["save_panel"],"Save",save_func);
-	}
-	
-	add_id(name){
-		this.elem_count = this.elem_count + 1;
-		this.id_dict[name] = this.div_id + this.elem_count.toString();
 	}
 
 	load_ction(){

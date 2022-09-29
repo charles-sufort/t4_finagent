@@ -1,8 +1,6 @@
-class TabPanel{
+class TabPanel extends Panel{
 	constructor(div_id,name){
 		this.div_id = div_id;
-		this.id_dict = {};
-		this.tabs_dict = {};
 		this.tabs = 0;
 		this.name = name;
 		const div = document.getElementById(div_id);
@@ -35,7 +33,7 @@ class TabPanel{
 		const div_cls = document.createElement("div");
 		div_cls.setAttribute("id",this.tabs_dict[name][0]);
 		div_panel.appendChild(div_cls);
-		console.log(this.tabs_dict[name][1])
+		console.log(this.tabs_dict[name][1]);
 		this.tabs_dict[name][1].build();
 	}
 }
