@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>60</y>
+      <w>450</w>
+      <h>490</h>
+    </coordinates>
+    <panel_attributes>CtionPanel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>80</y>
+      <w>220</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>InputPanel
+--
+cls_dict key="load_panel"
+lbl="Load Ctoin"
+func=this.name + ".load_ction()"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>450</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>InputPanel
+--
+cls_dict key = "save_panel"
+label = "Save"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>320</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>TermList
+--
+cls_dict key = "list_box"
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>180</y>
+      <w>170</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>[  ] : Input
+--
+id_dict key = "add_input"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>180</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Add
+--
+add_func=this.name+".add_class()"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>240</y>
+      <w>270</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>cls:Select
+--
+id_dict key = "sel_cls"
+on_change = this.name + ".select_cls()"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

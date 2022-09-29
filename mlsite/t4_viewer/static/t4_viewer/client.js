@@ -5,7 +5,12 @@ class Client {
 
 	load_ction(name,load_action) {
 		const oReq = new XMLHttpRequest();
-		oReq.addEventListener("load",load_action);
+
+		oReq.addEventListener("load",function () {
+			const resp = this.responseText;
+			load_action(resp);
+		}
+		);
 		oReq.open("POST","http://127.0.0.1:9000/ction/get/");
 		const obj  = {"name":name};
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
@@ -23,13 +28,16 @@ class Client {
 		}
 	}
 
-	save_ction(elem_id,cdict) {
-		var input = document.getElementById(elem_id);
+	save_ction(name,cdict,load_func) {
 		var xhr = new XMLHttpRequest();
 		const oReq = new XMLHttpRequest();
-		const obj = {'name': input.value, 'dictionary':cdict}
+		const obj = {'name': name, 'dictionary':cdict}
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-//		oReq.addEventListener("load", reqListener); 
+		oReq.addEventListener("load", function (){
+			const response = this.responseText;
+			load_func(response);
+		}
+		); 
 		oReq.open("POST","http://127.0.0.1:9000/ction/add/");
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);

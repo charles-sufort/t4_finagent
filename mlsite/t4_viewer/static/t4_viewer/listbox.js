@@ -1,10 +1,9 @@
 class ListBox {
-	constructor(div_id,size,client,item_func) {
+	constructor(div_id,size,item_func) {
 		console.log(div_id);
 		const div = document.getElementById(div_id);
 		this.box = document.createElement("select");
 		this.box.setAttribute("size",size);
-		this.client = client;
 		const box_id = div_id + "box";
 		this.div_id = div_id;
 		console.log(div);
@@ -39,7 +38,7 @@ class ListBox {
 		if (! this.items.has(this.item_func(item))){
 			this.items.add(this.item_func(item));
 			const opt = document.createElement("option");
-			opt.setAttribute("value",item);
+			opt.setAttribute("value",this.item_func(item));
 			this.items_dict[this.item_func(item)] = item;
 			opt.innerHTML = item.toString();
 			this.box.appendChild(opt);
@@ -50,6 +49,10 @@ class ListBox {
 		return Array.from(this.items);
 	}
 	
+	getSelected(){
+		return this.box.options[this.box.selectedIndex].value;
+	}
+
 	removeItems(){
 		this.box.innerHTML = "";
 		this.items = new Set();

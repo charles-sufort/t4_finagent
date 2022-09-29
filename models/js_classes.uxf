@@ -5,9 +5,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>54</y>
+      <y>0</y>
       <w>252</w>
-      <h>252</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>Client
 --
@@ -26,6 +26,7 @@ task_id)
 freq_query(ction,dataform,key,query_fun)
 save_list(dataform,name,terms,load_func)
 get_list(dataform,name,load_func)
+get_datatree(company,load_func)
 
 
 
@@ -38,7 +39,7 @@ get_list(dataform,name,load_func)
     <id>UMLClass</id>
     <coordinates>
       <x>234</x>
-      <y>324</y>
+      <y>270</y>
       <w>252</w>
       <h>225</h>
     </coordinates>
@@ -63,7 +64,7 @@ graph_data()
     <id>UMLClass</id>
     <coordinates>
       <x>261</x>
-      <y>54</y>
+      <y>0</y>
       <w>189</w>
       <h>216</h>
     </coordinates>
@@ -78,8 +79,8 @@ change_class(index)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>513</x>
-      <y>324</y>
+      <x>18</x>
+      <y>513</y>
       <w>189</w>
       <h>216</h>
     </coordinates>
@@ -99,16 +100,17 @@ task_fun()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>513</x>
-      <y>54</y>
+      <x>252</x>
+      <y>513</y>
       <w>189</w>
       <h>207</h>
     </coordinates>
     <panel_attributes>ListBox
 --
-constructor(div_id)
+constructor(div_id,size,item_func)
 addKeyBindings()
-addItem(item,value_func)
+addItem(item)
+getSelected()
 getItems()
 removeItems()
 addEventFunc(key,func)</panel_attributes>
@@ -118,7 +120,7 @@ addEventFunc(key,func)</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>18</x>
-      <y>333</y>
+      <y>279</y>
       <w>189</w>
       <h>216</h>
     </coordinates>
@@ -131,6 +133,84 @@ add_term2()
 save_termlist()
 display_status(response)
 display_list(response)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>747</y>
+      <w>189</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>TabPanel
+--
+constructor(div_id,name)
+add_tab(div_id,name,panel_cls)
+select_tab(name)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>747</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>InputPanel
+--
+constructor(div_id,lbl,func)
+getInput()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>909</y>
+      <w>189</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>DataTree
+--
+constructor(div_id,name,client)
+build()
+get_companies()
+display_companies(response)
+load_company()
+save_tree(response)
+product_list()
+subproduct_list()
+issue_list()
+subissue_list()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>261</x>
+      <y>909</y>
+      <w>189</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>CtionPanel
+--
+constructor(div_id,name,client)
+build()
+add_id(name)
+load_ction()
+handle_load(response)
+save_ction()
+handle_save(resposne)
+add_cls()
+select_cls()
 </panel_attributes>
     <additional_attributes/>
   </element>

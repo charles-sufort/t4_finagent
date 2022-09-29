@@ -6,24 +6,62 @@ class DataTree {
 		this.id_dict = {};
 		this.cls_dict = {};
 		this.elem_count = 0;
+		this.tree = null;
 	}
 
 	build(){
 		const div = document.getElementById(this.div_id);
 		const div_load_cmp = document.createElement("div");
-
+		const company_lbl = document.createElement("label");
 		this.elem_count = this.elem_count + 1;
-		this.id_dict["load_cmp"] = this.div_id + "." + this.elem_count.toString();
-		div_load_cmp.setAttribute("id",this.id_dict["load_cmp"]);
+		this.id_dict["load_panel"] = this.div_id + "." + this.elem_count.toString();
+		div_load_cmp.setAttribute("id",this.id_dict["load_panel"]);
 		div.appendChild(div_load_cmp);
-		const load_func = this.name + ".load_company()";
-		const load_cmp = new InputPanel(this.id_dict["load_cmp"],"Company:",load_func);
-		this.cls_dict["load_cmp"] = load_cmp;
-		div.append(div_load_cmp);
+		this.get_companies();
 	}
 
+
+	get_companies(){
+		const obj = this;
+		const load_func = function (resp){
+			const response = JSON.parse(resp);
+			obj.display_companies(response);
+		}
+		client.get_companies(load_func);
+	}
+
+	display_companies(response){
+		const div_load = document.getElementById(this.id_dict["load_panel"]);
+		const label = document.createElement("label");
+		const cmp_list = document.createElement("select");
+		const load_func = this.name + ".load_company()";
+		const load_btn = document.createElement("button");
+		this.elem_count = this.elem_count + 1;
+		this.id_dict["cmp_list"] = this.div_id + "." + this.elem_count.toString();
+		cmp_list.setAttribute("id",this.id_dict["cmp_list"]);
+		load_btn.setAttribute('onclick',load_func);
+		div_load.appendChild(label);
+		div_load.appendChild(cmp_list);
+		div_load.appendChild(load_btn);
+		load_btn.innerHTML = "load";
+		const companies = response["companies"];
+		companies.sort();
+		const opt_def = document.createElement("option");
+		opt_def.setAttribute("value","");
+		opt_def.innerHTML = "Select Company";
+		cmp_list.appendChild(opt_def);
+		for (var i = 0; i<companies.length; i++){
+			const opt_cmp = document.createElement("option");
+			opt_cmp.setAttribute("value",companies[i]);
+			opt_cmp.innerHTML = companies[i];
+			cmp_list.appendChild(opt_cmp);
+		}
+	}
+
+
 	load_company(){
-		const company = this.cls_dict["load_cmp"].get_input();
+		const cmp_list = document.getElementById(this.id_dict["cmp_list"]);
+		const company = cmp_list.options[cmp_list.selectedIndex].value;
 		const obj = this;
 		const load_func = function (resp){
 			const response = JSON.parse(resp);
@@ -34,28 +72,94 @@ class DataTree {
 	}
 
 	save_tree(response){
+		const div = document.getElementById(this.div_id);
+		div.innerHTML = "";
 		const div1 = document.createElement("div");
 		const div2 = document.createElement("div");
-		const prod_box = document.createElement("select");
-		const subprod_box = document.createElement("select");
-		const issue_box = document.createElement("select");
-		const subissue_box = document.createElement("select");
-		prod_box.setAttribute("size",10);
-		subprod_box.setAttribute("size",10);
-		issue_box.setAttribute("size",10);
-		subissue_box.setAttribute("size",10);
+		const prod_div = document.createElement("div");
+		const subprod_div = document.createElement("div");
+		const issue_div = document.createElement("div");
+		const subissue_div = document.createElement("div");
+		this.tree = response["datatree"];
 		this.elem_count = this.elem_count + 1;
-		id_dict["product_box"] = this.div_id + "." + this.elem_count.to_string();
+		this.id_dict["product_div"] = this.div_id + "." + this.elem_count.toString();
 		this.elem_count = this.elem_count + 1;
-		id_dict["subproduct_box"] = this.div_id + "." + this.elem_count.to_string();
-		this.elem_count = this.elem_count + 1;
-		id_dict["issue_box"] = this.div_id + "." + this.elem_count.to_string();
-		this.elem_count = this.elem_count + 1;
-		id_dict["subissue_box"] = this.div_id + "." + this.elem_count.to_string();
-		prod_box.setAttribute("id",id_dict["product_box"]);
-		subprod_box.setAttribute("id",id_dict["subproduct_box"]);
-		issue_box.setAttribute("id",id_dict["issue_box"]);
-		subissue_box.setAttribute("id",id_dict["subissue_box"]);
+		this.id_dict["issue_div"] = this.div_id + "." + this.elem_count.toString();
+		div1.setAttribute("id",this.id_dict["product_div"]);
+		div2.setAttribute("id",this.id_dict["issue_div"]);
+		div.appendChild(div1);
+		div.appendChild(div2);
+		const item_func = x => x[0];
+		this.cls_dict["product_box"] = new ListBox(this.id_dict["product_div"],10,item_func);
+		this.cls_dict["subproduct_box"] = new ListBox(this.id_dict["product_div"],10,item_func);
+		this.cls_dict["issue_box"] = new ListBox(this.id_dict["issue_div"],10,item_func);
+		this.cls_dict["subissue_box"] = new ListBox(this.id_dict["issue_div"],10,item_func);
+		const obj = this;
+		const prod_func = function (lbox) {
+			obj.subproduct_list();
+		}
+		const subprod_func = function (lbox) {
+			obj.issue_list();
+		}
+		const issue_func = function (lbox) {
+			obj.subissue_list();
+		}
+		this.cls_dict["product_box"].addEventFunc("Enter",prod_func);
+		this.cls_dict["subproduct_box"].addEventFunc("Enter",subprod_func);
+		this.cls_dict["issue_box"].addEventFunc("Enter",issue_func);
+		this.product_list();
 
+	}
+
+	product_list(){
+		this.cls_dict["product_box"].removeItems()
+		this.cls_dict["subproduct_box"].removeItems()
+		this.cls_dict["issue_box"].removeItems()
+		this.cls_dict["subissue_box"].removeItems()
+		const products = Object.keys(this.tree["nodes"]);
+		const product_data = [];
+		for (var i = 0; i< products.length; i++){
+			this.cls_dict["product_box"].addItem([products[i],this.tree["nodes"][products[i]]["count"]]);
+		}
+		console.log(product_data);
+		}
+
+	subproduct_list(){
+		this.cls_dict["subproduct_box"].removeItems()
+		this.cls_dict["issue_box"].removeItems()
+		this.cls_dict["subissue_box"].removeItems()
+		const product = this.cls_dict["product_box"].getSelected();
+		const subproducts = Object.keys(this.tree["nodes"][product]["nodes"]);
+		const subproduct_data = [];
+		for (var i = 0; i<subproducts.length; i++){
+			this.cls_dict["subproduct_box"].addItem([subproducts[i],this.tree["nodes"][product]["nodes"][subproducts[i]]["count"]]);
+		}
+	}
+
+	issue_list(){
+		this.cls_dict["issue_box"].removeItems()
+		this.cls_dict["subissue_box"].removeItems()
+		const product = this.cls_dict["product_box"].getSelected();
+		const subproduct = this.cls_dict["subproduct_box"].getSelected();
+
+		const issues = Object.keys(this.tree["nodes"][product]["nodes"][subproduct]["nodes"]);
+		const issue_data = [];
+		for (var i = 0; i<issues.length; i++){
+			this.cls_dict["issue_box"].addItem([issues[i],this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issues[i]]["count"]]);
+		}
+	}
+
+	subissue_list(){
+		this.cls_dict["subissue_box"].removeItems()
+		const product = this.cls_dict["product_box"].getSelected();
+		const subproduct = this.cls_dict["subproduct_box"].getSelected();
+
+		const issue = this.cls_dict["issue_box"].getSelected();
+
+		const subissues = Object.keys(this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["nodes"]);
+		const subissue_data = [];
+		for (var i = 0; i<subissues.length; i++){
+			this.cls_dict["subissue_box"].addItem([subissues[i],this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["count"]]);
+		}
 	}
 }

@@ -11,6 +11,7 @@
 <script src="{% static 't4_viewer/inputpanel.js' %}"></script>
 <script src="{% static 't4_viewer/tabpanel.js' %}"></script>
 <script src="{% static 't4_viewer/datatree.js' %}"></script>
+<script src="{% static 't4_viewer/ctionpanel.js' %}"></script>
 
 
 <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
@@ -28,11 +29,13 @@ var ctionviewer = new CtionViewer(div_panel+".2","ctionviewer",client);
 var queryboard = new QueryBoard(div_panel+".3","queryboard",client);                     
 var termboard = new TermBoard(div_panel+".4","termboard",client);                        
 var datatree = new DataTree(div_panel+".5","datatree",client);
+var ctionpanel = new CtionPanel(div_panel+".6","ctionpanel",client);
 tabpanel.add_tab(div_panel+".1","TaskBoard",taskboard);
 tabpanel.add_tab(div_panel+".2","CtionViewer",ctionviewer);
 tabpanel.add_tab(div_panel+".3","QueryBoard",queryboard);
 tabpanel.add_tab(div_panel+".4","TermBoard",termboard);
 tabpanel.add_tab(div_panel+".5","DataTree",datatree);
+tabpanel.add_tab(div_panel+".6","CtionPanel",ctionpanel);
 
 
 function set_panel(){

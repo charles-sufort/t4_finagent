@@ -18,7 +18,7 @@ class TabPanel{
 
 	add_tab(div_id,name,panel_cls){
 		const div_tabs = document.getElementById(this.id_dict["tabs"]);
-		const div_cls = document.getElementById(div_id);
+		const div_cls = document.createElement(div_id);
 		const tab = document.createElement("button");
 		const tab_id = this.id_dict["tabs"] + "." + (this.tabs+1).toString();
 		const tab_func = this.name + ".select_tab('"+name+"')";

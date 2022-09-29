@@ -7,68 +7,112 @@ class CtionPanel {
 		this.cls_dict = {};
 		this.elem_count = 0;
 		this.ction = null;
-	
 }
 
 	build(){
 		const div = document.getElementById(this.div_id);
 		const div_load = document.createElement("div");
-		this.elem_count = this.elem_count + 1;
-		this.id_dict["load_panel"] = this.div_id + "." + this.elem_count.to_string();
+		this.add_id("load_panel");
 		div_load.setAttribute("id",this.id_dict["load_panel"]);
 		div.appendChild(div_load);
 		const load_func = this.name + ".load_ction()";
-		this.elem_count = this.elem_count + 1;
-		this.id_dict["sel_cls"] = this.div_id + "." + this.elem_count.to_string();
+		this.cls_dict["load_panel"] = new InputPanel(this.id_dict["load_panel"],"Load Ction:",load_func);
+		const div_add = document.createElement("div");
+		const add_input = document.createElement("input");
+		const add_func = this.name + ".add_cls()";
+		this.add_id("add_input");
+		add_input.setAttribute("id",this.id_dict["add_input"]);
+		const add_btn = document.createElement("button");
+		add_btn.innerHTML = "Add";
+		add_btn.setAttribute("onclick",add_func);
+		div_add.appendChild(add_btn);
+		div_add.appendChild(add_input);
+		div.appendChild(div_add);
+		this.add_id("sel_cls");
 		const sel_cls = document.createElement("select");
+		const sel_func = this.name + ".select_cls()";
 		sel_cls.setAttribute("id",this.id_dict["sel_cls"]);
+		sel_cls.setAttribute("onchange",sel_func);
+		div.appendChild(sel_cls);
+		this.add_id("div_list");
+		const div_list = document.createElement("div");
+		div_list.setAttribute("id",this.id_dict["div_list"]);
+		div.appendChild(div_list);
+		this.cls_dict["list_box"] = new ListBox(this.id_dict["div_list"],10,x => x);
+		const save_func = this.name + ".save_ction()";
+		this.add_id('save_panel');
+		const div_save = document.createElement("div");
+		div_save.setAttribute("id",this.id_dict["save_panel"]);
+		div.appendChild(div_save);
+		this.cls_dict["save_panel"] = new InputPanel(this.id_dict["save_panel"],"Save",save_func);
+	}
+	
+	add_id(name){
+		this.elem_count = this.elem_count + 1;
+		this.id_dict[name] = this.div_id + this.elem_count.toString();
 	}
 
-
 	load_ction(){
-		const name = this.cls_dict["load_panel"].get_input();
+		const name = this.cls_dict["load_panel"].getInput();
 		const obj = this;
 		const load_func = function (resp){
+			console.log(resp);
 			const response = JSON.parse(resp);
 			obj.handle_load(response);
 		}
-		client.load_ction(name,load_func);
+		this.client.load_ction(name,load_func);
 	}
 
 	handle_load(response){
 		console.log(response);
 		this.ction = response["ction"];
 		const classes = Object.keys(this.ction);
+		const sel_func = this.name + ".select_class()";
 		const sel_cls = document.getElementById(this.id_dict["sel_cls"]);
+		const opt_def = document.createElement("option");
+		opt_def.setAttribute("value","");
+		opt_def.innerHTML = "select class";
+		sel_cls.appendChild(opt_def);
 		for (var i = 0; i< classes.length; i++){
 			const opt_cls = document.createElement("option");
-			opt_cls.setAttribute("id",classes[i]);
+			opt_cls.setAttribute("value",classes[i]);
 			opt_cls.innerHTML = classes[i];
 			sel_cls.appendChild(opt_cls);
 		}
 	}
-
-	get_companies(){
+	
+	save_ction(){
+		const name = this.cls_dict["save_panel"].getInput()
 		const obj = this;
-		const load_func = function (resp){
-			const response = JSON.parse(resp);
-			obj.display_companies(response);
+		const load_func = function (response){
+			const resp = JSON.parse(response);
+			obj.handle_save(resp);
 		}
-		client.get_companies();
+		client.save_ction(name,this.ction,load_func);
 	}
 
+	handle_save(response){
+		alert(response);
+	}
 
-	display_companies(response){
-		const div_load = document.getElementById(thid.id_dict["load_panel"]);
-		const label = document.createElement("label");
-		const cmp_list = document.createElement("select");
-		this.elem_count = this.elem_count + 1;
-		id_dict["cmp_list"] = this.div_id + "." + this.elem_count.to_string();
-		for (var i = 0; i<response["companies"]; i++){
-			const opt_cmp = document.createElement("option");
-			opt_cmp.setAttribute("id",response["companies"][i]);
-			opt_cmp.innerHTML = response["companies"][i];
-			cmp_list.appendChild(opt_cmp);
+	add_cls(){
+		console.log("here");
+		const sel_cls = document.getElementById(this.id_dict["sel_cls"]);
+		const cls = document.getElementById(this.id_dict["add_input"]).value;
+		const opt = document.createElement("option");
+		opt.setAttribute("value",cls);
+		opt.innerHTML = cls;
+		sel_cls.appendChild(opt);
+		this.ction[cls] = [];
+	}
+
+	select_cls(){
+		const sel_cls = document.getElementById(this.id_dict["sel_cls"]);
+		const cls = sel_cls.options[sel_cls.selectedIndex].value;
+		const vec_ls = this.ction[cls];
+		this.cls_dict["list_box"].removeItems();
+		for (var i = 0; i<vec_ls.length; i++){
+			this.cls_dict["list_box"].addItem(vec_ls[i]);
 		}
 	}
 }

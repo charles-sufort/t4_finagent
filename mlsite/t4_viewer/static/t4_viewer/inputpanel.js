@@ -16,7 +16,7 @@ class InputPanel{
 		div.appendChild(submit);
 	}
 
-	get_input(){
+	getInput(){
 		return document.getElementById(this.id_dict["input"]).value;
 	}
 
