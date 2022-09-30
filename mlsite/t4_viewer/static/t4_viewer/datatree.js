@@ -1,10 +1,11 @@
-class DataTree extend Panel{
+class DataTree extends Panel{
 	constructor (div_id,name,client){
 		super();
 		this.div_id = div_id;
 		this.name = name;
 		this.client = client;
 		this.tree = null;
+		this.company = null;
 	}
 
 	build(){
@@ -17,11 +18,16 @@ class DataTree extend Panel{
 		div.appendChild(div_load_cmp);
 		this.get_companies();
 		const div_ction = document.createElement("div");
-
-		div_ction.setAttribute("id"
-
-		this.cls_dict["ctionpanel"] = CtionPanel(,
-		
+		this.add_id("treepanel");
+		const div_tree = document.createElement("div");
+		div_tree.setAttribute("id",this.id_dict["treepane"]);
+		div.appendChild(div_tree);
+		this.add_id("ctionpanel");
+		div_ction.setAttribute("id",this.id_dict["ctionpanel"]);
+		name = this.name + ".cls_dict['ctionpanel']";
+		div.appendChild(div_ction);
+		this.cls_dict["ctionpanel"] = new CtionPanel(this.id_dict["ctionpanel"],name,this.client);
+		this.cls_dict["ctionpanel"].build();
 	}
 
 
@@ -65,19 +71,18 @@ class DataTree extend Panel{
 
 	load_company(){
 		const cmp_list = document.getElementById(this.id_dict["cmp_list"]);
-		const company = cmp_list.options[cmp_list.selectedIndex].value;
+		 this.company = cmp_list.options[cmp_list.selectedIndex].value;
 		const obj = this;
 		const load_func = function (resp){
 			const response = JSON.parse(resp);
 			obj.save_tree(response);
 		}
-		this.client.get_datatree(company,load_func);
+		this.client.get_datatree(this.company,load_func);
 
 	}
 
 	save_tree(response){
-		const div = document.getElementById(this.div_id);
-		div.innerHTML = "";
+		const div = document.getElementById(this.id_dict["datatree"]);
 		const div1 = document.createElement("div");
 		const div2 = document.createElement("div");
 		const prod_div = document.createElement("div");
@@ -98,6 +103,7 @@ class DataTree extend Panel{
 		this.cls_dict["subproduct_box"] = new ListBox(this.id_dict["product_div"],10,item_func);
 		this.cls_dict["issue_box"] = new ListBox(this.id_dict["issue_div"],10,item_func);
 		this.cls_dict["subissue_box"] = new ListBox(this.id_dict["issue_div"],10,item_func);
+		console.log(this.company);
 		const obj = this;
 		const prod_func = function (lbox) {
 			obj.subproduct_list();
@@ -112,6 +118,24 @@ class DataTree extend Panel{
 		this.cls_dict["subproduct_box"].addEventFunc("Enter",subprod_func);
 		this.cls_dict["issue_box"].addEventFunc("Enter",issue_func);
 		this.product_list();
+		const boxes = ["product_box","subproduct_box","issue_box","subissue_box"];
+		for (var i = 0; i< boxes.length; i++){
+			console.log(i);
+			console.log(boxes[i]);
+			const ind = i;
+			this.cls_dict[boxes[i]].addEventFunc("a",function(){
+				console.log(boxes);
+				console.log(boxes[ind]);
+				console.log(ind);
+				const val = [obj.company,"NA","NA","NA","NA"];
+				for (var j = 0; j <= ind; j++){
+					console.log(j);
+					console.log(val);
+					val[j+1] = obj.cls_dict[boxes[j]].getSelected();
+				}
+				obj.cls_dict["ctionpanel"].add_vec(val);
+			});
+		}
 	}
 
 	product_list(){
@@ -140,6 +164,7 @@ class DataTree extend Panel{
 	}
 
 	issue_list(){
+
 		this.cls_dict["issue_box"].removeItems()
 		this.cls_dict["subissue_box"].removeItems()
 		const product = this.cls_dict["product_box"].getSelected();
@@ -158,7 +183,6 @@ class DataTree extend Panel{
 		const subproduct = this.cls_dict["subproduct_box"].getSelected();
 
 		const issue = this.cls_dict["issue_box"].getSelected();
-
 		const subissues = Object.keys(this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["nodes"]);
 		const subissue_data = [];
 		for (var i = 0; i<subissues.length; i++){

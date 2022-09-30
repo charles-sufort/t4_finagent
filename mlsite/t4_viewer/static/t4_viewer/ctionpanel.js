@@ -4,7 +4,7 @@ class CtionPanel extends Panel{
 		this.div_id = div_id;
 		this.name = name;
 		this.client = client;
-		this.ction = null;
+		this.ction = {};
 }
 
 	build(){
@@ -105,7 +105,22 @@ class CtionPanel extends Panel{
 		const vec_ls = this.ction[cls];
 		this.cls_dict["list_box"].removeItems();
 		for (var i = 0; i<vec_ls.length; i++){
-			this.cls_dict["list_box"].addItem(vec_ls[i]);
+			const vec_str = vec_ls[i].join("__");
+			this.cls_dict["list_box"].addItem(vec_str);
+		}
+	}
+
+	add_vec(vec){
+		const sel_cls = document.getElementById(this.id_dict["sel_cls"]);
+		const cls = sel_cls.options[sel_cls.selectedIndex].value;
+		if (cls in this.ction){
+			this.ction[cls][this.ction[cls].length] = vec;
+			const vec_str = vec.join("__");
+			this.cls_dict["list_box"].addItem(vec_str)
+
+		}
+		else{
+			alert("no class selected");
 		}
 	}
 }

@@ -72,6 +72,7 @@ class ListBox {
 		}
 	}
 
+
 	addEventFunc(key,func){
 		const obj = this;
 		this.box.addEventListener('keypress',(event) => {

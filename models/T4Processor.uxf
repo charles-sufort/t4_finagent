@@ -41,7 +41,7 @@ check_dataform_company(ction,dataform)
       <x>0</x>
       <y>40</y>
       <w>200</w>
-      <h>340</h>
+      <h>400</h>
     </coordinates>
     <panel_attributes>T4
 --
@@ -63,6 +63,8 @@ get_dataform_company_status(company,dataform)
 get_dataform(ction,dataform)
 company_metadata_summary()
 check_dataform_company(company,dataform)
+get_company_tree(company)
+get_companies()
 __save_file(file,data_
 __load_file(file)
 __get_name(data_dir)
