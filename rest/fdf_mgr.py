@@ -9,7 +9,6 @@ class FDF_MGR:
         self.fdf_root = self.dl.proj_root + "/data/fdf"
         self.js_md  = self.get_metadata()
 
-
     def get_metadata(self):
         file = self.fdf_root + "/directory.json"
         js_md = {}
@@ -38,9 +37,9 @@ class FDF_MGR:
         dir_cmp_path = self.fdf_root + "/" + dir_cmp
         os.mkdir(dir_cmp_path)
         for i in range(len(vecs)):
-            vec = vecs[i]
+            vec =[company] + vecs[i]
             vec_str = "__".join(vec)
-            vec_df = self.dl.filter_vec(vec,company)
+            vec_df = self.dl.filter_vec(vec)
             indices = vec_df.index.values.tolist()
             ids = vec_df["Complaint ID"].values.tolist()
             dir_path = "vec" + str(i+1)
@@ -103,7 +102,6 @@ class FDF_MGR:
         with open(cmp_md_path,'w') as fo:
             json.dump(cmp_md,fo)
 
-
     def retrieve_vec_data(self,company,vec,dataform):
         dir_cmp = self.fdf_root + "/" + self.js_md["companies"][company]["dir"]
         cmp_md_path = dir_cmp + "/directory.json"
@@ -123,13 +121,13 @@ class FDF_MGR:
             data_js = json.load(fo)
         return data_js
 
-
 if __name__ == "__main__":
     reinit_fdf()
     dbmgr = FDF_MGR()
     dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
-#    dbmgr = FDF_MGR()
-#    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+    dbmgr = FDF_MGR()
+    company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+    dbmgr.add_company("1ST FINANCIAL, INC.")
 #    print(dbmgr.get_company_metadata(company))
 #    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
 #    vec_str = "__".join(vec)

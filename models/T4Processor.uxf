@@ -4,20 +4,30 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>230</y>
+      <x>310</x>
+      <y>50</y>
       <w>320</w>
-      <h>340</h>
+      <h>490</h>
     </coordinates>
     <panel_attributes>T4Processor
 --
-get_data()
-process_dataform_ction(ction,dataform)
+process_dataform_ctionform(ction,dataform)
+process_dataform_vecs(vec_df,dataform)
+process_dataform_company(company,dataform)
+process_dataform_inds(company,dataform)
+process_dataform_ind(ind,dataform)
 process_dataform(vec_df,dataform)
-company_metadata_summary(company_metadata_summary)
-process_datafform_company(company,dataform)
-check_dataform_company(ction,dataform)
 
+get_ction_data(ctoin,dataform)
+get_vecs_dataform(dataform)
+get_company_vecs_dataform(self,dataform,company)
+
+count_dataform_freq(ction,dataform,key)
+
+check_ction_dataform(ction,dataform)
+check_dataform_company(company,dataform)
+
+company_metadata_summary(company_metadata_summary)
 
 
 --
@@ -27,8 +37,8 @@ check_dataform_company(ction,dataform)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>40</y>
+      <x>630</x>
+      <y>30</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -39,36 +49,64 @@ check_dataform_company(ction,dataform)
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>40</y>
-      <w>200</w>
-      <h>400</h>
+      <y>0</y>
+      <w>270</w>
+      <h>830</h>
     </coordinates>
     <panel_attributes>T4
 --
+self.dl: DataLoader
+src_dir: Str
+self.proj_root: Str
+self.ction_process: 
+&lt;ction,&lt;dataform,status&gt;&gt;
+self.t4proc: T4Processor
+self.company_process:
+&lt;company,&lt;dataform,status&gt;&gt;
+self.company_scan_process
+&lt;company,&lt;dataform,status&gt;&gt;
+-
 save_ction(name,ction)
 get_ction(name)
 get_ction_names(name,termlist)
 save_termlist(dataform,name,termlist)
 get_termlist(dataform,name)
 get_termlist_names()
-query_term_avgs(ction,termlist)
 get_lvec_sample(vec)
-avg_query(ction,termlist)
-query(ction,query_type,min_n)
-process_dataform(ction,dataform)
-process_dataform_thread(ction,dataform)
-process_dataform_company(compamy,dataform)
-process_dataform_company_thread(company,dataform)
-get_dataform_company_status(company,dataform)
-get_dataform(ction,dataform)
+
+process_dataform_ction
+(ction,dataform)
+process_dataform_ction_thread
+(ction,dataform)
+get_ction_dataform_status
+(ction,dataform)
+process_dataform_company
+(compamy,dataform)
+process_dataform_company_thread
+(company,dataform)
+get_company_dataform_status
+(company,dataform)
+
+scan_company_dataform
+(company,dataform)
+scan_company_dataform_thread
+(company,dataform)
+scan_company_dataform_status
+(company,dataform)
+scan_company_dataform_resuls
+(company,dataform)
+scan_company_dataform_repair
+(company,dataform)
+
 company_metadata_summary()
-check_dataform_company(company,dataform)
 get_company_tree(company)
 get_companies()
 __save_file(file,data_
 __load_file(file)
 __get_name(data_dir)
-</panel_attributes>
+query_term_avgs(ction,termlist)
+avg_query(ction,termlist)
+query(ction,query_type,min_n)</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

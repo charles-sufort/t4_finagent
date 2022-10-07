@@ -11,55 +11,98 @@ class T4Processor:
     def __init__(self):
         self.dl = DataLoader()
         self.fdf_mgr = FDF_MGR()
-
+# T4P-1
     def process_dataform_ction(self,ction,dataform):
         vec_strs_1 = []
+        # add each vector of ction to processing queue 
+
         for cl in ction:
             vecs = ction[cl]
             cl_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs]
             vec_strs_1 += cl_strs
         vec_strs = []
+        # loop through processing queue
         for company,vec_str in vec_strs_1:
+           # get metadata for vector
             vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec_str)
             if dataform not in vec_md["dataforms"]:
                 vec_df = self.dl.df.iloc[vec_md["indices"]]
+                #  process vec indices
                 data = self.process_dataform(vec_df,dataform)
+                # save vec data
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
 
     def process_dataform_vecs(self, vecs, dataform):
         vec_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs]
+        # loop through processing queue
         for company,vec_str in vec_strs:
+           # get metadata for vector
             vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec_str)
             if dataform not in vec_md["dataforms"]:
+                # process vec indices
                 vec_df = self.dl.df.iloc[vec_md["indices"]]
                 data = self.process_dataform(vec_df,dataform)
+                # save vec data
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
 
     def process_dataform_company(self,company,dataform):
         company_md = self.fdf_mgr.get_company_metadata(company)
         vec_strs = [(company,vec) for vec in company_md]
+        # loop through processing queue
+
         for company,vec_str in vec_strs:
+           # get metadata for vector
             vec_md  = self.fdf_mgr.retrieve_vec_metadata(company,vec_str)
             if dataform not in company_md[vec_str]["dataforms"]:
+                # process vec indices
                 vec_df = self.dl.df.iloc[vec_md["indices"]]
                 data = self.process_dataform(vec_df,dataform)
+                # save vec data
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
                 print("saved: {}".format(vec_str))
 
+    def process_dataform_vec_dict(self,vec_dict,dataform):
+        for vec in vec_dict:
+            print(vec)
+            print(vec_dict)
+            inds = [ int(ind) for ind in vec_dict[vec]]
+            inds_df = self.dl.df.iloc[inds]
+            data = self.process_dataform(inds_df,dataform)
+            print(data)
 
-        
-    def get_company_vecs_dataform(self,dataform,company):
-        fdf_jd = self.fdf_mgr.js_md
-        vecs = []
-        company_md = self.fdf_mgr.get_company_metadata(company)
-        for vec in company_md:
-            vec_md = company_md[vec]
-            if dataform in vec_md["dataforms"]:
-                print(vec)
-                if vec_md["dataforms"][dataform] == "Yes":
-                    vecs.append(vec)
-        return vecs
+    def process_dataform(self,vec_df,dataform):
+        lemmas = []
+        inds = vec_df.index.values.tolist()
+        self.text_section = TextSection()
+        pipe = TextSection()
+        data = {}
+        for i in range(len(inds)):
+            text = vec_df["Consumer complaint narrative"].iloc[i]
+            print(text)
+            if dataform == "lemma":
+                data[inds[i]] = pipe.get_lemmas(text)
+            elif dataform == "noun_chunks":
+                data[inds[i]] = pipe.get_noun_chunks(text)
+            elif dataform == "ners":
+                ners = pipe.get_ners(text)
+                print("ners")
+                print(ners)
+                data[inds[i]] = ners
+        return data
 
+
+# T4P-2
+
+    def get_ction_dataform(ction,dataform):
+        cl_dict = {}
+        for cl in ction:
+            vecs = [(vec[0],"__".join(vec[1:])) for vec in ction[cl]]
+            cl_data = []
+            for company, vec_str in vecs:
+                data = self.fdf_mgr.retrieve_vec_data(company,vec,dataform)
+                cl_data.appendChild(data)
+            cl_dict[cl] = cl_data
+        return cl_dict
 
     def get_vecs_dataform(self,dataform):
         fdf_jd = self.fdf_mgr.js_md
@@ -77,39 +120,20 @@ class T4Processor:
         return vecs
 
 
-    def process_dataform(self,vec_df,dataform):
-        lemmas = []
-        inds = vec_df.index.values.tolist()
-        self.text_section = TextSection()
-        pipe = TextSection()
-        data = {}
-        for i in range(len(inds)):
-            text = vec_df["Consumer complaint narrative"].iloc[i]
-            if dataform == "lemma":
-                data[inds[i]] = pipe.get_lemmas(text)
-            elif dataform == "noun_chunks":
-                data[inds[i]] = pipe.get_noun_chunks(text)
-            elif dataform == "ners":
-                data[inds[i]] = pipe.get_ners(text)
-        return data
+    def get_company_vecs_dataform(self,dataform,company):
+        fdf_jd = self.fdf_mgr.js_md
+        vecs = []
+        company_md = self.fdf_mgr.get_company_metadata(company)
+        for vec in company_md:
+            vec_md = company_md[vec]
+            if dataform in vec_md["dataforms"]:
+                print(vec)
+                if vec_md["dataforms"][dataform] == "Yes":
+                    vecs.append(vec)
+        return vecs
 
-    def company_metadata_summary(self,company):
-        js_md = self.fdf_mgr.js_md
-        cmp_md = self.fdf_mgr.get_company_metadata(company)
-        df_dict = {}
-        for vec in cmp_md:
-            for dataform in cmp_md[vec]["dataforms"]:
-                if cmp_md[vec]["dataforms"][dataform] != "Yes":
-                    continue
-                if dataform not in df_dict:
-                    df_dict[dataform] = []
-                count = cmp_md[vec]["count"]
-                df_dict[dataform].append([vec,count])
-        return {"count": js_md["companies"][company]["count"], "dataframe": df_dict}
 
-    def get_dataform_inventory(dataform):
-        pass
-
+# 
     def check_ction_dataform(self,ction,dataform):
         vec_strs = []
         print(ction)
@@ -151,8 +175,9 @@ class T4Processor:
             ction_dict[cl] = val_count
         return ction_dict
 
-    def check_dataform_company(self,company,dataform):
+    def company_dataform_scan_faults(self,company,dataform):
         company_md = self.fdf_mgr.get_company_metadata(company)
+        fault_inds = {}
         for vec in company_md:
             vec_dict = company_md[vec]
             if vec_dict["dataforms"][dataform] == "Yes":
@@ -160,28 +185,39 @@ class T4Processor:
                 processed = True
                 for ind in df_dict:
                     if df_dict[ind] == []:
-                        print("here {}".format(vec))
-                        print(list(df_dict.keys()))
-                        processed = False
-                        break
-                if not processed:
-                    vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec)
-                    vec_df = self.dl.df.iloc[vec_md["indices"]]
-                    data = self.process_dataform(vec_df,dataform)
-                    self.fdf_mgr.save_vec_data(company,vec,data,dataform)
+                        if vec not in fault_inds:
+                            fault_inds[vec] = []
+                            print("here {}".format(vec))
+                            print(list(df_dict.keys()))
+                            processed = False
+                            fault_inds[vec].append(ind)
+                        else: 
+                            print("here {}".format(vec))
+                            print(list(df_dict.keys()))
+                            processed = False
+                            fault_inds[vec].append(ind)
 
-
-
-
-
-
-
-
-
-
-
-
-
+            return fault_inds
+#
+#                if not processed:
+#                    vec_md = self.fdf_mgr.retrieve_vec_metadata(company,vec)
+#                    vec_df = self.dl.df.iloc[vec_md["indices"]]
+#                    data = self.process_dataform(vec_df,dataform)
+#                    self.fdf_mgr.save_vec_data(company,vec,data,dataform)
+#
+    def company_metadata_summary(self,company): 
+        js_md = self.fdf_mgr.js_md
+        cmp_md = self.fdf_mgr.get_company_metadata(company)
+        df_dict = {}
+        for vec in cmp_md:
+            for dataform in cmp_md[vec]["dataforms"]:
+                if cmp_md[vec]["dataforms"][dataform] != "Yes":
+                    continue
+                if dataform not in df_dict:
+                    df_dict[dataform] = []
+                count = cmp_md[vec]["count"]
+                df_dict[dataform].append([vec,count])
+        return {"count": js_md["companies"][company]["count"], "dataframe": df_dict}
 
 
 
@@ -194,6 +230,10 @@ if __name__ == "__main__":
 #    print(t4proc.get_vecs_dataform(dataform))
 
     company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
+    vec_dict = {"Credit reporting, credit repair services, or other personal consumer reports__Credit reporting__Problem with a credit reporting company's investigation into an existing problem__Difficulty submitting a dispute or getting information about a dispute over the phone": ['23373', '738560']}
+    t4proc.process_dataform_vec_dict(vec_dict,"noun_chunks")
+
+
 #    print(t4proc.get_company_metadata(company))
 
 #    print(t4proc.get_company_vecs_dataform(dataform,company))

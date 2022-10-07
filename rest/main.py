@@ -24,7 +24,7 @@ class Name(BaseModel):
     name: str
 
 class TermList2(BaseModel):
-    dataform: str
+    dataform: Literal["ners","noun_chunks","lemma"]
     name: str
 
 class AvgQuery(BaseModel):
@@ -41,21 +41,21 @@ class QueryText(BaseModel):
     query_type: str
 
 class ProcessCtion(BaseModel):
-    ction: Ction
-    name: str
+    ction: str
+    dataform: Literal["ners","noun_chunks","lemma"]
 
 class ProcessCompany(BaseModel):
     company: str
-    dataform: str
+    dataform: Literal["ners","noun_chunks","lemma"]
 
 class QueryCtionDFFreq(BaseModel):
     ction: Ction
-    dataform: str
+    dataform: Literal["ners","noun_chunks","lemma"]
     key: str
 
 class QueryCtionDFFreq2(BaseModel):
     ction: str
-    dataform: str
+    dataform: Literal["ners","noun_chunks","lemma"]
     key: str
 
 class QueryMetaData(BaseModel):
@@ -76,6 +76,7 @@ app.add_middleware(
 async def root():
     return {"message": "Hello World"}
 
+# REST-1
 @app.post("/ction/add/")
 async def save_ction(ction: Ction):
     t41.save_ction(ction.name,ction.dictionary)
@@ -106,59 +107,72 @@ async def get_termlist_names():
     termlists = t41.get_termlist_names()
     return {"termlists":termlists}
 
-@app.get("/data/avg_query/")
-async def avg_query(avg_query: AvgQuery):
-    avg_query = t41.query_avg(avg_query.ction, avg_query.termlist)
-    return {"C_avgs":avg_query}
-
 @app.post("/data/lvec_sample")
 async def get_lvec_sample(vec: Vec):
     sample = t41.get_lvec_sample(vec.fields)
     return {"Sample": sample}
 
-@app.post("/data/query/")
-async def get_query(query: Query):
-    print("here")
-    data = t41.query(query.ction.dictionary,query.query_type,query.min_n)
-    print(data)
-    print("here2")
-    return data
-
+# REST-2
 @app.post("/data/ction/dataform/process")
-async def process_dataform(proc: ProcessCtion):
-    t41.process_dataform(proc.ction,proc.name)
-    return "added"
+async def process_dataform_ction(proc: ProcessCtion):
+    t41.process_dataform_ction(proc.ctoin,proc.dataform)
+    return "started"
 
 @app.post("/data/company/dataform/process")
 async def process_dataform_company(proc: ProcessCompany):
     t41.process_dataform_company(proc.company,proc.dataform)
     return "started"
 
-@app.post("/data/company/dataform/process/get")
-async def get_company_process(proc: ProcessCompany):
-    return t41.get_dataform_company_status(proc.company,proc.dataform)
-   
-@app.post("/data/ction/dataform/get")
-async def get_dataform(proc: ProcessCtion):
-    return t41.get_dataform(proc.ction,proc.name)
+#@app.post("/data/company/dataform/process/get")
+#async def get_company_process(proc: ProcessCompany):
+#    return t41.get_dataform_company_status(proc.company,proc.dataform)
+#   
+#@app.post("/data/ction/dataform/process/get")
+#async def get_ction_dataform(proc: ProcessCtion):
+#    return t41.get_dataform(proc.ction,proc.dataform)
 
+@app.post("/data/company/dataform/status")
+async def status_company_dataform(proc: ProcessCompany):
+    return t41.get_company_dataform_status(proc.company,proc.dataform)
+
+@app.post("/data/ction/dataform/status")
+async def status_ction_dataform(proc: ProcessCtion):
+    return t41.get_ction_dataform_status(proc.ction,proc.dataform)
+
+
+# REST-3
 @app.post("/data/ction/dataform/freq/query")
 async def get_ction_dataform_freq(query: QueryCtionDFFreq):
     return t41.count_dataform_freq(query.ction.dictionary,query.dataform,query.key)
 
+
 @app.post("/data/ction/dataform/freq/query2")
-async def get_ction_dataform_freq(query: QueryCtionDFFreq2):
+async def get_ction_dataform_freq2(query: QueryCtionDFFreq2):
     ction = t41.get_ction(query.ction)
     return t41.count_dataform_freq(ction,query.dataform,query.key)
 
-@app.post("/data/company/dataform/check")
-async def check_company_dataform(proc: ProcessCompany):
-    return t41.check_dataform_company(proc.company,proc.dataform)
+# REST-4
 
-@app.post("data/company/dataform/check/status")
-async def status_check_company_dataform(proc: ProcessCompany):
-    return t41.get_status_check_dataform_company(proc.company,proc.dataform)
+@app.post("/data/company/dataform/process/scan")
+async def scan_company_dataform(proc: ProcessCompany):
+    return t41.scan_company_dataform(proc.company,proc.dataform)
 
+@app.post("/data/company/dataform/process/scan/status")
+async def status_dataform_company(proc: ProcessCompany):
+    return t41.company_dataform_scan_status(proc.company,proc.dataform)
+
+@app.post("/data/company/dataform/process/scan/get")
+async def get_company_dataform_scan(proc: ProcessCompany):
+    return t41.company_dataform_scan_results(proc.company,proc.dataform)
+
+@app.post("/data/company/dataform/process/scan/repair")
+async def company_dataform_scan_repair(proc: ProcessCompany):
+    return t41.company_dataform_scan_repair(proc.company,proc.dataform)
+
+
+#@app.post("data/company/dataform/status")
+#async def status_check_company_dataform(proc: ProcessCompany):
+#    return t41.get_status_check_dataform_company(proc.company,proc.dataform)
 
 @app.post("/data/company_md")
 async def get_company_md(md: QueryMetaData):
@@ -171,9 +185,21 @@ async def get_company_tree(name: Name):
     return {"datatree":datatree}
 
 @app.get("/data/company/get_all")
-async def get_company_tree():
+async def get_companies():
     companies = t41.get_companies()
     return {"companies":companies}
+
+# JUNK
+
+@app.get("/data/avg_query/")
+async def avg_query(avg_query: AvgQuery):
+    avg_query = t41.query_avg(avg_query.ction, avg_query.termlist)
+    return {"C_avgs":avg_query}
+
+@app.post("/data/query/")
+async def get_query(query: Query):
+    data = t41.query(query.ction.dictionary,query.query_type,query.min_n)
+    return data
 
 
 

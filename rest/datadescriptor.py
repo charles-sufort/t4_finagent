@@ -1,11 +1,12 @@
 import pandas as pd
 from dataloader import DataLoader
+import random
 
 class DataDescriptor:
     def __init__(self,file=None):
         self.dl = DataLoader(file)
         self.df = self.dl.df
-        self.count_values()
+#        self.count_values()
     
     def count_values(self):
         self.product_counts = self.df['Product'].value_counts()
@@ -30,6 +31,22 @@ class DataDescriptor:
         df_dd = self.df.drop_duplicates(subset=fields)
         print(df_dd.shape[0])
         print(df_dd[fields].values.tolist())
+
+
+    def col_summary(self):
+        cols = self.df.columns
+        print(cols)
+        for col in cols:
+            x = random.randint(0,self.df.shape[0]-1)
+            null_count = self.df[col].isna().sum()
+            unique_count = self.df[col].unique().shape[0]
+            print("Column: {}".format(col))
+            print("DataType: {}".format(self.df[col].dtypes))
+            print("Sample: {}".format(self.df[col][x]))
+            print("Null_Count: {}".format(null_count))
+            print("Unique Count: {}".format(unique_count))
+
+
 #        print(df_dd.shape)
 #        print(self.df['ZIP code'])
 #        print(self.df.dtypes)
@@ -50,6 +67,7 @@ class DataDescriptor:
 #        print(col_dict)        
 #        return col_dict
 
-
 dd = DataDescriptor("complaints.csv")
-dd.summary()
+dd.col_summary()
+
+

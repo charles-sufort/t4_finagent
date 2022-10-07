@@ -62,8 +62,8 @@ get_datatree(company,load_func)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>234</x>
-      <y>270</y>
+      <x>261</x>
+      <y>243</y>
       <w>252</w>
       <h>225</h>
     </coordinates>
@@ -125,7 +125,7 @@ task_fun()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>252</x>
-      <y>513</y>
+      <y>504</y>
       <w>189</w>
       <h>207</h>
     </coordinates>
@@ -180,7 +180,7 @@ select_tab(name)
     <id>UMLClass</id>
     <coordinates>
       <x>252</x>
-      <y>747</y>
+      <y>720</y>
       <w>189</w>
       <h>117</h>
     </coordinates>
@@ -219,22 +219,82 @@ subissue_list()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>261</x>
-      <y>909</y>
+      <x>252</x>
+      <y>846</y>
       <w>189</w>
-      <h>207</h>
+      <h>279</h>
     </coordinates>
     <panel_attributes>CtionPanel
 --
 constructor(div_id,name,client)
 build()
-add_id(name)
+build_load()
+build_1list()
+build_2list()
+build_clist(div_cls)
+build_save_panel()
+select_mode()
 load_ction()
 handle_load(response)
 save_ction()
 handle_save(resposne)
+load_ction1()
+load_ction2()
 add_cls()
 select_cls()
+add_vec(vec)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>1143</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>SelectBox
+--
+constructor(div_id,options,sel_func)
+build()
+setFunc(sel_func)
+addOption(value,text)
+getSelect()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>1152</y>
+      <w>189</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>PSTaskPanel
+--
+constructor(name,client)
+build(div_id)
+select_dataclass()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>1269</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>Panel
+--
+constructor()
+create_div(div_id)
+add_panel(name)
+add_component(name,cls)
+add_id(name)
 </panel_attributes>
     <additional_attributes/>
   </element>

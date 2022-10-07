@@ -22,29 +22,38 @@ CompanyHist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>60</y>
+      <x>370</x>
+      <y>50</y>
       <w>210</w>
-      <h>240</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>DataLoader
 --
-get_ction()
+get_ction(ction
+get_vecs(company)
+get_companies()
+get_company_df(company)
+filter_vec(vec)
+filter_vecs(vecs)
+filter_ction(c_dict)
+get_vecs_directory(company)
+
+
+get_vecs_directory(company)
+get_lvec_sample(lvec)
+save_df(df,name)
+
+JUNK
 query_text()
-filter_vecs()
-filter_ction()
 match_to_clabel()
-dfC_term_avgs()
-get_vecs_directory()
-get_lvec_sample()
-save_df()</panel_attributes>
+dfC_term_avgs()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>10</x>
-      <y>330</y>
+      <x>0</x>
+      <y>380</y>
       <w>300</w>
       <h>240</h>
     </coordinates>
@@ -61,6 +70,20 @@ save_vec_data(company,vec,data,dataform)
 retrieve_vec_data(company,vec,dataform)
 save_vec_data(company,vec,data,dataform)
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>410</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DBClient2
+--
+get_dataform_inds(table,inds)
+create_table(database,name,df)</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

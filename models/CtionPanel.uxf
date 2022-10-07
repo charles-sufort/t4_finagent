@@ -5,9 +5,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>50</x>
-      <y>60</y>
+      <y>10</y>
       <w>450</w>
-      <h>490</h>
+      <h>620</h>
     </coordinates>
     <panel_attributes>CtionPanel</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>80</y>
-      <w>220</w>
-      <h>90</h>
+      <x>50</x>
+      <y>150</y>
+      <w>210</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>InputPanel
 --
@@ -31,7 +31,7 @@ func=this.name + ".load_ction()"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>450</y>
+      <y>540</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -45,8 +45,8 @@ label = "Save"
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>320</y>
+      <x>60</x>
+      <y>400</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -61,8 +61,8 @@ cls_dict key = "list_box"
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>180</y>
+      <x>60</x>
+      <y>270</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
@@ -74,8 +74,8 @@ id_dict key = "add_input"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>180</y>
+      <x>240</x>
+      <y>270</y>
       <w>230</w>
       <h>50</h>
     </coordinates>
@@ -87,8 +87,8 @@ add_func=this.name+".add_class()"</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>240</y>
+      <x>60</x>
+      <y>330</y>
       <w>270</w>
       <h>60</h>
     </coordinates>
@@ -97,6 +97,53 @@ add_func=this.name+".add_class()"</panel_attributes>
 id_dict key = "sel_cls"
 on_change = this.name + ".select_cls()"
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>60</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Mode: Select
+--
+cls_dict key="sel_mode"
+options = [single,double]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>230</y>
+      <w>450</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>ClassPanel : Single</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>30</y>
+      <w>450</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>options_panel: div</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>130</y>
+      <w>450</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>load_panel: div</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

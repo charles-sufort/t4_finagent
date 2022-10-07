@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>620</x>
-      <y>60</y>
+      <y>70</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>810</x>
-      <y>210</y>
+      <y>220</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>50</x>
-      <y>30</y>
+      <x>60</x>
+      <y>0</y>
       <w>220</w>
-      <h>360</h>
+      <h>660</h>
     </coordinates>
     <panel_attributes>Rest:
 --
@@ -40,15 +40,46 @@ save_ction(ction: Ction)
 get_ction(ction: Name)
 get_ction_names()
 add_termlist()
-get_termlists()
 get_termlist()
+get_termlist_names()
 get_lvec_sample()
-get_query()
-process_dataform(proc: ProcessCtion)
-get_dataform(proc: ProcessCtion)
-get_company_md(md: QueryMetaData)
-recheck_company_data
 
+process_dataform_ction
+(proc: ProcessCtion)
+process_dataform_company
+(proc: ProcessCompany)
+get_dataform_ction
+(proc: ProcessCtion)
+get_dataform_company
+(proc: ProcessCompany)
+status_dataform_ction
+(proc: ProcessCtion)
+status_dataform_company
+(proc: ProcessCompany)
+
+get_ction_dataform_freq
+(query: QueryCtionDFFreq)
+get_ction_dataform_freq2
+(query: QueryCtionDFFreq2)
+
+scan_company_dataform
+(proc: ProcessCompany)
+status_dataform_company
+(proc: ProcessCompany)
+get_company_dataform_scan
+(proc: ProcessCompany)
+company_dataform_scan_repair
+(proc: ProcessCompany)
+
+
+get_company_md(md: QueryMetaData)
+get_company_tree(name: Name)
+get_companies()
+--
+JUNK
+query_term_avgs(ction,termlist)
+get_query()
+avg_query
 
 </panel_attributes>
     <additional_attributes/>

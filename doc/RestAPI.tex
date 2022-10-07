@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{listings}
+
+\title{RestAPI}
+\author{Charles Dake}
+
+\begin{document}
+\section{Rest Functions}
+
+\subsection{CURL POST "/ction/add"}
+\begin{enumerate}
+\item Description: api call to add ctions to database
+\item Body: 
+\begin{lstlisting}
+{ 
+"dictionary":
+{
+"C1": 
+[
+["BANK OF AMERICA, NATIONAL ASSOCIATION", "Student loan", "Private student loan","NA","NA"]
+],
+"C2":[
+["BANK OF AMERICA, NATIONAL ASSOCIATION","Student loan","Non-federal student loan","NA","NA"]
+]}
+}
+\end{lstlisting}
+\item Return:
+\begin{lstlisting}
+{ 
+"message": "Hello World"
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{CURL POST "/ction/get/"}
+\begin{enumerate}
+\item Description: api call to get information of a specific api call
+\item Body: 
+\begin{lstlisting}
+{ 
+"name": "C1"
+}
+\end{lstlisting}
+\end{enumerate}
+
+
+\subsection{CURL POST "/ction/get_all/"}
+\begin{enumerate}
+\item Description: api call to get information of a specific api call
+\item Body: 
+\begin{lstlisting}
+Empty
+\end{lstlisting}
+\item Response:
+\begin{lstlisting}
+{
+"message":[ "C1", "C2" ]
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{CURL POST "/termlist/add/"}
+TODO
+
+\subsection{CURL POST "/termlist/get_all/"}
+TODO
+
+\subsection{CURL POST "/data/avg_query/"}
+TODO
+
+\subsection{CURL POST "/data/get_lvec_sample/"}
+TODO
+
+\subsection{CURL POST "/data/query/"}
+TODO
+
+\subsection{CURL POST "/data/dataform/process/"}
+TODO
+
+\subsection{CURL POST "/data/dataform/get/"}
+TODO
+
+\subsection{CURL POST "/data/company_md/"}
+\begin{enumerate}
+\item Description: api call to get information of a specific api call
+\item Body: 
+\begin{lstlisting}
+{ 
+"company": "BANK OF AMERICA, NATIONAL ASSOCIATION"
+}
+\end{lstlisting}
+\item Response:
+\begin{lstlisting}
+{ 
+"count": 2300,
+"dataframe": {
+[
+['Debt collection__Auto debt__Attempts to collect debt not owed__Debt was paid', 3]
+], 
+'lemma': 
+[
+['Debt collection__Auto debt__Attempts to collect debt not owed__Debt was paid', 3] 
+]	
+}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{CURL POST ``/data/ction/dataform/freq/query''}
+\begin{enumerate}
+\item Description: api call to get information of a specific api call
+\item Body: 
+\begin{lstlisting}
+{ 
+"ction": CTION,
+``dataform'': ``lemma'',
+``key'': ``lemma''
+}
+\end{lstlisting}
+\item Response:
+\begin{lstlisting}
+{ 
+"C1": 
+[
+[``lem1'', 31]
+]
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{CURL POST ``/data/ction/dataform/freq/query2''}
+\begin{enumerate}
+\item Description: api call to get information of a specific api call
+\item Body: 
+\begin{lstlisting}
+{ 
+"ction": ``T1'',
+``dataform'': ``lemma'',
+``key'': ``lemma''
+}
+\end{lstlisting}
+\item Response:
+\begin{lstlisting}
+{ 
+"C1": 
+[
+[``lem1'', 31]
+]
+}
+\end{lstlisting}
+\end{enumerate}
+
+\end{document}

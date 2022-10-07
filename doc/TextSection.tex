@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\begin{document}
+\section{DataForms}
+The NLP are currently being extracted with the spacy NLP library. The forms in use are lemmas, ners, and noun chunks.
+
+\subsection{Lemmas}
+The format of a lemma entry is 
+
+\begin{lstlisting}
+{
+"lemma": LEMMA,
+"token": TOKEN
+}
+\end{lstlisting}
+
+\subsection{NERS}
+\begin{lstlisting}
+{
+"text": LEMMA,
+"label": TOKEN
+}
+\end{lstlisting}
+
+\subsection{Noun Chunks}
+\begin{lstlisting}
+{
+"text": LEMMA,
+"root": TOKEN,
+"dep": DEP,
+"head": HEAD
+}
+\end{lstlisting}
+
+
+
+\end{document}

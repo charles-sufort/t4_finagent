@@ -28,8 +28,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>30</y>
+      <x>50</x>
+      <y>20</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -52,7 +52,7 @@ companies: {name: CmpDict}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>360</x>
       <y>110</y>
       <w>170</w>
       <h>90</h>
@@ -63,19 +63,6 @@ dir: str
 dataforms: {str: count}
 count: int
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>40</x>
-      <y>230</y>
-      <w>190</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>Company Level
---
-vecs: {name: VecDict}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -97,13 +84,13 @@ count: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
-      <y>50</y>
-      <w>130</w>
-      <h>90</h>
+      <x>80</x>
+      <y>40</y>
+      <w>90</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>110.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -121,11 +108,11 @@ count: int
     <coordinates>
       <x>220</x>
       <y>130</y>
-      <w>110</w>
+      <w>160</w>
       <h>40</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -156,11 +143,28 @@ ids: [int]</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>120</x>
-      <y>300</y>
+      <y>310</y>
       <w>30</w>
-      <h>60</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>230</y>
+      <w>190</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Company Level
+--
+{name: VecDict}
+--
+--
+change to 
+vecs: {name:VecDict}</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>60</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DataBase
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>250</y>
+      <w>210</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>dataentry
+--
+'Complaint ID'
+--
+'Company'
+-
+'Product'
+'Sub-product'
+'Issue'
+'Sub-issue'
+--
+'Consumer complaint narrative'
+-
+'Timely response?'
+'Submitted via'
+-
+'Company response to consumer'
+'Company public response'
+-
+Tags
+-
+'Date received'
+'Date sent to company'
+--
+'State'
+'ZIP code'
+'Tags'
+--
+'Consumer consent provided?'
+'Consumer disputed?'
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>170</x>
+      <y>10</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Query</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>170</x>
+      <y>60</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Process</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>170</x>
+      <y>110</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Classify</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>170</x>
+      <y>160</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Compare</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

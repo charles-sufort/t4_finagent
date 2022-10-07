@@ -1,0 +1,137 @@
+\documentclass{article}
+\title{T4 Processor}
+\author{Charles Dake}
+
+\begin{document}
+\maketitle
+\section{Description}
+This unit is the data processing unit of the T4 system. It handles tasks to complete NLP pipeline tasks for the processed data database. It relies on the FDF MGR to interface the database.
+
+
+\section{Methods}
+
+\subsection{Ctoin calls}
+
+\subsubsection{save_ction()}
+
+\subsubsection{get_ction()}
+
+\subsectoin{TermList calls}
+
+\subsubsection{add_termlist()}
+
+\subsubsection{get_termlist()}
+
+\subsubsection{get_termlist_names()}
+
+\subsection{Query}
+
+\subsubsection{avg_query()}
+
+\subsubsection{get_lvec_sample()}
+
+\subsubsection{get_query()}
+
+\subsection{Dataform Process}
+
+\subsubsection{proces_dataform_ction(proc: ProcessCtion)}
+
+\subsubsection{get_dataform_ction(proc: ProcessCtion)}
+
+\subsubsection{status_check_dataform_ction(proc: ProcessCtion)}
+
+\subsubsection{proces_dataform_company(proc: ProcessCtion)}
+
+\subsubsection{get_dataform_company(proc: ProcessCtion)}
+
+\subsubsection{status_check_dataform_company(proc: ProcessCtion)}
+
+\subsubsection{Company Calls}
+
+\subsubsection{get_company_md(md: QueryMetaData)}
+
+\subsubsection{get_company_tree(md: QueryMetaData)}
+
+\subsubsection{get_companies(md: QueryMetaData)}
+
+\subsubsection{Old}
+
+\subsection{process_dataform_ction(ction,dataform)}
+\begin{enumerate}
+\item Description: This function processes the provided ction's data with respect to the given dataform.
+\item Parameters: 
+	\begin{enumerate}
+		\item ction --  <key,[vec]>
+		\item dataform -- string
+	\end{enumerate}
+\end{enumerate}
+
+
+\subsection{process_dataform_vec(vecs,dataform)}
+\begin{enumerate}
+\item Description: This function processes the provided list of vecs with respect to the given dataform.
+\item Parameters:
+	\begin{enumerate}
+		\item vecs -- [vec]
+	\end{enumerate}
+\item Returns: 
+\end{enumerate}
+
+
+\subsection{process_dataform_company(company,dataform)}
+\begin{enumerate}
+\item Description: This function processes the data of a company with respect to the given dataform.
+\item Parameters:
+	\begin{enumerate}
+		\item vecs -- [vec]
+	\end{enumerate}
+\item Returns: 
+\end{enumerate}
+
+\subsection{get_vecs_dataform()}
+\begin{enumerate}
+\item Description: This function returns the list of vectors which have been processed with respect to the given dataframe.
+\item Returns: 
+TODO
+\end{enumerate}
+
+
+
+
+\subsection{company_metadata_summary(company)}
+\begin{enumerate}
+\item Description: This function returns the metadata summary with respect to a given company.
+\item Returns: 
+TODO
+\end{enumerate}
+
+
+\subsection{get_dataform_inventory(dataform)}
+\begin{enumerate}
+\item Description: This method returns the inventory of the dataforms. 
+\item Returns: 
+TODO
+\end{enumerate}
+
+
+
+
+
+\subsection{check_ction_dataform(ction,dataform)}
+\begin{enumerate}
+\item Description: This method checks if a ctions data had been fully processed with respect to the dataform.
+\item Returns: 
+TODO
+\end{enumerate}
+
+
+\subsection{count_dataform_freq(ction,dataform,key)}
+\begin{enumerate}
+\item Description: This method returns the dataform element counts for a ction with respect to the provided key.
+\item Returns: 
+TODO
+\end{enumerate}
+
+
+
+\end{document}
