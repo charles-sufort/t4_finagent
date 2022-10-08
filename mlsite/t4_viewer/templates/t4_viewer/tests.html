@@ -4,8 +4,11 @@
 
 <button id="test1" onclick="Test1()" >Panel-Panel</button>
 <button id="test2" onclick="Test2()">Panel-PanelComponent</button>
-<button id="test3" onclick="Test3()">Panel-Panel 2 </button>
-<button id="test4" onclick="Test4()">Panel-PanelComponent 2 </button>
+<button id="test3" onclick="Test3()">Panelx2 </button>
+
+<button id="test4" onclick="Test4()">PanelComponentx2 </button>
+<button id="test5" onclick="Test4()">PanelxPanelComponent </button>
+<button id="test6" onclick="Test4()">PanelComponentxPanel </button>
 
 <script src="{% static 't4_viewer/panel.js' %}"></script>
 <script src="{% static 't4_viewer/panelcomponent.js' %}"></script>
@@ -32,12 +35,125 @@
 		console.log(div_1_1_1_id === P2_div);
 	}
 	function Test2() {
-
+		const div = document.getElementById("div1");
+		div.innerHTML = "";
+		const P1 = new Panel();
+		P1.create_div("div1");
+		P1.add_component("C1",new PanelComponent());
+		const div_1 = div.children[0];
+		const div_1_id = div_1.id;
+		const div_1_1 = div_1.children[0];
+		const div_1_1_id = div_1_1.id;
+		const div_1_1_1 = div_1_1.children[0];
+		const div_1_1_1_id = div_1_1_1.id;
+		const div_1_1_1_1 = div_1_1_1.children[0];
+		const div_1_1_1_1_id = div_1_1_1_1.id;
+		const P2 = P1.panel_dict["P2"];
+		const P1_div = P1.id;
+		const C1_div = P1.cls_dict["C1"].id;
+		console.log("P1 dictionary is div1.1");
+		console.log(div_1_id === P1_div);
+		console.log("P2 dictionary is div1.2");
+		console.log(div_1_1_1_1_id === C1_div);
 	}
 	function Test3() {
+		const div = document.getElementById("div1");
+		div.innerHTML = "";
+		const P1 = new Panel();
+		P1.create_div("div1");
+		const P1_div = P1.id;
+		P1.add_panel("P2");
+		P1.add_panel("P3");
+		const P2 = P1.panel_dict["P2"];
+		const P2_div = P2.id;
+		console.log(P2_div);
+		const P3 = P1.panel_dict["P3"];
+		const P3_div = P3.id;
+		console.log(P3_div);
+		const div_1 = div.children[0];
+		const div_1_id = div_1.id;
+		const div_1_1 = div_1.children[0];
+		const div_1_1_id = div_1_1.id;
+		const div_1_1_1 = div_1_1.children[0];
+		const div_1_1_1_id = div_1_1_1.id;
+		const div_1_2 = div_1.children[1];
+		const div_1_2_id = div_1_2.id;
+		const div_1_2_1 = div_1_2.children[0];
+		const div_1_2_1_id = div_1_2_1.id;
+		console.log("P1 dictionary is div1.1");
+		console.log(div_1_id === P1_div);
+		console.log("P2 dictionary is div1.2");
+		console.log(div_1_1_1_id === P2_div);
+		console.log("P2 dictionary is div1.2");
+		console.log(div_1_2_1_id === P3_div);
 
 	}
 	function Test4() {
+		const div = document.getElementById("div1");
+		div.innerHTML = "";
+		const P1 = new Panel();
+		P1.create_div("div1");
+		const P1_div = P1.id;
+		P1.add_component("C1",new PanelComponent());
+		P1.add_component("C2",new PanelComponent());
+		const C1 = P1.cls_dict["C1"];
+		const C1_div = C1.id;
+		const C2 = P1.cls_dict["C2"];
+		const C2_div = C2.id;
+		const div_1 = div.children[0];
+		const div_1_id = div_1.id;
+		const div_1_1 = div_1.children[0];
+		const div_1_1_id = div_1_1.id;
+		const div_1_1_1 = div_1_1.children[0];
+		const div_1_1_1_id = div_1_1_1.id;
+		const div_1_1_1_1 = div_1_1_1.children[0];
+		const div_1_1_1_1_id = div_1_1_1_1.id;
+		const div_1_2 = div_1.children[1];
+		const div_1_2_id = div_1_2.id;
+		const div_1_2_1 = div_1_2.children[0];
+		const div_1_2_1_id = div_1_2_1.id;
+		const div_1_2_1_1 = div_1_2_1.children[0];
+		const div_1_2_1_1_id = div_1_2_1_1.id;
+		console.log("P1 dictionary is div1.1");
+		console.log(div_1_id === P1_div);
+		console.log("C1 dictionary is div1.1.2.1.1");
+		console.log(div_1_1_1_1_id === C1_div);
+		console.log("C2 dictionary is div1.1.2.1.1");
+		console.log(div_1_2_1_1_id === C2_div);
+
+	}
+
+	function Test5(){
+		const div = document.getElementById("div1");
+		div.innerHTML = "";
+		const P1 = new Panel();
+		P1.create_div("div1");
+		const P1_div = P1.id;
+		P1.add_component("C1",new PanelComponent());
+		P1.add_panel("P2");
+		const C1 = P1.cls_dict["C1"];
+		const C1_div = C1.id;
+		const P2 = P1.panel_dict["P2"];
+		const P2_div = P2.id;
+		const div_1 = div.children[0];
+		const div_1_id = div_1.id;
+		const div_1_1 = div_1.children[0];
+		const div_1_1_id = div_1_1.id;
+		const div_1_1_1 = div_1_1.children[0];
+		const div_1_1_1_id = div_1_1_1.id;
+		const div_1_1_1_1 = div_1_1_1.children[0];
+		const div_1_1_1_1_id = div_1_1_1_1.id;
+		const div_1_2 = div_1.children[1];
+		const div_1_2_id = div_1_2.id;
+		const div_1_2_1 = div_1_2.children[0];
+		const div_1_2_1_id = div_1_2_1.id;
+		console.log("P1 dictionary is div1.1");
+		console.log(div_1_id === P1_div);
+		console.log("C1 dictionary is div1.1.2.1.1");
+		console.log(div_1_1_1_1_id === C1_div);
+		console.log("C2 dictionary is div1.1.2.1.1");
+		console.log(div_1_2_1_id === P2_div);
+
 
 	}
 
