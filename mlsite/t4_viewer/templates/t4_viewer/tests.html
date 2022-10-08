@@ -1,0 +1,45 @@
+{% load static %}
+
+<div id="div1"></div>
+
+<button id="test1" onclick="Test1()" >Panel-Panel</button>
+<button id="test2" onclick="Test2()">Panel-PanelComponent</button>
+<button id="test3" onclick="Test3()">Panel-Panel 2 </button>
+<button id="test4" onclick="Test4()">Panel-PanelComponent 2 </button>
+
+<script src="{% static 't4_viewer/panel.js' %}"></script>
+<script src="{% static 't4_viewer/panelcomponent.js' %}"></script>
+
+<script>
+	function Test1() {
+		const div = document.getElementById("div1");
+		div.innerHTML = "";
+		const P1 = new Panel();
+		P1.create_div("div1");
+		P1.add_panel("P2");
+		const div_1 = div.children[0];
+		const div_1_id = div_1.id;
+		const div_1_1 = div_1.children[0];
+		const div_1_1_id = div_1_1.id;
+		const div_1_1_1 = div_1_1.children[0];
+		const div_1_1_1_id = div_1_1_1.id;
+		const P2 = P1.panel_dict["P2"];
+		const P1_div = P1.id;
+		const P2_div = P2.id;
+		console.log("P1 dictionary is div1.1");
+		console.log(div_1_id === P1_div);
+		console.log("P2 dictionary is div1.2");
+		console.log(div_1_1_1_id === P2_div);
+	}
+	function Test2() {
+
+	}
+	function Test3() {
+
+	}
+	function Test4() {
+
+	}
+
+
+</script>

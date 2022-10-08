@@ -20,6 +20,10 @@ def terms(request):
     context = {}
     return render(request,'t4_viewer/terms.html', context)
 
+def tests(request):
+    context = {}
+    return render(request,'t4_viewer/tests.html', context)
+
 def index(request):
     context = {}
     return render(request,'t4_viewer/index.html', context)

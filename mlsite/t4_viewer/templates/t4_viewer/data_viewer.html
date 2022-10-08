@@ -3,17 +3,14 @@
 </div>
 
 <script src="{% static 't4_viewer/panel.js' %}"></script>
-<script src="{% static 't4_viewer/client.js' %}"></script>
-<script src="{% static 't4_viewer/page.js' %}"></script>
-<script src="{% static 't4_viewer/taskboard.js' %}"></script>
-<script src="{% static 't4_viewer/ctionviewer.js' %}"></script>
-<script src="{% static 't4_viewer/queryboard.js' %}"></script>
-<script src="{% static 't4_viewer/termboard.js' %}"></script>
-<script src="{% static 't4_viewer/listbox.js' %}"></script>
-<script src="{% static 't4_viewer/inputpanel.js' %}"></script>
+
 <script src="{% static 't4_viewer/tabpanel.js' %}"></script>
-<script src="{% static 't4_viewer/datatree.js' %}"></script>
-<script src="{% static 't4_viewer/ctionpanel.js' %}"></script>
+<script src="{% static 't4_viewer/client.js' %}"></script>
+<script src="{% static 't4_viewer/taskboard.js' %}"></script>
+<script src="{% static 't4_viewer/pstaskpanel.js' %}"></script>
+<script src="{% static 't4_viewer/selectbox.js' %}"></script>
+
+
 
 <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
 
@@ -23,44 +20,11 @@ var name = "NA";
 var cdict = {};
 var data = {};
 var cdict_s = {};
-var tabpanel = new TabPanel("tab_panel","tabpanel");
+var tabpanel = new TabPanel("tabpanel");
+tabpanel.build("tab_panel");
 const div_panel = tabpanel.id_dict["panel"];
-var taskboard = new TaskBoard(div_panel+".1","taskboard",client,task_status,task_status);
-var ctionviewer = new CtionViewer(div_panel+".2","ctionviewer",client);
-var queryboard = new QueryBoard(div_panel+".3","queryboard",client);                     
-var termboard = new TermBoard(div_panel+".4","termboard",client);                        
-var datatree = new DataTree(div_panel+".5","datatree",client);
-var ctionpanel = new CtionPanel(div_panel+".6","ctionpanel",client);
+var taskboard = new TaskBoard("taskboard",client,task_status,task_status);
 tabpanel.add_tab(div_panel+".1","TaskBoard",taskboard);
-tabpanel.add_tab(div_panel+".2","CtionViewer",ctionviewer);
-tabpanel.add_tab(div_panel+".3","QueryBoard",queryboard);
-tabpanel.add_tab(div_panel+".4","TermBoard",termboard);
-tabpanel.add_tab(div_panel+".5","DataTree",datatree);
-tabpanel.add_tab(div_panel+".6","CtionPanel",ctionpanel);
-
-
-function set_panel(){
-	const select_panel = document.getElementById("select_panel");
-	const panel = select_panel.options[select_panel.selectedIndex].value;
-	const panel_board = document.getElementById("panel_board");
-	console.log(panel);
-	if (panel == "taskboard"){
-		panel_board.innerHTML = "";
-		taskboard = new TaskBoard("panel_board","taskboard",client,task_status,task_status);
-	}
-	else if (panel == "ctionviewer"){
-		panel_board.innerHTML = "";
-		ctionviewer = new CtionViewer("panel_board","ctionviewer",client);
-	}
-	else if (panel == "queryboard"){
-		panel_board.innerHTML = "";
-		queryboard = new QueryBoard("panel_board","queryboard",client);
-	}
-	else if (panel == "termboard"){
-		panel_board.innerHTML = "";
-		termboard = new TermBoard("panel_board","termboard",client);
-	}
-}
 
 function task_status(response,task_id){
 	console.log("fun task_status");

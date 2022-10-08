@@ -13,6 +13,9 @@ class ListBox {
 		this.items = new Set();
 		this.items_dict = {}
 		this.item_func = item_func;
+		this.box.setAttribute("width","300");
+		this.box.setAttribute("style","overflow-x:scroll; width:300px");
+
 	}
 
 	addKeyBindings(){
@@ -59,7 +62,10 @@ class ListBox {
 	}
 
 	removeItem(item){
+		console.log("remove");
+		console.log(item);
 		if ( this.items.has(item)){
+			console.log("in");
 			const item_val = this.items_dict[item];
 			this.items.delete(item);
 			delete this.items_dict[item];

@@ -5,7 +5,6 @@ class Client {
 
 	load_ction(name,load_action) {
 		const oReq = new XMLHttpRequest();
-
 		oReq.addEventListener("load",function () {
 			const resp = this.responseText;
 			load_action(resp);

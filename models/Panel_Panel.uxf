@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>150</y>
+      <w>570</w>
+      <h>490</h>
+    </coordinates>
+    <panel_attributes>div: div_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>190</y>
+      <w>480</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>div: div_id + ".1"
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>380</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Panel P2
+--
+id = div_id+".1"+".1"+".1"</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>300</y>
+      <w>480</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>div: div_id+".1"+".1"
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>380</y>
+      <w>480</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>div: div_id+".1"+".1"+".1"
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>220</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Panel P1
+--
+id = div_id+".1"</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

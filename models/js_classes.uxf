@@ -268,7 +268,7 @@ getSelect()
     <id>UMLClass</id>
     <coordinates>
       <x>252</x>
-      <y>1152</y>
+      <y>1134</y>
       <w>189</w>
       <h>153</h>
     </coordinates>
@@ -295,6 +295,22 @@ create_div(div_id)
 add_panel(name)
 add_component(name,cls)
 add_id(name)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>1296</y>
+      <w>189</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>PanelComponent
+--
+constructor(name,client)
+build(div_id)
+build_inner()
 </panel_attributes>
     <additional_attributes/>
   </element>

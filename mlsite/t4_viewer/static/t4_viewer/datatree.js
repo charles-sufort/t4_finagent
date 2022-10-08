@@ -1,6 +1,6 @@
 class DataTree extends Panel{
 	constructor (div_id,name,client){
-		super();
+		super(div_id);
 		this.div_id = div_id;
 		this.name = name;
 		this.client = client;
@@ -29,7 +29,6 @@ class DataTree extends Panel{
 		this.cls_dict["ctionpanel"] = new CtionPanel(this.id_dict["ctionpanel"],name,this.client);
 		this.cls_dict["ctionpanel"].build();
 	}
-
 
 	get_companies(){
 		const obj = this;
@@ -83,6 +82,7 @@ class DataTree extends Panel{
 
 	save_tree(response){
 		const div = document.getElementById(this.id_dict["datatree"]);
+		div.innerHTML = "";
 		const div1 = document.createElement("div");
 		const div2 = document.createElement("div");
 		const prod_div = document.createElement("div");
@@ -186,7 +186,8 @@ class DataTree extends Panel{
 		const subissues = Object.keys(this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["nodes"]);
 		const subissue_data = [];
 		for (var i = 0; i<subissues.length; i++){
-			this.cls_dict["subissue_box"].addItem([subissues[i],this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["count"]]);
+			this.cls_dict["subissue_box"].addItem([subissues[i],this.tree["nodes"][product]["nodes"][subproduct]["nodes"][issue]["nodes"][subissues[i]]["count"]]);
+
 		}
 	}
 }
