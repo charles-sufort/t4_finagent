@@ -256,7 +256,7 @@ add_vec(vec)
     </coordinates>
     <panel_attributes>SelectBox
 --
-constructor(div_id,options,sel_func)
+constructor(options,sel_func)
 build()
 setFunc(sel_func)
 addOption(value,text)
@@ -291,6 +291,7 @@ select_dataclass()
     <panel_attributes>Panel
 --
 constructor()
+reset()
 create_div(div_id)
 add_panel(name)
 add_component(name,cls)

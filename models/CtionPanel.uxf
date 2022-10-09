@@ -46,7 +46,7 @@ label = "Save"
     <id>UMLClass</id>
     <coordinates>
       <x>60</x>
-      <y>400</y>
+      <y>420</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -62,7 +62,7 @@ cls_dict key = "list_box"
     <id>UMLClass</id>
     <coordinates>
       <x>60</x>
-      <y>270</y>
+      <y>290</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
@@ -75,7 +75,7 @@ id_dict key = "add_input"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>240</x>
-      <y>270</y>
+      <y>290</y>
       <w>230</w>
       <h>50</h>
     </coordinates>
@@ -88,7 +88,7 @@ add_func=this.name+".add_class()"</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>60</x>
-      <y>330</y>
+      <y>350</y>
       <w>270</w>
       <h>60</h>
     </coordinates>
@@ -110,18 +110,18 @@ on_change = this.name + ".select_cls()"
     <panel_attributes>Mode: Select
 --
 cls_dict key="sel_mode"
-options = [single,double]</panel_attributes>
+options = [1-list,2-list]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>50</x>
-      <y>230</y>
+      <y>240</y>
       <w>450</w>
-      <h>300</h>
+      <h>290</h>
     </coordinates>
-    <panel_attributes>ClassPanel : Single</panel_attributes>
+    <panel_attributes>cls_panel : Panel</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -132,7 +132,7 @@ options = [single,double]</panel_attributes>
       <w>450</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>options_panel: div</panel_attributes>
+    <panel_attributes>options_panel: Panel</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -143,7 +143,29 @@ options = [single,double]</panel_attributes>
       <w>450</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>load_panel: div</panel_attributes>
+    <panel_attributes>load_panel: Panel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SimpleClass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>260</y>
+      <w>450</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>clistX</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

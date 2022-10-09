@@ -1,4 +1,4 @@
-class PSTaskPanel extends Panel {
+class PSTaskPanel extends PanelComponent {
 	constructor(name,client){
 		super();
 		this.name = name;
@@ -6,9 +6,7 @@ class PSTaskPanel extends Panel {
 		console.log("here1");
 	}
 
-	build(div_id){
-		console.log("here2");
-		this.create_div(div_id);
+	build_inner(){
 		this.add_panel("load_panel");
 		const submit = document.createElement("button");
 		const sel_func = this.name + ".select_dataclass()";

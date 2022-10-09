@@ -3,12 +3,16 @@
 </div>
 
 <script src="{% static 't4_viewer/panel.js' %}"></script>
-
+<script src="{% static 't4_viewer/panelcomponent.js' %}"></script>
 <script src="{% static 't4_viewer/tabpanel.js' %}"></script>
 <script src="{% static 't4_viewer/client.js' %}"></script>
 <script src="{% static 't4_viewer/taskboard.js' %}"></script>
 <script src="{% static 't4_viewer/pstaskpanel.js' %}"></script>
 <script src="{% static 't4_viewer/selectbox.js' %}"></script>
+<script src="{% static 't4_viewer/ctionpanel.js' %}"></script>
+<script src="{% static 't4_viewer/inputpanel.js' %}"></script>
+<script src="{% static 't4_viewer/listbox.js' %}"></script>
+
 
 
 
@@ -25,6 +29,9 @@ tabpanel.build("tab_panel");
 const div_panel = tabpanel.id_dict["panel"];
 var taskboard = new TaskBoard("taskboard",client,task_status,task_status);
 tabpanel.add_tab(div_panel+".1","TaskBoard",taskboard);
+var ctionpanel = new CtionPanel("ctionpanel",client);
+tabpanel.add_tab(div_panel+".1","CtionPanel",ctionpanel);
+
 
 function task_status(response,task_id){
 	console.log("fun task_status");

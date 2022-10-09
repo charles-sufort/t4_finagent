@@ -1,12 +1,11 @@
-class SelectBox extends Panel{
+class SelectBox extends PanelComponent{
 	constructor(options,sel_func){
 		super();
 		this.options = options;
 		this.sel_func = sel_func;
 	}
 
-	build(div_id){
-		this.create_div(div_id)
+	build_inner(){
 		this.add_id("sel_elem");
 		const sel_elem = document.createElement("select");
 		sel_elem.setAttribute("id",this.id_dict["sel_elem"]);

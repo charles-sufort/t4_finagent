@@ -1,27 +1,16 @@
-class CtionPanel extends Panel{
-	constructor(div_id,name,client) {
-		super(div_id);
-		this.div_id = div_id;
+class CtionPanel extends PanelComponent{
+	constructor(name,client) {
+		super();
 		this.name = name;
 		this.client = client;
 		this.ction = {};
 }
 
-	build(){
-		const div = document.getElementById(this.div_id);
-		const div_load = document.createElement("div");
-		const div_cls_panel = document.createElement("div");
-		const div_opt_panel = document.createElement("div");
-		this.add_id("load_panel");
-		this.add_id("options_panel");
-		this.add_id("cls_panel");
-		div.appendChild(div_opt_panel);
-		div.appendChild(div_load);
-		div.appendChild(div_cls_panel);
-		div_cls_panel.setAttribute('id',this.id_dict["cls_panel"]);
-		div_opt_panel.setAttribute('id',this.id_dict["options_panel"]);
-		div_load.setAttribute("id",this.id_dict["load_panel"]);
-		const ids = ["div_clist","div_list","sel_cls","add_inp"];
+	build_inner(){
+		this.add_panel("options_panel");
+		this.add_panel("load_panel");
+		this.add_panel("cls_panel");
+		const ids = ["clist","div_list","sel_cls","add_inp"];
 		for (var i = 0; i<ids.length; i++){
 			this.add_id(ids[i]+"1-1");
 			this.add_id(ids[i]+"1-2");
@@ -29,104 +18,71 @@ class CtionPanel extends Panel{
 		}
 		const options = ["1-list","2-list"];
 		const sel_func = this.name + ".select_mode()";
-		this.cls_dict["sel_mode"] = new SelectBox(this.id_dict["options_panel"],options,sel_func);
-		this.cls_dict["sel_mode"].setFunc(sel_func);
-		this.cls_dict["sel_mode"].build();
+		this.panel_dict["options_panel"].add_component("sel_mode",new SelectBox(options));
+		this.panel_dict["options_panel"].cls_dict["sel_mode"].setFunc(sel_func);
 	}
 
 	build_load(){
-		const div = document.getElementById(this.id_dict["load_panel"]);
-		div.innerHTML = "";
 		const load_func = this.name + ".load_ction()";
-		this.cls_dict["load_panel"] = new InputPanel(this.id_dict["load_panel"],"Load Ction:",load_func);
+		this.panel_dict["load_panel"].add_component("input",new InputPanel("Load Ction:",load_func));
 	}
 
 	build_1list(){
 		this.build_load();
-		const div = document.getElementById(this.id_dict["cls_panel"]);
-		const div_sel = document.createElement("div");
-		div_sel.setAttribute("id",this.id_dict["sel_cls1-1"]);
-		div.innerHTML = "";
-		div.setAttribute("style","");
-		const div_clist = document.createElement("div");
-		div_clist.setAttribute("id",this.id_dict["div_clist1-1"]);
-		div_clist.appendChild(div_sel);
-		div.appendChild(div_clist);
+		var cls_panel = this.panel_dict["cls_panel"];
+		cls_panel.add_panel("clist1-1_panel");
 		this.build_clist("1-1");
 	}
 
 	build_2list(){
 		this.build_load();
-		const div = document.getElementById(this.id_dict["cls_panel"]);
-		div.innerHTML = "";
-		div.setAttribute("style","display: flex");
-		const div_sel_1 = document.createElement("div");
-		div_sel_1.setAttribute("id",this.id_dict["sel_cls1-2"]);
-		const div_sel_2 = document.createElement("div");
-		div_sel_2.setAttribute("id",this.id_dict["sel_cls2-2"]);
-		const div_clist1 = document.createElement("div");
-		div_clist1.setAttribute("id",this.id_dict["div_clist1-2"]);
-		div_clist1.setAttribute("style","display: inline:block");
-		div_clist1.appendChild(div_sel_1);
-		div.appendChild(div_clist1);
+		var cls_panel = this.panel_dict["cls_panel"];
+		cls_panel.add_panel("clist1-2_panel");
+		cls_panel.add_panel("clist2-2_panel");
 		this.build_clist("1-2");
-		const div_clist2 = document.createElement("div");
-		div_clist2.setAttribute("id",this.id_dict["div_clist2-2"]);
-		div_clist2.setAttribute("style","display: inline:block");
-		div_clist2.appendChild(div_sel_2);
-		div.appendChild(div_clist2);
 		this.build_clist("2-2");
 	}
 
 	build_clist(part_num){
-		const div_cls_id = "div_clist" + part_num;
-		const div_sel_id = "sel_cls" + part_num;
-		const div_ls_id = "div_list" + part_num;
-		const add_inp_id = "add_inp" + part_num;
+		const clist_panel_id = "clist"+part_num+"_panel";
+		const sel_cls_id = "sel_cls" + part_num;
 		const list_box_id = "list_box" + part_num;
-
-		const div_add = document.createElement("div");
-		const div_list = document.createElement("div");
+		var cls_panel = this.panel_dict["cls_panel"];
+		var clist_panel = cls_panel.panel_dict[clist_panel_id];
+		clist_panel.add_panel("add_panel");
+		console.log(clist_panel);
+		var add_panel = clist_panel.panel_dict["add_panel"];
 		const add_input = document.createElement("input");
-		const sel_func = this.name + ".select_cls('"+part_num+"')";
-		this.cls_dict[div_sel_id] = new SelectBox(this.id_dict[div_sel_id],[],sel_func);
-		this.cls_dict[div_sel_id].build();
 		const add_btn = document.createElement("button");
-		const div_clist = document.getElementById(this.id_dict[div_cls_id]);
 		const add_func = this.name + ".add_cls()";
-		add_input.setAttribute("id",this.id_dict[div_cls_id]);
-		add_input.setAttribute("id",this.id_dict[add_inp_id]);
-		div_list.setAttribute("id",this.id_dict[div_ls_id]);
 		add_btn.setAttribute("onclick",add_func);
 		add_btn.innerHTML = "Add";
-		div_clist.appendChild(div_add);
-		div_add.appendChild(add_btn);
-		div_add.appendChild(add_input);
-		div_clist.appendChild(div_list);
-		this.cls_dict[list_box_id] = new ListBox(this.id_dict[div_ls_id],10,x => x);
+		add_panel.div.appendChild(add_input);
+		add_panel.div.appendChild(add_btn);
+		clist_panel.add_component(sel_cls_id,new SelectBox([]));
+		const sel_func = this.name + ".select_cls('"+part_num+"')";
+		clist_panel.cls_dict[sel_cls_id].setFunc(sel_func)
+		clist_panel.add_component(list_box_id,new ListBox(10,x => x));
 	}
 
 
 	build_save_panel(){
+		var cls_panel = this.panel_dict["cls_panel"]
 		const save_func = this.name + ".save_ction()";
-		this.add_id('save_panel');
-		const div_save = document.createElement("div");
-		div_save.setAttribute("id",this.id_dict["save_panel"]);
-		div.appendChild(div_save);
-		this.cls_dict["save_panel"] = new InputPanel(this.id_dict["save_panel"],"Save",save_func);
+		cls_panel.add_component("save_panel",new InputPanel("Save",save_func));
 	}
 	
 	select_mode(){
-		const div = document.getElementById(this.id_dict["cls_panel"]);
-		div.innerHTML = ""
-		const mode = this.cls_dict["sel_mode"].getSelected();
-		console.log(mode);
+		const mode = this.panel_dict["options_panel"].cls_dict["sel_mode"].getSelected();
+		this.panel_dict["cls_panel"].reset();
 		if (mode == "1-list"){
 			this.build_1list();
 		}
 		else if (mode == "2-list"){
 			this.build_2list();
 		}
+		this.build_save_panel();
+	
 	}
 
 	load_ction(){

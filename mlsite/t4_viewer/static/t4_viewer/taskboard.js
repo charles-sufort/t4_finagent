@@ -1,4 +1,4 @@
-class TaskBoard extends Panel{
+class TaskBoard extends PanelComponent{
 	constructor (name,client,task_fun,status_fun) {
 		super();
 		this.client = client;
@@ -8,8 +8,7 @@ class TaskBoard extends Panel{
 		this.status_fun = status_fun;
 	}
 
-	build(div_id){
-		this.create_div(div_id);
+	build_inner(){
 		this.add_panel("task_panel");
 		this.add_panel("add_div");
 		const add_btn = document.createElement("button");

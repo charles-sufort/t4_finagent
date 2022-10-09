@@ -4,6 +4,17 @@ class Panel {
 		this.cls_dict = {};
 		this.panel_dict = {};
 		this.elem_count = 0;
+		this.div = document.createElement("div");
+		this.id = "";
+	}
+
+	reset(){
+		this.div.innerHTML = "";
+		this.id_dict = {};
+		this.cls_dict = {};
+		this.panel_dict = {};
+		this.elem_count = 0;
+
 	}
 
 	create_div(div_id){
@@ -16,8 +27,6 @@ class Panel {
 
 
 	add_panel(name){
-		console.log("Panel");
-		console.log(this);
 		this.add_id(name);
 		const div = document.createElement("div");
 		div.setAttribute("id",this.id_dict[name]);

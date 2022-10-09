@@ -1,18 +1,18 @@
-class ListBox {
-	constructor(div_id,size,item_func) {
-		console.log(div_id);
-		const div = document.getElementById(div_id);
+class ListBox extends PanelComponent{
+	constructor(size,item_func) {
+		super();
+		this.size = size;
+		this.item_func = item_func;
+	
+	}
+
+	build_inner(){
 		this.box = document.createElement("select");
-		this.box.setAttribute("size",size);
-		const box_id = div_id + "box";
-		this.div_id = div_id;
-		console.log(div);
-		this.box.setAttribute("id",box_id);
-		div.appendChild(this.box);
+		this.box.setAttribute("size",this.size);
+		this.div.appendChild(this.box);
 		this.addKeyBindings();
 		this.items = new Set();
 		this.items_dict = {}
-		this.item_func = item_func;
 		this.box.setAttribute("width","300");
 		this.box.setAttribute("style","overflow-x:scroll; width:300px");
 
@@ -77,7 +77,6 @@ class ListBox {
 			}
 		}
 	}
-
 
 	addEventFunc(key,func){
 		const obj = this;

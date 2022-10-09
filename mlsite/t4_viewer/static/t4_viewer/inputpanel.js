@@ -1,18 +1,23 @@
-class InputPanel extends Panel{
-	constructor(div_id,lbl,func) {
+class InputPanel extends PanelComponent{
+	constructor(lbl,func) {
 		super();
-		const div  = document.getElementById(div_id);
+		this.func = func;
+		this.lbl = lbl;
+	}
+
+	build_inner(){
 		const label = document.createElement("label");
 		const input = document.createElement("input");
 		const submit = document.createElement("button");
 		this.add_id("input");
 		input.setAttribute("id",this.id_dict["input"]);
-		submit.setAttribute("onclick",func);
-		label.innerHTML = lbl;
+		submit.setAttribute("onclick",this.func);
+		label.innerHTML = this.lbl;
 		submit.innerHTML = "submit";
-		div.appendChild(label);
-		div.appendChild(input);
-		div.appendChild(submit);
+		this.div.appendChild(label);
+		this.div.appendChild(input);
+		this.div.appendChild(submit);
+
 	}
 
 	getInput(){

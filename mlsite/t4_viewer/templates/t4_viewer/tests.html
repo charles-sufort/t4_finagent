@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <div id="div1"></div>
 
 <button id="test1" onclick="Test1()" >Panel-Panel</button>
@@ -12,8 +13,16 @@
 
 <script src="{% static 't4_viewer/panel.js' %}"></script>
 <script src="{% static 't4_viewer/panelcomponent.js' %}"></script>
+<script src="{% static 't4_viewer/listbox.js' %}"></script>
+
 
 <script>
+	const div = document.getElementById("div1");
+	div.innerHTML = "";
+	const P1 = new Panel();
+	P1.create_div("div1");
+	P1.add_component("lbox",new ListBox(10,x=>x));
+
 	function Test1() {
 		const div = document.getElementById("div1");
 		div.innerHTML = "";
