@@ -139,6 +139,11 @@ async def status_company_dataform(proc: ProcessCompany):
 async def status_ction_dataform(proc: ProcessCtion):
     return t41.get_ction_dataform_status(proc.ction,proc.dataform)
 
+@app.post("/data/company/dataform/progress")
+async def status_company_dataform(proc: ProcessCompany):
+    return t41.get_company_dataform_progress(proc.company,proc.dataform)
+
+
 
 # REST-3
 @app.post("/data/ction/dataform/freq/query")

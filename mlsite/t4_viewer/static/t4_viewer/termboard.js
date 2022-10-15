@@ -1,12 +1,10 @@
 class TermBoard {
-	constructor (div_id,name,client) {
+	constructor (name,client) {
 		this.name = name;
-		this.div_id = div_id;
 		this.client = client;
 	}
 
-	build(){
-		const div = document.getElementById(this.div_id);
+	build_inner(){
 		const term_list_id = this.div_id + "term_list";
 		const select_df_id = this.div_id + "select_df";
 		const select_df = document.createElement("select");

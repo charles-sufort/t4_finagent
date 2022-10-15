@@ -10,12 +10,6 @@ class CtionPanel extends PanelComponent{
 		this.add_panel("options_panel");
 		this.add_panel("load_panel");
 		this.add_panel("cls_panel");
-		const ids = ["clist","div_list","sel_cls","add_inp"];
-		for (var i = 0; i<ids.length; i++){
-			this.add_id(ids[i]+"1-1");
-			this.add_id(ids[i]+"1-2");
-			this.add_id(ids[i]+"2-2");
-		}
 		const options = ["1-list","2-list"];
 		const sel_func = this.name + ".select_mode()";
 		this.panel_dict["options_panel"].add_component("sel_mode",new SelectBox(options));
@@ -24,21 +18,28 @@ class CtionPanel extends PanelComponent{
 
 	build_load(){
 		const load_func = this.name + ".load_ction()";
+		this.panel_dict["load_panel"].reset();
 		this.panel_dict["load_panel"].add_component("input",new InputPanel("Load Ction:",load_func));
 	}
 
 	build_1list(){
 		this.build_load();
 		var cls_panel = this.panel_dict["cls_panel"];
-		cls_panel.add_panel("clist1-1_panel");
+		cls_panel.add_panel("clist_panel");
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+
+		clist_panel.add_panel("clist1-1_panel");
 		this.build_clist("1-1");
 	}
 
 	build_2list(){
 		this.build_load();
 		var cls_panel = this.panel_dict["cls_panel"];
-		cls_panel.add_panel("clist1-2_panel");
-		cls_panel.add_panel("clist2-2_panel");
+		cls_panel.add_panel("clist_panel");
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+		clist_panel.div.setAttribute("style","display:flex");
+		clist_panel.add_panel("clist1-2_panel");
+		clist_panel.add_panel("clist2-2_panel");
 		this.build_clist("1-2");
 		this.build_clist("2-2");
 	}
@@ -48,21 +49,13 @@ class CtionPanel extends PanelComponent{
 		const sel_cls_id = "sel_cls" + part_num;
 		const list_box_id = "list_box" + part_num;
 		var cls_panel = this.panel_dict["cls_panel"];
-		var clist_panel = cls_panel.panel_dict[clist_panel_id];
-		clist_panel.add_panel("add_panel");
-		console.log(clist_panel);
-		var add_panel = clist_panel.panel_dict["add_panel"];
-		const add_input = document.createElement("input");
-		const add_btn = document.createElement("button");
-		const add_func = this.name + ".add_cls()";
-		add_btn.setAttribute("onclick",add_func);
-		add_btn.innerHTML = "Add";
-		add_panel.div.appendChild(add_input);
-		add_panel.div.appendChild(add_btn);
-		clist_panel.add_component(sel_cls_id,new SelectBox([]));
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+
+		var clistX_panel = clist_panel.panel_dict[clist_panel_id];
+		clistX_panel.add_component(sel_cls_id,new SelectBox([]));
 		const sel_func = this.name + ".select_cls('"+part_num+"')";
-		clist_panel.cls_dict[sel_cls_id].setFunc(sel_func)
-		clist_panel.add_component(list_box_id,new ListBox(10,x => x));
+		clistX_panel.cls_dict[sel_cls_id].setFunc(sel_func)
+		clistX_panel.add_component(list_box_id,new ListBox(10,x => x));
 	}
 
 
@@ -75,6 +68,13 @@ class CtionPanel extends PanelComponent{
 	select_mode(){
 		const mode = this.panel_dict["options_panel"].cls_dict["sel_mode"].getSelected();
 		this.panel_dict["cls_panel"].reset();
+		const cls_panel = this.panel_dict["cls_panel"];
+		cls_panel.add_panel("add_panel");
+		var add_panel = cls_panel.panel_dict["add_panel"];
+		const add_func = this.name + ".add_cls()";
+
+		add_panel.add_component("add_cls",new InputPanel2("add",add_func));
+
 		if (mode == "1-list"){
 			this.build_1list();
 		}
@@ -86,7 +86,8 @@ class CtionPanel extends PanelComponent{
 	}
 
 	load_ction(){
-		const name = this.cls_dict["load_panel"].getInput();
+		const name = this.panel_dict["load_panel"].cls_dict["input"].getInput();
+		console.log(`load_ction: ${name} `);
 		const obj = this;
 		const load_func = function (resp){
 			console.log(resp);
@@ -97,8 +98,8 @@ class CtionPanel extends PanelComponent{
 	}
 
 	handle_load(response){
-		const mode = this.cls_dict["sel_mode"].getSelected();
-		console.log(response);
+		const options_panel = this.panel_dict["options_panel"];
+		const mode = options_panel.cls_dict["sel_mode"].getSelected();
 
 		const classes = Object.keys(response["ction"]);
 		for (var i = 0; i<classes.length; i++){
@@ -111,22 +112,37 @@ class CtionPanel extends PanelComponent{
 		}
 		const sel_func = this.name + ".select_class()";
 		if (mode == "1-list"){
-			const sel_cls = this.cls_dict["sel_cls1-1"];
+			const cls_panel = this.panel_dict["cls_panel"];
+
+			var clist_panel = cls_panel.panel_dict["clist_panel"];
+			const clist_id = 'clist1-1_panel';
+			const clistX_panel = clist_panel.panel_dict[clist_id];
+			const sel_cls = clistX_panel.cls_dict["sel_cls1-1"];
 			sel_cls.removeOptions();
-			const opt_def = document.createElement("option");
-			opt_def.setAttribute("value","");
+			sel_cls.addOption("","select");
 			for (var i = 0; i< classes.length; i++){
 				sel_cls.addOption(classes[i],classes[i]);
 			}
 		}
 		else if (mode == "2-list"){
-			const sel_cls_1 = this.cls_dict["sel_cls1-2"];
-			const sel_cls_2 = this.cls_dict["sel_cls2-2"];
-			const list_box_1 = this.cls_dict["list_box1-2"];
-			const list_box_2 = this.cls_dict["list_box2-2"];			
+			const cls_panel = this.panel_dict["cls_panel"];
+			var clist_panel = cls_panel.panel_dict["clist_panel"];
+
+			const clist1_id = 'clist1-2_panel';
+			const clist1_panel = clist_panel.panel_dict[clist1_id];
+			const sel_cls_1 = clist1_panel.cls_dict["sel_cls1-2"];
+
+			const list_box_1 = clist1_panel.cls_dict["list_box1-2"];
+			const clist2_id = 'clist2-2_panel';
+			const clist2_panel = clist_panel.panel_dict[clist2_id];
+			const sel_cls_2 = clist2_panel.cls_dict["sel_cls2-2"];
+			const list_box_2 = clist2_panel.cls_dict["list_box2-2"];
+
 			const obj = this;
 			sel_cls_1.removeOptions();
 			sel_cls_2.removeOptions();
+			sel_cls_1.addOption("","select");
+			sel_cls_2.addOption("","select");
 			const move_func_12 = function () {
 				const cls1 = sel_cls_1.getSelected();
 				const cls2 = sel_cls_2.getSelected();
@@ -169,13 +185,23 @@ class CtionPanel extends PanelComponent{
 	}
 	
 	save_ction(){
-		const name = this.cls_dict["save_panel"].getInput()
+		const cls_panel = this.panel_dict["cls_panel"];
+		const name = cls_panel.cls_dict["save_panel"].getInput();
 		const obj = this;
 		const load_func = function (response){
 			const resp = JSON.parse(response);
 			obj.handle_save(resp);
 		}
-		client.save_ction(name,this.ction,load_func);
+		var ction = {};
+		const classes = Object.keys(this.ction);
+		for (var i = 0; i<classes.length; i++){
+			const cls_vec_strs = Array.from(this.ction[classes[i]])
+			ction[classes[i]] = [];
+			for (var j = 0; j<cls_vec_strs.length; j++){
+				ction[classes[i]][ction[classes[i]].length] = cls_vec_strs[j].split('__');
+			}
+		}
+		client.save_ction(name,ction,load_func);
 	}
 
 	handle_save(response){
@@ -183,29 +209,53 @@ class CtionPanel extends PanelComponent{
 	}
 
 	add_cls(){
-		console.log("here");
-		const sel_cls = document.getElementById(this.id_dict["sel_cls"]);
-		const cls = document.getElementById(this.id_dict["add_input"]).value;
-		const opt = document.createElement("option");
-		opt.setAttribute("value",cls);
-		opt.innerHTML = cls;
-		sel_cls.appendChild(opt);
+		const cls_panel = this.panel_dict["cls_panel"];
+		const add_panel = cls_panel.panel_dict["add_panel"];
+		const options_panel = this.panel_dict["options_panel"];
+		const mode = options_panel.cls_dict["sel_mode"].getSelected();
+		const cls = add_panel.cls_dict["add_cls"].getInput();
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+
 		this.ction[cls] = new Set();
+		if (mode == "1-list"){
+			const clistX_panel = clist_panel.panel_dict["clist1-1_panel"];
+			const sel_cls = clist_panel.cls_dict["sel_cls1-1"];
+			
+
+			sel_cls.addOption(cls,cls);
+		}
+		else if (mode == "2-list"){
+			const clist1_panel = clist_panel.panel_dict["clist1-2_panel"];
+			const sel1_cls = clist1_panel.cls_dict["sel_cls1-2"];
+			const clist2_panel = clist_panel.panel_dict["clist2-2_panel"];
+			const sel2_cls = clist2_panel.cls_dict["sel_cls2-2"];
+			sel1_cls.addOption(cls,cls);
+			sel2_cls.addOption(cls,cls);
+
+
+		}
 	}
 
 	select_cls(part_num){
+		const cls_panel = this.panel_dict["cls_panel"];
+		const clist_id = "clist"+part_num+"_panel";
+
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+
+		const clistX_panel = clist_panel.panel_dict[clist_id];
 		const sel_id = "sel_cls" + part_num;
 		const list_id = "list_box" + part_num;
-		const cls = this.cls_dict[sel_id].getSelected();
+		const cls = clistX_panel.cls_dict[sel_id].getSelected();
 		const vec_ls = Array.from(this.ction[cls]);
-		this.cls_dict[list_id].removeItems();
+		clistX_panel.cls_dict[list_id].removeItems();
 		for (var i = 0; i<vec_ls.length; i++){
-			this.cls_dict[list_id].addItem(vec_ls[i]);
+			clistX_panel.cls_dict[list_id].addItem(vec_ls[i]);
 		}
 	}
 
 	add_vec(vec){
-		const mode = this.cls_dict["sel_mode"].getSelected();
+		const options_panel = this.panel_dict["options_panel"];
+		const mode = options_panel.cls_dict["sel_mode"].getSelected();
 		var part_num = null;
 
 		if (mode == "1-list"){
@@ -214,14 +264,18 @@ class CtionPanel extends PanelComponent{
 		else if (mode == "2-list"){
 			part_num = "1-2";
 		}
+		const clist_id = "clist"+part_num+"_panel";
+		const cls_panel = this.panel_dict["cls_panel"];
+		var clist_panel = cls_panel.panel_dict["clist_panel"];
+		const clistX_panel = clist_panel.panel_dict[clist_id];
 
-		const sel_cls = this.cls_dict["sel_cls"+part_num];
+		const sel_cls = clistX_panel.cls_dict["sel_cls"+part_num];
 		const cls = sel_cls.getSelected();
 		const vec_str = vec.join("__");
 		if (cls in this.ction){
-			this.ction[cls].has(vec_str);
-			this.cls_dict["list_box"+part_num].addItem(vec_str)
-
+			if (!this.ction[cls].has(vec_str)){
+				clistX_panel.cls_dict["list_box"+part_num].addItem(vec_str)
+			}
 		}
 		else{
 			alert("no class selected");

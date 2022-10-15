@@ -15,7 +15,6 @@ class ListBox extends PanelComponent{
 		this.items_dict = {}
 		this.box.setAttribute("width","300");
 		this.box.setAttribute("style","overflow-x:scroll; width:300px");
-
 	}
 
 	addKeyBindings(){

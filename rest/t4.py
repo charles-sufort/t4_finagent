@@ -75,7 +75,7 @@ class T4:
         if company not in self.company_process:
             self.company_process[company] = {}
             self.company_process[company][dataform] = "started"
-            t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataformn))
+            t = threading.Thread(target=self.process_dataform_company_thread,args=(company,dataform))
             t.start()
         else:
             self.company_process[company][dataform] = "started"
@@ -89,15 +89,15 @@ class T4:
         if dataform in self.t4proc.fdf_mgr.js_md["companies"][company]["dataforms"]:
             vec_count = self.t4proc.fdf_mgr.js_md["companies"][company]["dataforms"][dataform]
         status = self.company_process[company][dataform]
-        print("here2")
         return {"vec_count": vec_count,"status":status}
 
     def get_company_dataform_status(self,company,dataform):
         return self.__check_process(self.company_process,company,dataform)
 
+    def get_company_dataform_progress(self,company,dataform):
+        return self.t4proc.get_company_dataform_progress(company,dataform)
+
     def get_dataform(self,ction,dataform):
-        print("here")
-        print(list(self.ction_process.keys()))
         if ction.name in self.ction_process:
             if dataform in self.ction_process[ction.name]:
                 if self.ction_process[ction.name][dataform] == "finished": 
@@ -112,18 +112,15 @@ class T4:
 #T4-3
 
     def scan_company_dataform(self,company,dataform):    
-        print("here1")
         if company not in self.company_scan_process:
             self.company_scan_process[company] = {}
             self.company_scan_process[company][dataform] = "started"
             t = threading.Thread(target=self.scan_company_dataform_thread,args=(company,dataform))
             t.start()
-            print("here2")
         else:
             self.company_scan_process[company][dataform] = "started"
             t = threading.Thread(target=self.scan_company_dataform_thread,args=(company,dataform))
             t.start()
-            print("here2")
         return "started"
 
     def scan_company_dataform_thread(self,company,dataform):
@@ -158,7 +155,7 @@ class T4:
         return datatree.tree
 
     def get_companies(self):
-        return self.dl.get_companies()
+        return self.t4proc.fdf_mgr.get_companies()
 
 
 #T4-5
@@ -186,25 +183,21 @@ class T4:
 # JUNK
 
     def check_dataform_company(self,company,dataform):    
-        print("here1")
         if company not in self.check_process:
             self.check_process[company] = {}
             self.check_process[company][dataform] = "started"
             t = threading.Thread(target=self.check_dataform_company_thread,args=(company,dataform))
             t.start()
-            print("here2")
         else:
             self.check_process[company][dataform] = "started"
             t = threading.Thread(target=self.check_dataform_company_thread,args=(company,dataform))
             t.start()
-            print("here2")
         return self.t4proc.check_dataform_company(company,dataform)
 
     def query(self,ction,query_type,min_n):
         L = self.dl.filter_vecs(ction)
         query = {}
         for c in L:
-            print("query: {}".format(c))
             Lc_dict = self.dl.query_text(L[c],query_type,min_n)
             Lc = [] 
             for term in Lc_dict:
@@ -223,7 +216,6 @@ class T4:
         p = "[a-zA-Z\']+"
         CT_df = {}
         for cl in CL: 
-            print("1: cl {}".format(cl))
             cl_df = CL[cl]
             df_ccn = cl_df['Consumer complaint narrative'].str.lower()
             re_df = cl_ccn.applymap(lambda x: re.findall(p,x))
@@ -234,7 +226,6 @@ class T4:
             T[cl] = terms_df
         dict_avgs = {}
         for cl in  CL:
-            print("2: cl {}".fomat(cl))
             dict_avgs[cl] = {}
             for term in termlist:
                 dict_avgs[cl][term] = np.average(CT_df[cl].to_numpy())

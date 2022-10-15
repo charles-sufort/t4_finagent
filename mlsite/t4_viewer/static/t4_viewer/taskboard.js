@@ -22,7 +22,7 @@ class TaskBoard extends PanelComponent{
 		this.task_count = this.task_count + 1;
 		const task_name = "taskpanel_" + this.task_count.toString();
 		name = this.name+".panel_dict['task_panel'].cls_dict['"+task_name+"']";
-		this.panel_dict["task_panel"].add_component(task_name, new PSTaskPanel(name,client));
+		this.panel_dict["task_panel"].add_component(task_name, new PSTaskPanel(name,client,this.task_count));
 	}
 
 }

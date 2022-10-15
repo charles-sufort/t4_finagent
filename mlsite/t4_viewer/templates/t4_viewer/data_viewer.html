@@ -12,6 +12,10 @@
 <script src="{% static 't4_viewer/ctionpanel.js' %}"></script>
 <script src="{% static 't4_viewer/inputpanel.js' %}"></script>
 <script src="{% static 't4_viewer/listbox.js' %}"></script>
+<script src="{% static 't4_viewer/datatree.js' %}"></script>
+<script src="{% static 't4_viewer/listpanel.js' %}"></script>
+<script src="{% static 't4_viewer/queryboard.js' %}"></script>
+
 
 
 
@@ -27,10 +31,21 @@ var cdict_s = {};
 var tabpanel = new TabPanel("tabpanel");
 tabpanel.build("tab_panel");
 const div_panel = tabpanel.id_dict["panel"];
+
 var taskboard = new TaskBoard("taskboard",client,task_status,task_status);
 tabpanel.add_tab(div_panel+".1","TaskBoard",taskboard);
+
 var ctionpanel = new CtionPanel("ctionpanel",client);
-tabpanel.add_tab(div_panel+".1","CtionPanel",ctionpanel);
+tabpanel.add_tab(div_panel+".2","CtionPanel",ctionpanel);
+
+var datatree = new DataTree("datatree",client);
+tabpanel.add_tab(div_panel+".3","DataTree",datatree);
+
+var listpanel = new ListPanel("listpanel",client);
+tabpanel.add_tab(div_panel+".4","ListPanel",listpanel);
+
+var queryboard = new QueryBoard("queryboard",client);
+tabpanel.add_tab(div_panel+".5","QueryBoard",queryboard);
 
 
 function task_status(response,task_id){

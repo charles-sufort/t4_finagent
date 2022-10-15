@@ -30,7 +30,9 @@ class Client {
 	save_ction(name,cdict,load_func) {
 		var xhr = new XMLHttpRequest();
 		const oReq = new XMLHttpRequest();
+		console.log(cdict);
 		const obj = {'name': name, 'dictionary':cdict}
+		console.log(obj);
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
 		oReq.addEventListener("load", function (){
 			const response = this.responseText;
@@ -52,37 +54,82 @@ class Client {
 		oReq.send(blob);
 	}
 	
-	process_company_dataform(company,dataform,task_fun,task_id){
+	process_company_dataform(company,dataform,task_fun){
 		const oReq = new XMLHttpRequest();
 		const obj = {'company':company,'dataform':dataform};
+		oReq.addEventListener("load",function () {
+			console.log("fun");
+			const response = this.responseText;
+			console.log(response);
+			task_fun(response);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
+		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/process");
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+
+	}
+
+	process_ction_dataform(ction,dataform,task_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {'ction':ction,'dataform':dataform};
 		console.log("proccess dataform");
 		console.log(task_id);
 		oReq.addEventListener("load",function () {
 			console.log("fun");
-			console.log(task_id);
 			const response = this.responseText;
 			console.log(response);
-			task_fun(response,task_id);
+			task_fun(response);
 		},false);
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
-		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/process")
+		oReq.open("POST","http://127.0.0.1:9000/data/ction/dataform/process")
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 
 	}
+
 	
-	company_process_status(company,dataform,status_fun,task_id){
+	company_process_status(company,dataform,status_fun){
 		const oReq = new XMLHttpRequest();
 		const obj = {'company':company,'dataform':dataform};
 
 		oReq.addEventListener("load",function () {
-			status_fun(this.responseText,task_id);
+			status_fun(this.responseText);
 		},false);
 		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
-		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/process/get")
+		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/status")
 		oReq.setRequestHeader("Content-Type","application/json");
 		oReq.send(blob);
 	}
+
+	company_process_progress(company,dataform,status_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {'company':company,'dataform':dataform};
+
+		oReq.addEventListener("load",function () {
+			status_fun(this.responseText);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
+		oReq.open("POST","http://127.0.0.1:9000/data/company/dataform/progress")
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}
+
+
+
+	ction_process_status(ction,dataform,status_fun){
+		const oReq = new XMLHttpRequest();
+		const obj = {'ction':ction,'dataform':dataform};
+
+		oReq.addEventListener("load",function () {
+			status_fun(this.responseText);
+		},false);
+		const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})
+		oReq.open("POST","http://127.0.0.1:9000/data/ction/dataform/status")
+		oReq.setRequestHeader("Content-Type","application/json");
+		oReq.send(blob);
+	}
+
 
 	freq_query(ction,dataform,key,query_fun){
 		const oReq = new XMLHttpRequest();
@@ -101,6 +148,7 @@ class Client {
 		var xhr = new XMLHttpRequest();
 		const oReq = new XMLHttpRequest();
 		const obj = {'dataform': dataform,'name': name, 'terms': terms};
+		console.log(obj);
 		oReq.addEventListener("load",function () {
 			const response = this.responseText;
 			load_func(response);

@@ -4,9 +4,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
+      <x>430</x>
       <y>50</y>
-      <w>320</w>
+      <w>440</w>
       <h>490</h>
     </coordinates>
     <panel_attributes>T4Processor
@@ -22,10 +22,12 @@ get_ction_data(ctoin,dataform)
 get_vecs_dataform(dataform)
 get_company_vecs_dataform(self,dataform,company)
 
+
 count_dataform_freq(ction,dataform,key)
 
 check_ction_dataform(ction,dataform)
 check_dataform_company(company,dataform)
+get_company_dataform_progress(company,dataform)
 
 company_metadata_summary(company_metadata_summary)
 
@@ -37,7 +39,7 @@ company_metadata_summary(company_metadata_summary)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
+      <x>750</x>
       <y>30</y>
       <w>100</w>
       <h>30</h>
@@ -48,7 +50,7 @@ company_metadata_summary(company_metadata_summary)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>120</x>
       <y>0</y>
       <w>270</w>
       <h>830</h>
@@ -85,6 +87,8 @@ process_dataform_company
 process_dataform_company_thread
 (company,dataform)
 get_company_dataform_status
+(company,dataform)
+get_company_dataform_progress
 (company,dataform)
 
 scan_company_dataform

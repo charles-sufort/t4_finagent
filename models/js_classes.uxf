@@ -150,7 +150,8 @@ addEventFunc(key,func)</panel_attributes>
     </coordinates>
     <panel_attributes>TermBoard
 --
-constructor(div_id,name,client)
+constructor(name,client)
+build_inner()
 load_list()
 add_term1()
 add_term2()
@@ -186,7 +187,7 @@ select_tab(name)
     </coordinates>
     <panel_attributes>InputPanel
 --
-constructor(div_id,lbl,func)
+constructor(lbl,func)
 getInput()
 </panel_attributes>
     <additional_attributes/>
@@ -226,7 +227,7 @@ subissue_list()
     </coordinates>
     <panel_attributes>CtionPanel
 --
-constructor(div_id,name,client)
+constructor(name,client)
 build()
 build_load()
 build_1list()
@@ -240,8 +241,8 @@ save_ction()
 handle_save(resposne)
 load_ction1()
 load_ction2()
-add_cls()
-select_cls()
+add_cls(part_num)
+select_cls(part_num)
 add_vec(vec)
 </panel_attributes>
     <additional_attributes/>
@@ -275,8 +276,11 @@ getSelect()
     <panel_attributes>PSTaskPanel
 --
 constructor(name,client)
-build(div_id)
+build_inner(div_id)
 select_dataclass()
+get_companies()
+display_companies(response)
+submit_task()
 </panel_attributes>
     <additional_attributes/>
   </element>

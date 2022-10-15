@@ -1,4 +1,5 @@
 import json, os
+
 from dataloader import DataLoader
 from fdf_script import reinit_fdf
 
@@ -8,6 +9,9 @@ class FDF_MGR:
         self.df = self.dl.df
         self.fdf_root = self.dl.proj_root + "/data/fdf"
         self.js_md  = self.get_metadata()
+
+    def get_companies(self):
+        return list(self.js_md["companies"].keys())
 
     def get_metadata(self):
         file = self.fdf_root + "/directory.json"
@@ -109,10 +113,8 @@ class FDF_MGR:
         with open(cmp_md_path,'r') as fo:
             cmp_md = json.load(fo)
         if dataform not in cmp_md[vec]["dataforms"]:
-            print("not found")
             return -1
         elif cmp_md[vec]["dataforms"][dataform] != "Yes":
-            print("not found")
             return -1
         vec_dir = dir_cmp + "/" + cmp_md[vec]["dir"]
         data_js_path = vec_dir + "/" + dataform + ".json"
@@ -122,13 +124,11 @@ class FDF_MGR:
         return data_js
 
 if __name__ == "__main__":
-    reinit_fdf()
-    dbmgr = FDF_MGR()
-    dbmgr.add_company("BANK OF AMERICA, NATIONAL ASSOCIATION")
     dbmgr = FDF_MGR()
     company = "BANK OF AMERICA, NATIONAL ASSOCIATION"
-    dbmgr.add_company("1ST FINANCIAL, INC.")
-#    print(dbmgr.get_company_metadata(company))
+#    dbmgr.add_company("1ST FINANCIAL, INC.")
+    cmp_md = dbmgr.get_company_metadata(company)
+    print(cmp_md["BANK OF AMERICA, NATIONAL ASSOCIATION__Student loan__Private student loan__Getting a loan__Fraudulent loan"])
 #    vec = ["Debt collection","Auto debt","Attempts to collect debt not owed","Debt was paid"]
 #    vec_str = "__".join(vec)
     #data = dbmgr.retrieve_vec_data(company,vec_str,"lemma")

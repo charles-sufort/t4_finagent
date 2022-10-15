@@ -59,16 +59,12 @@ class T4Processor:
                 data = self.process_dataform(vec_df,dataform)
                 # save vec data
                 self.fdf_mgr.save_vec_data(company,vec_str,data,dataform)
-                print("saved: {}".format(vec_str))
 
     def process_dataform_vec_dict(self,vec_dict,dataform):
         for vec in vec_dict:
-            print(vec)
-            print(vec_dict)
             inds = [ int(ind) for ind in vec_dict[vec]]
             inds_df = self.dl.df.iloc[inds]
             data = self.process_dataform(inds_df,dataform)
-            print(data)
 
     def process_dataform(self,vec_df,dataform):
         lemmas = []
@@ -78,18 +74,14 @@ class T4Processor:
         data = {}
         for i in range(len(inds)):
             text = vec_df["Consumer complaint narrative"].iloc[i]
-            print(text)
             if dataform == "lemma":
                 data[inds[i]] = pipe.get_lemmas(text)
             elif dataform == "noun_chunks":
                 data[inds[i]] = pipe.get_noun_chunks(text)
             elif dataform == "ners":
                 ners = pipe.get_ners(text)
-                print("ners")
-                print(ners)
                 data[inds[i]] = ners
         return data
-
 
 # T4P-2
 
@@ -114,7 +106,6 @@ class T4Processor:
                 vec_md = company_md[vec]
                 if dataform in vec_md["dataforms"]:
 
-                    print(vec)
                     if vec_md["dataforms"][dataform] == "Yes":
                         vecs.append(vec)
         return vecs
@@ -127,7 +118,6 @@ class T4Processor:
         for vec in company_md:
             vec_md = company_md[vec]
             if dataform in vec_md["dataforms"]:
-                print(vec)
                 if vec_md["dataforms"][dataform] == "Yes":
                     vecs.append(vec)
         return vecs
@@ -136,24 +126,38 @@ class T4Processor:
 # 
     def check_ction_dataform(self,ction,dataform):
         vec_strs = []
-        print(ction)
         for cl in ction:
             vecs = ction[cl]
             vecs2 = []
             for vec in vecs:
                 vec = [vec[i] for i in range(4) if vec[i] != "NA" ]
                 vecs2.append(vec)
-            cl_strs = [(vec[0],"__".join(vec[1:])) for vec in vecs ]
+            cl_strs = [(vec[0],"__".join(vec)) for vec in vecs ]
             vec_strs += cl_strs
         for company, vec_str in vec_strs:
-            cmp_md = self.company_metadata_summary(company)
-            cmp_vec_strs = [tup[0] for tup in cmp_md["dataframe"][dataform]]
+            print(company,vec_str)
+            cmp_md = self.fdf_mgr.get_company_metadata(company)
+            print(cmp_md)
+            cmp_vec_strs = [tup[0] for tup in cmp_md[vec_str]["dataforms"][dataform]]
             vec_in = False
             for cmp_vec_str in cmp_vec_strs:
                 if vec_str in cmp_vec_str:
                     vec_in = True
                     break
         return True
+
+    def get_company_dataform_progress(self,company,dataform):
+        md = self.fdf_mgr.get_metadata()
+        if company in md["companies"]:
+            cmp_md = md["companies"][company]
+            if dataform in cmp_md["dataforms"]:
+                return {"processed":cmp_md["dataforms"][dataform],"total":cmp_md["count"]}
+            else:
+                return "not processed"
+        else:
+            return "no company"
+
+
 
     def count_dataform_freq(self,ction,dataform,key):
         if not self.check_ction_dataform(ction,dataform):
@@ -164,7 +168,7 @@ class T4Processor:
             cl_vals = []
             for vec in ction[cl]:
                 company = vec[0]
-                vec_str = "__".join(vec[1:])
+                vec_str = "__".join(vec)
                 data = self.fdf_mgr.retrieve_vec_data(company,vec_str,dataform)
                 for ind in data:
                     ind_data = data[ind]
@@ -187,13 +191,9 @@ class T4Processor:
                     if df_dict[ind] == []:
                         if vec not in fault_inds:
                             fault_inds[vec] = []
-                            print("here {}".format(vec))
-                            print(list(df_dict.keys()))
                             processed = False
                             fault_inds[vec].append(ind)
                         else: 
-                            print("here {}".format(vec))
-                            print(list(df_dict.keys()))
                             processed = False
                             fault_inds[vec].append(ind)
 
