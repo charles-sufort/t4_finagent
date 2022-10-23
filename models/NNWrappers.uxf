@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>40</y>
+      <w>210</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>NNWraper1
+--
+init(layers:[Layer])
+define_dense_layer()
+define_bidir_layer()
+define_conv2d_layer()
+define_dropout_layer()
+define_maxpooling2d_layer()
+define_flatten_layer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>310</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Layer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>370</y>
+      <w>170</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>DenseLayer
+--
+units: Int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>120</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Dense
+--
+units: Int
+--
+activation: fun
+use_bias: Boolean
+kernel_initializer: kernel
+bias_initializer: vector
+kernel_regularizer: fun
+bias_regularizer: fun
+activity_regularizer: fun
+kernel_constraint: fun
+bias_constraint: fun
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>60</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Layer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>350</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>ConvLayer2D
+--
+filters: Int
+kernel_size: Shape
+--
+stride: shape
+padding: "valid"|"same"
+data_format: Str
+dilation_rate
+groups
+activation: fun
+use_bias: Boolean
+kernel_initializer: kernel
+bias_initializer: vector
+kernel_regularizer: fun
+bias_regularizer: fun
+activity_regularizer: fun
+kernel_constraint: fun
+bias_constraint: fun
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>120</y>
+      <w>170</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>BiDirectional
+--
+layer: Layer
+--
+merge_mode
+weights
+backward_layer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>350</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>DropoutLayer
+--
+rate: Int
+--
+noise_shape
+seed
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>120</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>MaxPooling2D
+--
+
+--
+pool_size: shape
+stride: shape
+padding: "valid"|"same"
+data_format: Str
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>350</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>FlattenLayer
+--
+
+--
+data_format
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

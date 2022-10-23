@@ -69,8 +69,6 @@ class T4:
     def get_ction_dataform_status(self,ction_name,dataform):
         return self.__check_process(this.ction_process,ction_name,dataform)
 
-
-
     def process_dataform_company(self,company,dataform):
         if company not in self.company_process:
             self.company_process[company] = {}
@@ -143,7 +141,6 @@ class T4:
     def company_dataform_scan_repair(self,company,dataform):
         inds = self.company_scan_results[company][dataform] 
         return "TODO"
-
 
 #T4-4
 

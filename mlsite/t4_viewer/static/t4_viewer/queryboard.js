@@ -61,19 +61,17 @@ class QueryBoard extends PanelComponent{
 		this.response = response;
 		const display_panel = this.panel_dict["display_panel"];
 		display_panel.reset();
-		display_panel.add_panel("clist_panel");
-		display_panel.add_panel("results_panel");
 		display_panel.add_panel("glossary_panel");
 		const modes = ["graph","list"];
-		const dataforms = ["ners","lemma","noun_chunks"];
+		display_panel.add_panel("clist_panel");
 		display_panel.add_component("sel_mode",new SelectBox(modes));
-		display_panel.add_component("sel_df",new SelectBox(dataforms));
+		display_panel.add_panel("results_panel");
 		const disp_mode_func = this.name + ".disp_mode()";
 		display_panel.cls_dict["sel_mode"].setFunc(disp_mode_func);
 		const clist_panel = display_panel.panel_dict["clist_panel"];
 		const result_panel = display_panel.panel_dict["results_panel"];
 		const clists = ["whitelist","blacklist"];
-		const load_func = this.name + ".save_clist()";
+		const load_func = this.name + ".load_clist()";
 		clist_panel.add_component("sel_clist",new SelectBox(clists));
 		clist_panel.add_component("clist_inp", new InputPanel("Clist:",load_func));
 	}
@@ -82,11 +80,11 @@ class QueryBoard extends PanelComponent{
 	cls_select(){
 		console.log("cls_select");
 		const display_panel = this.panel_dict["display_panel"];
-		const results_panel = this.panel_dict["results_panel"];
+		const results_panel = display_panel.panel_dict["results_panel"];
 		const cls = results_panel.cls_dict["sel_cls"].getSelected();
 		const cls_list = this.response[cls];
 		cls_list.sort(col2sort);
-		const listbox = results_panel.panel_dict["listbox"]
+		const listbox = results_panel.cls_dict["listbox"]
 		listbox.removeItems();
 		for (var i = 0; i < cls_list.length; i++){
 			listbox.addItem(cls_list[i],0);
@@ -138,21 +136,22 @@ class QueryBoard extends PanelComponent{
 			
 
 	save_clist(response){
+		console.log(response);
 		const display_panel = this.panel_dict["display_panel"];
+		const results_panel = display_panel.panel_dict["results_panel"];
 		const clist_panel = display_panel.panel_dict["clist_panel"];
 		const clist_type = clist_panel.cls_dict["sel_clist"].getSelected();
-		this.clist["type"] = clist_opt;
+		this.clist["type"] = clist_type;
 		this.clist["termlist"] = new Set();
+		const listbox = results_panel.cls_dict["listbox"];
 		for (var i = 0;  i<response["termlist"].length; i++){
 			const term = response["termlist"][i];
-			console.log(term);
 			this.clist["termlist"].add(term);
 		}
-		if (sel_type == "list"){
-			console.log(this.clist);
-			this.cls_list.apply_clist(clist_opt,this.clist["termlist"]);
+		if (this.mode == "list"){
+			listbox.apply_clist(clist_opt,this.clist["termlist"]);
 		}
-		else if (sel_type == "graph"){
+		else if (this.mode == "graph"){
 			const div_graph = document.getElementById(disp_id+"resultsgraph");
 			div_graph.innerHTML = "";
 			const data = this.graph_data();
@@ -170,13 +169,16 @@ class QueryBoard extends PanelComponent{
 	}
 
 	disp_mode(){
-		const results_panel = this.panel_dict["results_panel"];
-		const mode = results_panel.cls_dict["sel_mode"].getSelected();
+		const display_panel = this.panel_dict["display_panel"];
+		const query_panel = this.panel_dict["query_panel"];
+		const results_panel = display_panel.panel_dict["results_panel"];
+		const mode = display_panel.cls_dict["sel_mode"].getSelected();
+		const dataform = query_panel.cls_dict["sel_df"].getSelected();
 		results_panel.reset();
 		if (mode == "list"){
 			const cls_fun = this.name + ".cls_select()";
 			const classes = Object.keys(this.response);
-			results_panel.add_component("sel_cls",SelectBox(classes));
+			results_panel.add_component("sel_cls",new SelectBox(classes));
 			results_panel.cls_dict["sel_cls"].setFunc(cls_fun);
 			const obj = this;
 			const add_func = function (lbox){
@@ -190,7 +192,7 @@ class QueryBoard extends PanelComponent{
 				value_func = item => item[0];
 			}
 			results_panel.add_component("listbox",new ListBox(20,value_func));
-			results_panel.panel_dict["listbox"].addEventFunc("a",add_func);
+			results_panel.cls_dict["listbox"].addEventFunc("a",add_func);
 			this.mode = "list";
 		}
 		else if (mode == "graph"){

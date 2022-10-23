@@ -11,6 +11,14 @@ class Vec(BaseModel):
 class Clist(BaseModel):
     vectors: List[Vec]
 
+class Layer(BaseModel):
+    name: str
+    args: dict
+
+class Model1(BaseModel):
+    layers:  List[Layer]
+    options: dict
+
 class Ction(BaseModel):
     dictionary: Dict[str,List[List[str]]]
     name: str
@@ -193,6 +201,13 @@ async def get_company_tree(name: Name):
 async def get_companies():
     companies = t41.get_companies()
     return {"companies":companies}
+
+@app.post("/models/nnm/tf/add")
+async def add_model_nnm_tf(mod: Model1):
+    status = t41.add_model_nnm_tf()
+
+
+
 
 # JUNK
 
