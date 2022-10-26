@@ -6,9 +6,12 @@ from keras.callbacks import CSVLogger
 import sys
 from contextlib import redirect_stdout
 
-class NNWrapper_TF:
+class NNWrapper_S:
     def __init__(self,layers):
         self.model = tf.keras.Sequential()
+        src_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print(src_dir)
+        self.data_dir = src_dir + "/data"
         self.def_layers = {"dense": self.define_dense_layer,\
                  "bidirectional": self.define_bidir_layer,\
                  "conv2d": self.define_conv2d_layer,\
@@ -58,6 +61,8 @@ class NNWrapper_TF:
 
     def define_flatten_layer(self,**kwargs):
         return tf.keras.layers.Flatten(**kwargs)
+
+
 
 #log = tf.get_logger()
 #fh = logging.FileHandler('tf.log')
