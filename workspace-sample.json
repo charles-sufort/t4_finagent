@@ -1,0 +1,59 @@
+{
+    "layout": "stacked",
+    "percent": 0.4,
+    "type": "con",
+    "nodes": [
+        {
+            "name": "T1",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^URxvt$"
+                }
+            ]
+        },
+        {
+            "name": "T2",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^URxvt$"
+                }
+            ]
+        },
+        {
+            "name": "T3",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^URxvt$"
+                }
+            ]
+        }
+	]
+}
+{
+    "layout": "stacked",
+    "percent": 0.6,
+    "type": "con",
+    "nodes": [
+        {
+            "name": "chrome",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^Google-chrome$"
+                }
+            ]
+        },
+		{
+            "name": "umlet",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^com\\-baselet\\-standalone\\-MainStandalone$"
+                }
+            ]
+        }
+    ]
+}
