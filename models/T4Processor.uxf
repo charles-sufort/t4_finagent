@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>50</y>
+      <x>280</x>
+      <y>0</y>
       <w>440</w>
-      <h>490</h>
+      <h>370</h>
     </coordinates>
     <panel_attributes>T4Processor
 --
@@ -39,7 +39,7 @@ company_metadata_summary(company_metadata_summary)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
+      <x>630</x>
       <y>30</y>
       <w>100</w>
       <h>30</h>
@@ -50,10 +50,10 @@ company_metadata_summary(company_metadata_summary)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
+      <x>0</x>
       <y>0</y>
       <w>270</w>
-      <h>830</h>
+      <h>930</h>
     </coordinates>
     <panel_attributes>T4
 --
@@ -102,6 +102,12 @@ scan_company_dataform_resuls
 scan_company_dataform_repair
 (company,dataform)
 
+add_model(name,layers,options)
+save_model_arch(name)
+load_model_arch(name)
+train_model(model_name,data_name,epochs)
+evauate_model(model_name,data_name)
+
 company_metadata_summary()
 get_company_tree(company)
 get_companies()
@@ -111,6 +117,23 @@ __get_name(data_dir)
 query_term_avgs(ction,termlist)
 avg_query(ction,termlist)
 query(ction,query_type,min_n)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>390</y>
+      <w>440</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>T4ML
+--
+add_model(name,layers,options)
+save_model_arch(name)
+load_model_arch(name)
+train_model(model_name,data_name,epochs)
+evaluate_model(model_name,data_name)</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
