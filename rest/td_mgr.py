@@ -1,5 +1,7 @@
 import json,os
+import numpy as np
 import pandas as pd
+import tensorflow as tf
 
 class TD_MGR:
     def __init__(self):
@@ -41,15 +43,16 @@ class TD_MGR:
     
 
 if __name__ == "__main__":
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(path="mnist.npz")
     td_mgr = TD_MGR()
-    file = td_mgr.data_dir + "/mnist_train.csv"
+    file = td_mgr.data_dir + "/mnist_test.csv"
     df = pd.read_csv(file)
-    td_mgr.add_csv(df,"mnist_train")
-    df = td_mgr.load_csv("mnist_train")
+    td_mgr.add_csv(df,"mnist_test")
+    df = td_mgr.load_csv("mnist_test")
     cols  = df.columns.tolist()[1:]
     cols.remove("label")
     X = df[cols].to_numpy()
     Y = df["label"].to_numpy()
-    td_mgr.save_vecdata(X,Y,"mnist_train")
-    data = td_mgr.load_vecdata("mnist_train")
-    print(data)
+    td_mgr.save_vecdata(x_train,y_train,"mnist_train")
+    td_mgr.save_vecdata(x_test,y_test,"mnist_test")
+

@@ -16,6 +16,7 @@ class Layer(BaseModel):
     args: dict
 
 class Model1(BaseModel):
+    name: str
     layers:  List[Layer]
     options: dict
 
@@ -203,10 +204,10 @@ async def get_companies():
     return {"companies":companies}
 
 @app.post("/models/nnm/tf/add")
-async def add_model_nnm_tf(mod: Model1):
-    status = t41.add_model_nnm_tf()
+async def add_model_tf(mod: Model1):
+     t41.add_model(mod.name,mod.layers,mod.options)
 
-
+@app.post("models/nnm/tf/train")
 
 
 # JUNK
