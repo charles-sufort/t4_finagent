@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>50</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>MDL Metadata
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>110</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Models Metadata
+--
+models: {name: MDLDict}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>220</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Model Metadata
+--
+mdl_dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>110</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MDLDict
+--
+dir: Str</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>220</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MDLDict
+--
+trained : [(database,dataset)]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>330</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Trained Model Metadata
+--
+train_dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>330</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>TrainDict
+--
+(database,dataset): {file: Str}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
