@@ -1,4 +1,4 @@
-import json, os
+import json, os, shutil
 
 from dataloader import DataLoader
 from fdf_script import reinit_fdf

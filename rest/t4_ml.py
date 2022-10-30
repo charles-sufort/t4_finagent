@@ -1,6 +1,7 @@
 from neuralnetworks_tf import NNWrapper_S
 from td_mgr import TD_MGR
-import re
+import re, subprocess
+
 
 
 class T4ML:
@@ -25,20 +26,13 @@ class T4ML:
         self.models[name] = model
 
     def train_model(self,model_name,data_name,epochs):
-        model = self.models[model_name]
-        data = self.td_mgr.load_vecdata(data_name)
-        X = data["X"]
-        Y = data["Y"]
-        fit_opts = {"epochs":epochs}
-        model.train(X,Y,model_name,**fit_opts)
+        args = ['python','train_tfmodel1.py',model_name,data_name,epochs]
+        subprocess.Popen(args)
+
         
     def evaluate_model(self,model_name,data_name):
-        model = self.models[model_name]
-        data = self.td_mgr.load_vecdata(data_name)
-        X = data["X"]
-        Y = data["Y"]
-        eval_opts = {"x":X,"y":Y}
-        model.evaluate(model_name,**eval_opts)
+        args = ['python','train_tfmodel1.py',model_name,data_name,epochs]
+        subprocess.Popen(args)
 
     def model_training_status(self,model_name):
         file = self.nn.model_dir + "/" + model_name + "trainstatus"
@@ -46,16 +40,24 @@ class T4ML:
             text = fo.read()
             print(text)
             p = re.compile("[0-9]+\/[0-9]+")
-            print(p.findall(text)[-1])
+            p_nums = p.findall(text)[-1].split("/")
+            iters = p_nums[0]
+            max_iters = p_nums[1]
             p = re.compile("Epoch [0-9]+\/[0-9]+")
-            print(p.findall(text)[-1])
+            p_epochs = p.findall(text)[-1].split(" ")[1].split("/")
+            epoch = p_epochs[0]
+            max_epochs = p_epochs[1]
+            status = {"iters":iters,"max_iters":max_iters,"epoch":epoch,"max_epochs":max_epochs}
+            return status
 
 
         
 
 if __name__ == "__main__":
     t4ml = T4ML()
-    t4ml.model_training_status("test_model1")
+#    t4ml.train_model("test_model1","mnist_train","2")
+
+    print(t4ml.model_training_status("test_model1"))
 #    layers = []
 #    layers.append({"name":"conv2d","args":{"filters":28,"kernel_size":(3,3),"args":{"input_shape":(28,28,1)}}})
 #    layers.append({"name":"maxpooling2d","args":{"pool_size":(2,2)}})
@@ -65,7 +67,6 @@ if __name__ == "__main__":
 #    layers.append({"name":"dense","args":{"units":10,"args":{"activation":'softmax'}}})
 #    compile_opts = {'optimizer':'adam','loss':'sparse_categorical_crossentropy','metrics':['accuracy']}
 #    t4ml.add_model("mnist_model",layers,compile_opts)
-#    t4ml.train_model("mnist_model","mnist_train",2)
 #    t4ml.evaluate_model("mnist_model","mnist_train")
 
 
